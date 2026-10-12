@@ -9,21 +9,21 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>"><?= e($book['name']) ?></a> <span>›</span>
             <span>Suppliers</span>
         </div>
-        <h1><i class="fa-solid fa-truck" style="color:var(--brand)"></i> Suppliers</h1>
+        <h1><?= icon('truck', '', 'color:var(--brand)') ?> Suppliers</h1>
         <p>Add, edit, remove suppliers and keep track of all of them</p>
         <p><?= count($suppliers) ?> supplier<?= count($suppliers) !== 1 ? 's' : '' ?></p>
     </div>
         <button class="btn btn-secondary btn-sm" data-modal="printModal" title="Print PDF">
-            <i class="fa-solid fa-print"></i> Print
+            <?= icon('printer') ?> Print
         </button>
         <button class="btn btn-primary" data-modal="addSupplierModal">+ Add Supplier</button>
 </div>
 <!-- LM Controls -->
 <div class="lm-controls">
     <div class="lm-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <?= icon('search') ?>
         <input type="text" class="lm-search" id="suppTableSearch" placeholder="Search name, company, phone, email…">
-        <button class="lm-search-clear" id="suppTableClear"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lm-search-clear" id="suppTableClear"><?= icon('close') ?></button>
     </div>
     <select class="lm-select" id="suppTableSort">
         <option value="az">Name A–Z</option>
@@ -36,7 +36,7 @@ ob_start();
 <?php if (empty($suppliers)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon">🏭</div>
+        <div class="empty-icon"><?= icon('warehouse') ?></div>
         <h3>No suppliers yet</h3>
         <p>Add suppliers to track your purchases.</p>
     </div>
@@ -68,12 +68,12 @@ ob_start();
             <td style="text-align:right" class="td-amount"><?= format_money($s['total_billed']) ?></td>
             <td style="text-align:right" class="td-amount in"><?= format_money($s['total_paid']) ?></td>
             <td style="white-space:nowrap">
-                <a href="/books/<?= $book['id'] ?>/suppliers/<?= $s['id'] ?>" title="View" class="btn btn-sm btn-secondary"><i class="fa-solid fa-eye"></i></a>
-                <button class="btn btn-sm btn-secondary" title="Edit" data-modal="editSupplierModal"><i class="fa-solid fa-pen"></i></button>
+                <a href="/books/<?= $book['id'] ?>/suppliers/<?= $s['id'] ?>" title="View" class="btn btn-sm btn-secondary"><?= icon('eye') ?></a>
+                <button class="btn btn-sm btn-secondary" title="Edit" data-modal="editSupplierModal"><?= icon('square-pen') ?></button>
                 <form method="POST" action="/books/<?= $book['id'] ?>/suppliers/<?= $s['id'] ?>/delete" style="display: inline;"
                 data-confirm="Delete <?= e($s['name']) ?>?">
                 <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
-                <button class="btn btn-sm btn-danger" title="Delete"><i class="fa-solid fa-trash" style="color: #fff;"></i></button>
+                <button class="btn btn-sm btn-danger" title="Delete"><?= icon('trash', '', 'color: #fff;') ?></button>
                 </form>
             </td>
         </tr>

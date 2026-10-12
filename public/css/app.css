@@ -178,7 +178,7 @@ body {
     position: relative;
     font-size: 0; /* hides all text nodes and inline text */
 }
-.sidebar.collapsed .nav-item i {
+.sidebar.collapsed .nav-item .ic {
     width: auto;
     font-size: 15px;
     flex-shrink: 0;
@@ -340,7 +340,7 @@ body {
     transition: border-color .15s;
 }
 .sidebar-search-wrap:focus-within { border-color: var(--brand); }
-.sidebar-search-wrap i { color: var(--text-muted); font-size: 12px; }
+.sidebar-search-wrap .ic { color: var(--text-muted); font-size: 12px; }
 .sidebar-search-wrap input {
     border: none;
     background: transparent;
@@ -394,10 +394,10 @@ body {
     text-align: left;
     position: relative;
 }
-.nav-item i { width: 16px; text-align: center; font-size: 13px; flex-shrink: 0; }
+.nav-item .ic { width: 16px; text-align: center; font-size: 13px; flex-shrink: 0; }
 .nav-item:hover { background: var(--bg); color: var(--text); }
 .nav-item.active { background: var(--brand-light); color: var(--brand); font-weight: 600; }
-.nav-item.active i { color: var(--brand); }
+.nav-item.active .ic { color: var(--brand); }
 .nav-item.nav-back { font-size: 12px; color: var(--text-muted); padding: 5px 10px; }
 
 /* "Coming soon" nav items */
@@ -1321,7 +1321,7 @@ a.activity-link:hover { background: var(--hover-clr, var(--bg)); }
     gap: 6px;
 }
 
-.perm-module i {
+.perm-module .ic {
     color: var(--brand);
     width: 14px;
     text-align: center;
@@ -1432,7 +1432,7 @@ a.activity-link:hover { background: var(--hover-clr, var(--bg)); }
     max-width: 340px;
 }
 
-.lm-search-wrap i {
+.lm-search-wrap .ic {
     position: absolute;
     left: 10px;
     top: 50%;
@@ -1506,10 +1506,29 @@ th[data-sort] .sort-icon {
     margin-left: 4px;
     opacity: .4;
     font-size: 10px;
+    width: 1.3em;
+    height: 1.3em;
+    vertical-align: -0.2em;
 }
-th[data-sort].sort-asc .sort-icon::after  { content: ' ↑'; opacity: 1; }
-th[data-sort].sort-desc .sort-icon::after { content: ' ↓'; opacity: 1; }
-th[data-sort]:not(.sort-asc):not(.sort-desc) .sort-icon::after { content: ' ↕'; }
+/* sort arrows are drawn from the icon collection (chevrons-up-down / arrow-up / arrow-down) */
+th[data-sort] .sort-icon::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: currentColor;
+    -webkit-mask: var(--ic-sort-none) center / contain no-repeat;
+            mask: var(--ic-sort-none) center / contain no-repeat;
+}
+th[data-sort].sort-asc  .sort-icon { opacity: 1; }
+th[data-sort].sort-desc .sort-icon { opacity: 1; }
+th[data-sort].sort-asc  .sort-icon::after { -webkit-mask-image: var(--ic-sort-asc);  mask-image: var(--ic-sort-asc); }
+th[data-sort].sort-desc .sort-icon::after { -webkit-mask-image: var(--ic-sort-desc); mask-image: var(--ic-sort-desc); }
+:root {
+    --ic-sort-none: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 15 5 5 5-5M7 9l5-5 5 5'/%3E%3C/svg%3E%0A");
+    --ic-sort-asc:  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19V5M5 12l7-7 7 7'/%3E%3C/svg%3E%0A");
+    --ic-sort-desc: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 5v14M19 12l-7 7-7-7'/%3E%3C/svg%3E%0A");
+}
 
 /* Month separator rows */
 tr.month-sep td {
@@ -1611,7 +1630,7 @@ tr.lm-no-results td {
 .stat-value.amber { color: var(--amber); }
 
 /* Better empty state icon for FA icons */
-.empty-icon i { font-size: 36px; opacity: .25; display: block; margin-bottom: 10px; }
+.empty-icon .ic { font-size: 36px; opacity: .25; display: block; margin-bottom: 10px; }
 
 /* Consistent table column sort hint */
 .table-wrap table thead th { position: relative; }

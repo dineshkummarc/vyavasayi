@@ -107,7 +107,7 @@ class TwoFactorController
             redirect('/2fa/challenge');
         }
 
-        // ✅ 2FA passed — complete login
+        // -> 2FA passed — complete login
         session_regenerate_id(true);
         $_SESSION['user'] = session_user_from_row($user);
 
@@ -185,8 +185,8 @@ class TwoFactorController
             $pageTitle = 'Verification Failed';
             ob_start();
             echo '<div style="max-width:480px;margin:60px auto;text-align:center;font-family:system-ui">';
-            echo '<h2>⚠️ Link Expired</h2><p>This verification link is invalid or has expired.</p>';
-            echo '<a href="/send-verification" style="color:#1a6b4a">Request a new link →</a></div>';
+            echo '<h2>' . icon('alert-triangle') . ' Link Expired</h2><p>This verification link is invalid or has expired.</p>';
+            echo '<a href="/send-verification" style="color:#1a6b4a">Request a new link</a></div>';
             $content = ob_get_clean();
             require BASE_PATH . '/views/partials/layout.php';
             return;
@@ -194,7 +194,7 @@ class TwoFactorController
         Database::run('UPDATE email_verifications SET used_at=NOW() WHERE id=?', [$row['id']]);
         Database::run('UPDATE users SET email_verified=1 WHERE id=?', [$row['user_id']]);
         if (auth() && auth()['id'] == $row['user_id']) $_SESSION['user']['email_verified'] = 1;
-        redirect('/books', ['success' => '✅ Email verified successfully!']);
+        redirect('/books', ['success' => 'Email verified successfully!']);
     }
 
     public function sendVerification(array $params): void

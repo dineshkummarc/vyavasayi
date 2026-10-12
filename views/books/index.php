@@ -18,14 +18,14 @@ $searchQ = htmlspecialchars($_GET['q'] ?? '', ENT_QUOTES);
 <!-- Search bar -->
 <form method="GET" action="/books" class="books-search-form" style="margin-bottom:24px">
     <div class="books-search-wrap">
-        <i class="fa-solid fa-magnifying-glass books-search-icon"></i>
+        <?= icon('search', 'books-search-icon') ?>
         <input type="text" name="q" class="books-search-input"
                placeholder="Search any book…"
                value="<?= $searchQ ?>"
                autocomplete="off">
         <?php if ($searchQ): ?>
         <a href="/books" class="books-search-clear" title="Clear search">
-            <i class="fa-solid fa-xmark"></i>
+            <?= icon('close') ?>
         </a>
         <?php endif; ?>
     </div>
@@ -33,7 +33,7 @@ $searchQ = htmlspecialchars($_GET['q'] ?? '', ENT_QUOTES);
 
 <?php if (empty($myBooks) && empty($sharedBooks)): ?>
 <div class="empty-state">
-    <div class="empty-icon"><i class="fa-solid fa-book"></i></div>
+    <div class="empty-icon"><?= icon('book') ?></div>
     <?php if ($searchQ): ?>
     <h3>No books found</h3>
     <p>No books match &ldquo;<?= e($_GET['q'] ?? '') ?>&rdquo;.</p>
@@ -114,7 +114,7 @@ function renderBookCard(array $book): void {
 <div class="books-category">
     <div class="books-category-header">
         <h2 class="books-category-title">
-            <i class="fa-solid fa-book-open"></i> My Books
+            <?= icon('book-open') ?> My Books
         </h2>
         <span class="books-category-count"><?= count($myBooks) ?></span>
     </div>
@@ -124,7 +124,7 @@ function renderBookCard(array $book): void {
         <?php if ($searchQ): ?>
         <p>No owned books match your search.</p>
         <?php else: ?>
-        <p>You haven't created any books yet. <a href="/books/create">Create one now →</a></p>
+        <p>You haven't created any books yet. <a href="/books/create">Create one now <?= icon('arrow-right') ?></a></p>
         <?php endif; ?>
     </div>
     <?php else: ?>
@@ -147,7 +147,7 @@ function renderBookCard(array $book): void {
 <div class="books-category" style="margin-top:32px">
     <div class="books-category-header">
         <h2 class="books-category-title">
-            <i class="fa-solid fa-share-nodes"></i> Shared with Me
+            <?= icon('share') ?> Shared with Me
         </h2>
         <span class="books-category-count"><?= count($sharedBooks) ?></span>
     </div>
@@ -223,7 +223,7 @@ function renderBookCard(array $book): void {
     gap: 7px;
     margin: 0;
 }
-.books-category-title i { color: var(--brand); font-size: 13px; }
+.books-category-title .ic { color: var(--brand); font-size: 13px; }
 .books-category-count {
     font-size: 11px;
     font-weight: 700;

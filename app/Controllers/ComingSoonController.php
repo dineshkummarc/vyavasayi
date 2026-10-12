@@ -8,9 +8,9 @@ namespace App\Controllers;
 class ComingSoonController
 {
     private const FEATURES = [
-        'wallet'      => ['Wallet',      'fa-wallet',     'Keep a personal balance, top up and pay across your books — in one place.'],
-        'marketplace' => ['Marketplace', 'fa-store',      'Discover and connect with other businesses and suppliers on Byabsayee.'],
-        'deliveries'  => ['Deliveries',  'fa-truck-fast', 'Track delivery orders from dispatch to doorstep, per invoice.'],
+        'wallet'      => ['Wallet',      'wallet',     'Keep a personal balance, top up and pay across your books — in one place.'],
+        'marketplace' => ['Marketplace', 'store',      'Discover and connect with other businesses and suppliers on Byabsayee.'],
+        'deliveries'  => ['Deliveries',  'truck-fast', 'Track delivery orders from dispatch to doorstep, per invoice.'],
     ];
 
     public function show(array $params): void

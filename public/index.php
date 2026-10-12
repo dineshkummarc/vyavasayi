@@ -42,6 +42,9 @@ set_exception_handler(function (\Throwable $e): void {
     $msg  = $dev ? htmlspecialchars($e->getMessage()) : 'An unexpected error occurred. Please go back and try again.';
     $file = $dev ? htmlspecialchars(basename($e->getFile())) : 'ref';
     $line = $dev ? (int)$e->getLine() : $ref;
+    // Icons come from the helper when it is loaded (the error may happen before it is).
+    $icoWarn = function_exists('icon') ? icon('alert-triangle', '', 'vertical-align:-3px') : '';
+    $icoBack = function_exists('icon') ? icon('arrow-left') : '';
     echo "<!DOCTYPE html><html><head><meta charset='utf-8'>
     <title>Error — Byabsayee</title>
     <style>body{font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f8f9fa}
@@ -49,10 +52,10 @@ set_exception_handler(function (\Throwable $e): void {
     h2{color:#c0392b;margin:0 0 12px}p{color:#555;margin:6px 0}code{font-size:12px;background:#f0f0f0;padding:2px 6px;border-radius:4px}
     a{color:#1a6b4a;font-weight:600;text-decoration:none}</style></head>
     <body><div class='box'>
-    <h2>⚠ Something went wrong</h2>
+    <h2>{$icoWarn} Something went wrong</h2>
     <p>$msg</p>
     <p><code>$file : $line</code></p>
-    <p style='margin-top:20px'><a href='javascript:history.back()'>← Go back</a></p>
+    <p style='margin-top:20px'><a href='javascript:history.back()'>{$icoBack} Go back</a></p>
     </div></body></html>";
 });
 
@@ -187,13 +190,13 @@ if (isset($_GET['_error'])) {
         ?>
         <div style="min-height:60vh;display:flex;align-items:center;justify-content:center">
             <div style="text-align:center;max-width:440px">
-                <div style="font-size:56px;margin-bottom:16px">📎</div>
+                <div style="font-size:56px;margin-bottom:16px"><?= icon('paperclip') ?></div>
                 <h1 style="font-size:26px;margin-bottom:8px">File Too Large</h1>
                 <p style="color:var(--text-muted);margin-bottom:24px;font-size:15px">
                     The file you tried to upload exceeds the maximum allowed size.<br>
                     Please reduce the file size and try again.
                 </p>
-                <a href="javascript:history.back()" class="btn btn-secondary" style="margin-right:8px">← Go Back</a>
+                <a href="javascript:history.back()" class="btn btn-secondary" style="margin-right:8px"><?= icon('arrow-left') ?> Go Back</a>
                 <a href="/books" class="btn btn-primary">My Books</a>
             </div>
         </div>

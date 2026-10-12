@@ -8,7 +8,7 @@
  *
  * Trigger button:
  *   <button class="btn btn-secondary btn-sm" data-modal="printModal">
- *       <i class="fa-solid fa-print"></i> Print PDF
+ *       [icon] Print PDF
  *   </button>
  */
 
@@ -19,9 +19,9 @@ $_pmIsStatic = in_array($printCategory, $_pmStaticCategories);
 <div class="modal-backdrop" id="printModal">
   <div class="modal" style="max-width:400px">
     <div class="modal-title">
-      <i class="fa-solid fa-print" style="color:var(--brand)"></i>
+      <?= icon('printer', '', 'color:var(--brand)') ?>
       Print / Export PDF
-      <button type="button" class="modal-close" data-close-modal>✕</button>
+      <button type="button" class="modal-close" data-close-modal><?= icon('close') ?></button>
     </div>
     <div style="padding:18px 20px">
 
@@ -33,13 +33,13 @@ $_pmIsStatic = in_array($printCategory, $_pmStaticCategories);
             <!-- Static categories: only "Last N" and "All" -->
             <label class="pm-mode-card" data-mode="days">
               <input type="radio" name="pm_mode" value="days">
-              <i class="fa-solid fa-hashtag"></i>
+              <?= icon('hash') ?>
               <span class="pm-mode-label">Last N</span>
               <span class="pm-mode-sub">Items from last X days</span>
             </label>
             <label class="pm-mode-card selected" data-mode="all">
               <input type="radio" name="pm_mode" value="all" checked>
-              <i class="fa-solid fa-layer-group"></i>
+              <?= icon('layers') ?>
               <span class="pm-mode-label">All</span>
               <span class="pm-mode-sub">Every record</span>
             </label>
@@ -48,31 +48,31 @@ $_pmIsStatic = in_array($printCategory, $_pmStaticCategories);
             <!-- Transactional categories: full date options + All -->
             <label class="pm-mode-card" data-mode="days">
               <input type="radio" name="pm_mode" value="days">
-              <i class="fa-solid fa-hashtag"></i>
+              <?= icon('hash') ?>
               <span class="pm-mode-label">Last N Days</span>
               <span class="pm-mode-sub">Sum over last X days</span>
             </label>
             <label class="pm-mode-card" data-mode="date">
               <input type="radio" name="pm_mode" value="date">
-              <i class="fa-solid fa-calendar-day"></i>
+              <?= icon('calendar') ?>
               <span class="pm-mode-label">Single Day</span>
               <span class="pm-mode-sub">All entries on one day</span>
             </label>
             <label class="pm-mode-card selected" data-mode="month">
               <input type="radio" name="pm_mode" value="month" checked>
-              <i class="fa-solid fa-calendar"></i>
+              <?= icon('calendar') ?>
               <span class="pm-mode-label">By Month</span>
               <span class="pm-mode-sub">Daily totals for a month</span>
             </label>
             <label class="pm-mode-card" data-mode="year">
               <input type="radio" name="pm_mode" value="year">
-              <i class="fa-solid fa-calendar-check"></i>
+              <?= icon('calendar-check') ?>
               <span class="pm-mode-label">By Year</span>
               <span class="pm-mode-sub">Monthly totals for a year</span>
             </label>
             <label class="pm-mode-card" data-mode="all" style="grid-column:span 2">
               <input type="radio" name="pm_mode" value="all">
-              <i class="fa-solid fa-layer-group"></i>
+              <?= icon('layers') ?>
               <span class="pm-mode-label">All Time</span>
               <span class="pm-mode-sub">Every record ever, no date filter</span>
             </label>
@@ -118,7 +118,7 @@ $_pmIsStatic = in_array($printCategory, $_pmStaticCategories);
       <div style="margin-top:18px;display:flex;gap:8px">
         <button type="button" class="btn btn-secondary" data-close-modal style="flex:1">Cancel</button>
         <button type="button" class="btn btn-primary" id="pm_generate_btn" style="flex:2">
-          <i class="fa-solid fa-file-pdf"></i> Generate PDF
+          <?= icon('file-pdf') ?> Generate PDF
         </button>
       </div>
     </div>
@@ -144,7 +144,7 @@ $_pmIsStatic = in_array($printCategory, $_pmStaticCategories);
   border-color: var(--brand);
   background: var(--brand-light);
 }
-.pm-mode-card i { font-size: 16px; color: var(--brand); margin-bottom: 2px; }
+.pm-mode-card .ic { font-size: 16px; color: var(--brand); margin-bottom: 2px; }
 .pm-mode-label { font-size: 13px; font-weight: 600; color: var(--text); }
 .pm-mode-sub   { font-size: 11px; color: var(--text-muted); }
 </style>

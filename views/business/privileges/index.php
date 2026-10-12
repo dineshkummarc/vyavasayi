@@ -14,7 +14,7 @@ ob_start();
         <p>Create discount groups and assign them to customers.</p>
     </div>
     <button class="btn btn-secondary btn-sm" data-modal="printModal" title="Print PDF">
-            <i class="fa-solid fa-print"></i> Print
+            <?= icon('printer') ?> Print
         </button>
     <button class="btn btn-primary" data-modal="addPrivModal">+ New Privilege</button>
 </div>
@@ -22,7 +22,7 @@ ob_start();
 <?php if (empty($privileges)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon">🎫</div>
+        <div class="empty-icon"><?= icon('ticket') ?></div>
         <h3>No privileges yet</h3>
         <p>Create a privilege like "Relative (2% off)" or "Staff (10% off)" and assign it to customers.</p>
     </div>

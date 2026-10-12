@@ -46,7 +46,7 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>">Dashboard</a> <span>›</span>
             <span>Book Settings</span>
         </div>
-        <h1><i class="fa-solid fa-gear" style="color:var(--brand)"></i> Book Settings</h1>
+        <h1><?= icon('settings', '', 'color:var(--brand)') ?> Book Settings</h1>
         <p>Name, invoice look and numbering, currencies and methods for <?= e($book['name']) ?></p>
     </div>
 </div>
@@ -67,22 +67,22 @@ ob_start();
       <div class="st-nav-sub"><?= $book['type']==='business'?'Business':'Personal' ?></div>
     </div>
   </div>
-      <button type="button" class="st-tab active" onclick="sw('general',this)"><i class="fa-solid fa-sliders"></i> General</button>
+      <button type="button" class="st-tab active" onclick="sw('general',this)"><?= icon('sliders') ?> General</button>
     <?php if(!$isPersonal): ?>
-    <button type="button" class="st-tab" onclick="sw('business',this)"><i class="fa-solid fa-building"></i> Business</button>
-    <button type="button" class="st-tab" onclick="sw('invoice',this)"><i class="fa-solid fa-file-invoice"></i> Invoice</button>
+    <button type="button" class="st-tab" onclick="sw('business',this)"><?= icon('building') ?> Business</button>
+    <button type="button" class="st-tab" onclick="sw('invoice',this)"><?= icon('invoice') ?> Invoice</button>
     <div class="st-sep"></div>
     <button type="button" class="st-tab" onclick="sw('currencies',this)">
-      <i class="fa-solid fa-coins"></i> Currencies
+      <?= icon('coins') ?> Currencies
       <?php if(!empty($currencies)): ?><span class="st-badge"><?= count($currencies) ?></span><?php endif; ?>
     </button>
-    <button type="button" class="st-tab" onclick="sw('methods',this)"><i class="fa-solid fa-truck-fast"></i> Methods</button>
+    <button type="button" class="st-tab" onclick="sw('methods',this)"><?= icon('truck-fast') ?> Methods</button>
     <div class="st-sep"></div>
-    <a href="/books/<?= $book['id'] ?>/business-profile" class="st-tab"><i class="fa-solid fa-id-badge"></i> Public Profile</a>
+    <a href="/books/<?= $book['id'] ?>/business-profile" class="st-tab"><?= icon('id-card') ?> Public Profile</a>
     <div class="st-sep"></div>
     <?php endif; ?>
-    <button type="button" class="st-tab danger" onclick="sw('danger',this)"><i class="fa-solid fa-triangle-exclamation"></i> Danger Zone</button>
-  <button type="submit" class="st-save" id="saveBtn"><i class="fa-solid fa-check"></i> Save Changes</button>
+    <button type="button" class="st-tab danger" onclick="sw('danger',this)"><?= icon('alert-triangle') ?> Danger Zone</button>
+  <button type="submit" class="st-save" id="saveBtn"><?= icon('check') ?> Save Changes</button>
 </nav>
 
 <!-- ══ CONTENT ══ -->
@@ -92,7 +92,7 @@ ob_start();
 <div class="st-sec active" id="sec-general">
   <div class="st-panel">
     <div class="st-head">
-      <div class="st-icon"><i class="fa-solid fa-book"></i></div>
+      <div class="st-icon"><?= icon('book') ?></div>
       <div><h2>Book Identity</h2><p class="panel-desc">Name and colour shown on your dashboard</p></div>
     </div>
     <div class="st-panel-body">
@@ -115,7 +115,7 @@ ob_start();
               <div style="font-size:16px;font-weight:700;color:#fff" id="bCardName"><?= e($book['name']) ?></div>
               <div style="font-size:11px;color:rgba(255,255,255,.7);margin-top:2px"><?= $book['type']==='business'?'Business Book':'Personal Book' ?></div>
             </div>
-            <div style="font-size:22px;opacity:.5"><i class="fa-solid fa-book" style="color: #ffffff;"></i></div>
+            <div style="font-size:22px;opacity:.5"><?= icon('book', '', 'color: #ffffff;') ?></div>
           </div>
           <div style="padding:8px 18px;background:var(--bg);font-size:11px;color:var(--text-muted)">Dashboard preview</div>
         </div>
@@ -130,7 +130,7 @@ ob_start();
 <div class="st-sec" id="sec-business">
   <div class="st-panel">
     <div class="st-head">
-      <div class="st-icon blue"><i class="fa-solid fa-building"></i></div>
+      <div class="st-icon blue"><?= icon('building') ?></div>
       <div><h2>Business Information</h2><p class="panel-desc">Appears on invoices and public documents</p></div>
     </div>
     <div class="st-panel-body">
@@ -161,7 +161,7 @@ ob_start();
         <?php endif; ?>
         <div class="logo-zone" id="logoZone" onclick="document.getElementById('logoInput').click()">
           <img class="logo-preview" id="logoPreview" src="" alt="">
-          <div id="logoIcon" style="font-size:28px;margin-bottom:6px"><i class="fa-solid fa-image" style="color: var(--brand);"></i></div>
+          <div id="logoIcon" style="font-size:28px;margin-bottom:6px"><?= icon('image', '', 'color: var(--brand);') ?></div>
           <p><strong>Click to upload</strong> or drag &amp; drop</p>
           <p style="margin-top:3px;font-size:11px">PNG, JPG, SVG up to 2 MB</p>
         </div>
@@ -177,7 +177,7 @@ ob_start();
   <!-- Numbering -->
   <div class="st-panel">
     <div class="st-head">
-      <div class="st-icon amber"><i class="fa-solid fa-hashtag"></i></div>
+      <div class="st-icon amber"><?= icon('hash') ?></div>
       <div><h2>Invoice Numbering</h2><p class="panel-desc">Prefix controls how invoice numbers are formatted</p></div>
     </div>
     <div class="st-panel-body">
@@ -211,7 +211,7 @@ ob_start();
   <!-- Appearance -->
   <div class="st-panel">
     <div class="st-head">
-      <div class="st-icon"><i class="fa-solid fa-palette"></i></div>
+      <div class="st-icon"><?= icon('palette') ?></div>
       <div><h2>Invoice Appearance</h2><p class="panel-desc">Colour and font used on printed invoices</p></div>
     </div>
     <div class="st-panel-body">
@@ -231,7 +231,7 @@ ob_start();
           <div class="inv-prev-body">
             <div class="inv-prev-row"><div class="t">Invoice No</div><div class="v"><?= e($details['invoice_prefix']??'INV') ?>-000001</div></div>
             <div class="inv-prev-row"><div class="t">Total</div><div class="v" id="iPrevTotal" style="color:<?= e($book['theme_color']??'#1a6b4a') ?>">৳ 5,000</div></div>
-            <div class="inv-prev-row"><div class="t">Status</div><div class="v" style="color:var(--green)">Paid ✓</div></div>
+            <div class="inv-prev-row"><div class="t">Status</div><div class="v" style="color:var(--green)">Paid <?= icon('check') ?></div></div>
           </div>
         </div>
       </div>
@@ -249,7 +249,7 @@ ob_start();
   <!-- Inventory method -->
   <div class="st-panel">
     <div class="st-head">
-      <div class="st-icon green"><i class="fa-solid fa-layer-group"></i></div>
+      <div class="st-icon green"><?= icon('layers') ?></div>
       <div><h2>Inventory Method</h2><p class="panel-desc">Which stock batch is consumed first when making a sale</p></div>
     </div>
     <div class="st-panel-body">
@@ -257,19 +257,19 @@ ob_start();
       <div class="imc-wrap">
         <label class="imc <?= $cm==='FIFO'?'sel':'' ?>" id="fifoCard" onclick="selMethod('FIFO')">
           <input type="radio" name="inventory_method" value="FIFO" <?= $cm==='FIFO'?'checked':'' ?>>
-          <div class="imc-badge" style="background:var(--blue-bg)"><i class="fa-solid fa-arrows-spin" style="color: var(--brand);"></i></div>
+          <div class="imc-badge" style="background:var(--blue-bg)"><?= icon('refresh', '', 'color: var(--brand);') ?></div>
           <h4>FIFO</h4>
           <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--brand);margin-bottom:5px">First In, First Out</div>
           <div class="imc-sub">Oldest purchased stock is sold first. Standard for most retail businesses.</div>
-          <div class="imc-ck"><i class="fa-solid fa-check"></i></div>
+          <div class="imc-ck"><?= icon('check') ?></div>
         </label>
         <label class="imc <?= $cm==='LIFO'?'sel':'' ?>" id="lifoCard" onclick="selMethod('LIFO')">
           <input type="radio" name="inventory_method" value="LIFO" <?= $cm==='LIFO'?'checked':'' ?>>
-          <div class="imc-badge" style="background:var(--amber-bg)"><i class="fa-solid fa-arrows-turn-to-dots" style="color: var(--brand);"></i></div>
+          <div class="imc-badge" style="background:var(--amber-bg)"><?= icon('refresh', '', 'color: var(--brand);') ?></div>
           <h4>LIFO</h4>
           <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--amber);margin-bottom:5px">Last In, First Out</div>
           <div class="imc-sub">Most recently purchased stock is sold first. Common in certain tax strategies.</div>
-          <div class="imc-ck" style="background:var(--amber)"><i class="fa-solid fa-check"></i></div>
+          <div class="imc-ck" style="background:var(--amber)"><?= icon('check') ?></div>
         </label>
       </div>
     </div>
@@ -278,7 +278,7 @@ ob_start();
   <!-- Footer note -->
   <div class="st-panel">
     <div class="st-head">
-      <div class="st-icon muted"><i class="fa-solid fa-align-left"></i></div>
+      <div class="st-icon muted"><?= icon('align-left') ?></div>
       <div><h2>Invoice Footer</h2><p class="panel-desc">Optional tagline printed at the bottom of every invoice</p></div>
     </div>
     <div class="st-panel-body">
@@ -295,7 +295,7 @@ ob_start();
 <div class="st-sec" id="sec-currencies">
   <div class="st-panel">
     <div class="st-head">
-      <div class="st-icon amber"><i class="fa-solid fa-coins"></i></div>
+      <div class="st-icon amber"><?= icon('coins') ?></div>
       <div><h2>Currencies</h2><p class="panel-desc">The default currency symbol appears next to every amount</p></div>
     </div>
     <div class="st-panel-body">
@@ -319,7 +319,7 @@ ob_start();
         </div>
         <?php endforeach; ?>
       </div>
-      <button type="button" onclick="addCur()" class="btn btn-sm btn-secondary" style="margin-top:4px"><i class="fa-solid fa-plus"></i> Add Currency</button>
+      <button type="button" onclick="addCur()" class="btn btn-sm btn-secondary" style="margin-top:4px"><?= icon('plus') ?> Add Currency</button>
     </div>
   </div>
 </div>
@@ -328,7 +328,7 @@ ob_start();
 <div class="st-sec" id="sec-methods">
   <div class="st-panel">
     <div class="st-head">
-      <div class="st-icon green"><i class="fa-solid fa-truck-fast"></i></div>
+      <div class="st-icon green"><?= icon('truck-fast') ?></div>
       <div><h2>Delivery Methods</h2><p class="panel-desc">Options in the delivery dropdown on new invoices</p></div>
     </div>
     <div class="st-panel-body">
@@ -338,12 +338,12 @@ ob_start();
           <button type="button" class="del-btn" onclick="this.closest('.mrow').remove();markDirty()">×</button></div>
         <?php endforeach; ?>
       </div>
-      <button type="button" onclick="addM('deliveryList','delivery_methods[]')" class="btn btn-sm btn-secondary" style="margin-top:4px"><i class="fa-solid fa-plus"></i> Add Option</button>
+      <button type="button" onclick="addM('deliveryList','delivery_methods[]')" class="btn btn-sm btn-secondary" style="margin-top:4px"><?= icon('plus') ?> Add Option</button>
     </div>
   </div>
   <div class="st-panel">
     <div class="st-head">
-      <div class="st-icon blue"><i class="fa-solid fa-credit-card"></i></div>
+      <div class="st-icon blue"><?= icon('credit-card') ?></div>
       <div><h2>Payment Methods</h2><p class="panel-desc">Options in the payment dropdown on new invoices</p></div>
     </div>
     <div class="st-panel-body">
@@ -353,7 +353,7 @@ ob_start();
           <button type="button" class="del-btn" onclick="this.closest('.mrow').remove();markDirty()">×</button></div>
         <?php endforeach; ?>
       </div>
-      <button type="button" onclick="addM('paymentList','payment_methods[]')" class="btn btn-sm btn-secondary" style="margin-top:4px"><i class="fa-solid fa-plus"></i> Add Option</button>
+      <button type="button" onclick="addM('paymentList','payment_methods[]')" class="btn btn-sm btn-secondary" style="margin-top:4px"><?= icon('plus') ?> Add Option</button>
     </div>
   </div>
 </div>
@@ -364,7 +364,7 @@ ob_start();
 <div class="st-sec" id="sec-danger">
   <div class="st-panel danger">
     <div class="st-head">
-      <div class="st-icon red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <div class="st-icon red"><?= icon('alert-triangle') ?></div>
       <div><h2>Danger Zone</h2><p class="panel-desc">These actions cannot be undone</p></div>
     </div>
     <div class="st-danger-row">
@@ -373,7 +373,7 @@ ob_start();
         <span>Permanently hides this book — invoices, products, customers, everything.</span>
       </div>
       <button type="button" class="btn btn-danger" style="white-space:nowrap;flex-shrink:0" onclick="confirmDeleteBook()">
-        <i class="fa-solid fa-trash"></i> Delete Book
+        <?= icon('trash') ?> Delete Book
       </button>
     </div>
   </div>
@@ -394,10 +394,10 @@ function sw(name,btn){
 }
 let _dirty=false;
 function markDirty(){
-  if(!_dirty){_dirty=true;const b=document.getElementById('saveBtn');b.classList.add('dirty');b.innerHTML='<i class="fa-solid fa-circle-dot" style="color:#fbbf24"></i> Unsaved Changes';}
+  if(!_dirty){_dirty=true;const b=document.getElementById('saveBtn');b.classList.add('dirty');b.innerHTML=Icons.svg("circle-dot", "", "color:#fbbf24") + ' Unsaved Changes';}
 }
 document.getElementById('sForm').addEventListener('submit',()=>{
-  _dirty=false;const b=document.getElementById('saveBtn');b.classList.remove('dirty');b.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Saving…';
+  _dirty=false;const b=document.getElementById('saveBtn');b.classList.remove('dirty');b.innerHTML=Icons.svg("loader", "ic-spin") + ' Saving…';
 });
 function updBookColor(v){
   markDirty();

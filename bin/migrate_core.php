@@ -142,6 +142,27 @@ try {
 } catch (Throwable $e) { $failed++; say('  ! phase-2 repairs — ' . $e->getMessage()); }
 
 
+/* ── Expense-category icons: old Font Awesome names -> SVG icon-collection names ─────────────── */
+try {
+    if (has_table($pdo, 'expense_categories')) {
+        require_once BASE_PATH . '/app/Helpers/Icon.php';
+        $n = 0;
+        $old = $pdo->query("SELECT DISTINCT icon FROM expense_categories WHERE icon LIKE 'fa-%'")->fetchAll(PDO::FETCH_COLUMN);
+        $upd = $pdo->prepare('UPDATE expense_categories SET icon=? WHERE icon=?');
+        foreach ($old as $o) {
+            $upd->execute([\App\Helpers\Icon::resolve((string)$o), $o]);
+            $n += $upd->rowCount();
+        }
+        if ($n) say("  ~ $n expense categor" . ($n === 1 ? 'y' : 'ies') . ' moved to the SVG icon set');
+        $def = $pdo->query("SHOW COLUMNS FROM expense_categories LIKE 'icon'")->fetch(PDO::FETCH_ASSOC);
+        if ($def && ($def['Default'] ?? '') !== 'tag') {
+            $pdo->exec("ALTER TABLE expense_categories ALTER COLUMN icon SET DEFAULT 'tag'");
+            say("  ~ expense_categories.icon now defaults to 'tag'");
+        }
+    }
+} catch (Throwable $e) { $failed++; say('  ! expense-category icons — ' . $e->getMessage()); }
+
+
 
 /* ── Helpful indexes (no-ops when present) ──────────────────────────────────────────────────── */
 add_index($pdo, 'invoices',   'idx_inv_book_type_date', '`book_id`,`type`,`date`');

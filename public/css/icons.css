@@ -1,0 +1,20 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   Icons — inline SVG from the icon collection (public/icons, App\Helpers\Icon).
+   An icon is sized with font-size (1em) and coloured with the text colour
+   (currentColor), so it behaves like a character of text.
+   ────────────────────────────────────────────────────────────────────────── */
+.ic {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    vertical-align: -0.125em;
+    overflow: visible;
+}
+.ic-xs   { width: .75em; height: .75em; }
+.ic-lg   { width: 1.33em; height: 1.33em; }
+.ic-spin { animation: ic-spin 1s linear infinite; transform-origin: 50% 50%; }
+@keyframes ic-spin { to { transform: rotate(360deg); } }
+
+/* wrapper used where JavaScript swaps one icon for another (Icons.set) */
+.ic-wrap { display: inline-flex; align-items: center; justify-content: center; line-height: 1; }

@@ -29,7 +29,8 @@ $__theme = $_SESSION['user']['theme'] ?? 'light';
     <link rel="shortcut icon" href="<?= asset('favicon.ico') ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/86c0c1c09a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="<?= asset('css/icons.css') ?>">
+    <script src="<?= asset('js/icons.js') ?>"></script>
     <link rel="stylesheet" href="<?= asset('css/app.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/mobile.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/settings.css') ?>">
@@ -75,7 +76,7 @@ function navActive(string $path): string {
 <!-- ===================== SIDEBAR ===================== -->
 <aside class="sidebar" id="sidebar" aria-label="Main menu">
     <button type="button" class="sidebar-close" onclick="closeDrawer()" aria-label="Close menu">
-        <i class="fa-solid fa-xmark"></i>
+        <?= icon('close') ?>
     </button>
     <div class="sidebar-top">
         <a href="https://www.byabsayee.com" class="sidebar-logo">
@@ -89,7 +90,7 @@ function navActive(string $path): string {
     </div>
     <button class="sidebar-collapse-btn" id="sidebarCollapseBtn"
             onclick="toggleSidebar()" title="Collapse" aria-label="Toggle sidebar">
-        <i class="fa-solid fa-angles-left" id="sidebarCollapseIcon"></i>
+        <span id="sidebarCollapseIcon" class="ic-wrap"><?= icon('chevrons-left') ?></span>
     </button>
 
     <nav class="sidebar-nav">
@@ -97,7 +98,7 @@ function navActive(string $path): string {
         <?php if ($sidebarBook): ?>
 
         <a href="/books" title="All Books" class="nav-item nav-back" data-label="All Books">
-            <i class="fa-solid fa-arrow-left"></i> <span class="nav-text">All Books</span>
+            <?= icon('arrow-left') ?> <span class="nav-text">All Books</span>
         </a>
 
         <div class="sidebar-book-info">
@@ -118,7 +119,7 @@ function navActive(string $path): string {
 
         <a href="/books/<?= $currentBookId ?>"
            class="nav-item <?= preg_match('#^/books/'.$currentBookId.'$#', $uri) ? 'active' : '' ?>">
-            <i class="fa-solid fa-gauge"></i> Dashboard
+            <?= icon('gauge') ?> Dashboard
         </a>
 
         <?php if ($sidebarBook['type'] === 'business'): ?>
@@ -134,83 +135,83 @@ function navActive(string $path): string {
         <?php if ($sidebarCan('invoices','view')): ?>
         <div class="nav-dropdown <?= $invSubActive ? 'open' : '' ?>" id="navInvoices">
             <div class="nav-dropdown-trigger nav-item <?= $invSubActive ? 'active' : '' ?>">
-                <span><a href="/books/<?= $currentBookId ?>/invoices" title="Invoices"  class="nav-item <?= $uri === '/books/'.$currentBookId.'/invoices' ? 'active' : '' ?>"><i class="fa-solid fa-file-invoice"></i> Invoices</a></span>
-                <i onclick="toggleNavDropdown('navInvoices', event)" class="fa-solid fa-chevron-down nav-chevron"></i>
+                <span><a href="/books/<?= $currentBookId ?>/invoices" title="Invoices"  class="nav-item <?= $uri === '/books/'.$currentBookId.'/invoices' ? 'active' : '' ?>"><?= icon('invoice') ?> Invoices</a></span>
+                <?= icon('chevron-down', 'nav-chevron', '', ['onclick' => 'toggleNavDropdown(\'navInvoices\', event)']) ?>
             </div>
             <div class="nav-dropdown-menu">
-                <a href="/books/<?= $currentBookId ?>/sales"     class="nav-sub-item <?= str_contains($uri,'/books/'.$currentBookId.'/sales')     ? 'active' : '' ?>">     <i class="fa-solid fa-arrow-trend-up"></i> Sales</a>
-                <a href="/books/<?= $currentBookId ?>/purchases" class="nav-sub-item <?= str_contains($uri,'/books/'.$currentBookId.'/purchases') ? 'active' : '' ?>"> <i class="fa-solid fa-cart-shopping"></i> Purchases</a>
-                <a href="/books/<?= $currentBookId ?>/returns"   class="nav-sub-item <?= str_contains($uri,'/books/'.$currentBookId.'/returns')   ? 'active' : '' ?>">   <i class="fa-solid fa-rotate-left"></i> Returns</a>
+                <a href="/books/<?= $currentBookId ?>/sales"     class="nav-sub-item <?= str_contains($uri,'/books/'.$currentBookId.'/sales')     ? 'active' : '' ?>">     <?= icon('trending-up') ?> Sales</a>
+                <a href="/books/<?= $currentBookId ?>/purchases" class="nav-sub-item <?= str_contains($uri,'/books/'.$currentBookId.'/purchases') ? 'active' : '' ?>"> <?= icon('shopping-cart') ?> Purchases</a>
+                <a href="/books/<?= $currentBookId ?>/returns"   class="nav-sub-item <?= str_contains($uri,'/books/'.$currentBookId.'/returns')   ? 'active' : '' ?>">   <?= icon('rotate-ccw') ?> Returns</a>
             </div>
         </div>
         <?php endif; ?>
         <?php if ($sidebarCan('products','view')): ?>
-        <a href="/books/<?= $currentBookId ?>/products"     title="Products"    class="nav-item <?= navActive('/books/'.$currentBookId.'/products') ?>">     <i class="fa-solid fa-box"></i> Products</a>
+        <a href="/books/<?= $currentBookId ?>/products"     title="Products"    class="nav-item <?= navActive('/books/'.$currentBookId.'/products') ?>">     <?= icon('package') ?> Products</a>
         <?php endif; ?>
         <?php if ($sidebarCan('funds','view')): ?>
-        <a href="/books/<?= $currentBookId ?>/funds"        title="Funds"       class="nav-item <?= navActive('/books/'.$currentBookId.'/funds') ?>">        <i class="fa-solid fa-piggy-bank"></i> Funds</a>
+        <a href="/books/<?= $currentBookId ?>/funds"        title="Funds"       class="nav-item <?= navActive('/books/'.$currentBookId.'/funds') ?>">        <?= icon('piggy-bank') ?> Funds</a>
         <?php endif; ?>
         <?php if ($sidebarCan('expenses','view')): ?>
-        <a href="/books/<?= $currentBookId ?>/expenses"     title="Expenses"    class="nav-item <?= navActive('/books/'.$currentBookId.'/expenses') ?>">     <i class="fa-solid fa-receipt"></i> Expenses</a>
+        <a href="/books/<?= $currentBookId ?>/expenses"     title="Expenses"    class="nav-item <?= navActive('/books/'.$currentBookId.'/expenses') ?>">     <?= icon('receipt') ?> Expenses</a>
         <?php endif; ?>
         <?php if ($sidebarCan('dues','view')): ?>
-        <a href="/books/<?= $currentBookId ?>/dues"         title="Dues"        class="nav-item <?= navActive('/books/'.$currentBookId.'/dues') ?>">         <i class="fa-solid fa-hand-holding-dollar"></i> Dues</a>
+        <a href="/books/<?= $currentBookId ?>/dues"         title="Dues"        class="nav-item <?= navActive('/books/'.$currentBookId.'/dues') ?>">         <?= icon('hand-coins') ?> Dues</a>
         <?php endif; ?>
         <?php if ($sidebarCan('debts','view')): ?>
-        <a href="/books/<?= $currentBookId ?>/debts"        title="Debts"       class="nav-item <?= navActive('/books/'.$currentBookId.'/debts') ?>">        <i class="fa-solid fa-file-circle-minus"></i> Debts</a>
+        <a href="/books/<?= $currentBookId ?>/debts"        title="Debts"       class="nav-item <?= navActive('/books/'.$currentBookId.'/debts') ?>">        <?= icon('file-minus') ?> Debts</a>
         <?php endif; ?>
         <?php if ($sidebarCan('customers','view')): ?>
-        <a href="/books/<?= $currentBookId ?>/customers"    title="Customers"   class="nav-item <?= navActive('/books/'.$currentBookId.'/customers') ?>">    <i class="fa-solid fa-users"></i> Customers</a>
+        <a href="/books/<?= $currentBookId ?>/customers"    title="Customers"   class="nav-item <?= navActive('/books/'.$currentBookId.'/customers') ?>">    <?= icon('users') ?> Customers</a>
         <?php endif; ?>
         <?php if ($sidebarCan('suppliers','view')): ?>
-        <a href="/books/<?= $currentBookId ?>/suppliers"    title="Suppliers"   class="nav-item <?= navActive('/books/'.$currentBookId.'/suppliers') ?>">    <i class="fa-solid fa-user-tie"></i> Suppliers</a>
+        <a href="/books/<?= $currentBookId ?>/suppliers"    title="Suppliers"   class="nav-item <?= navActive('/books/'.$currentBookId.'/suppliers') ?>">    <?= icon('user-tie') ?> Suppliers</a>
         <?php endif; ?>
         <?php if ($sidebarCan('employees','view')): ?>
-        <a href="/books/<?= $currentBookId ?>/employees"    title="Employees"   class="nav-item <?= navActive('/books/'.$currentBookId.'/employees') ?>">    <i class="fa-solid fa-id-badge"></i> Employees</a>
+        <a href="/books/<?= $currentBookId ?>/employees"    title="Employees"   class="nav-item <?= navActive('/books/'.$currentBookId.'/employees') ?>">    <?= icon('id-card') ?> Employees</a>
         <?php endif; ?>
         <?php if ($sidebarCan('contacts','view')): ?>
-        <a href="/books/<?= $currentBookId ?>/contacts"     title="Contacts"    class="nav-item <?= navActive('/books/'.$currentBookId.'/contacts') ?>">     <i class="fa-solid fa-address-book"></i> Contacts</a>
+        <a href="/books/<?= $currentBookId ?>/contacts"     title="Contacts"    class="nav-item <?= navActive('/books/'.$currentBookId.'/contacts') ?>">     <?= icon('address-book') ?> Contacts</a>
         <?php endif; ?>
         <?php if ($sidebarCan('coupons','view')): ?>
-        <a href="/books/<?= $currentBookId ?>/coupons"      title="Coupons"     class="nav-item <?= navActive('/books/'.$currentBookId.'/coupons') ?>">      <i class="fa-solid fa-ticket"></i> Coupons</a>
+        <a href="/books/<?= $currentBookId ?>/coupons"      title="Coupons"     class="nav-item <?= navActive('/books/'.$currentBookId.'/coupons') ?>">      <?= icon('ticket') ?> Coupons</a>
         <?php endif; ?>
         <?php if ($sidebarIsOwner): ?>
-        <a href="/books/<?= $currentBookId ?>/deliveries"   title="Deliveries"  class="nav-item <?= navActive('/books/'.$currentBookId.'/deliveries') ?>">   <i class="fa-solid fa-truck-fast"></i> Deliveries <span class="nav-soon">Soon</span></a>
+        <a href="/books/<?= $currentBookId ?>/deliveries"   title="Deliveries"  class="nav-item <?= navActive('/books/'.$currentBookId.'/deliveries') ?>">   <?= icon('truck-fast') ?> Deliveries <span class="nav-soon">Soon</span></a>
         <?php endif; ?>
         <?php if ($sidebarCan('reports','view')): ?>
-        <a href="/books/<?= $currentBookId ?>/reports"      title="Reports"     class="nav-item <?= navActive('/books/'.$currentBookId.'/reports') ?>">      <i class="fa-solid fa-chart-line"></i> Reports</a>
+        <a href="/books/<?= $currentBookId ?>/reports"      title="Reports"     class="nav-item <?= navActive('/books/'.$currentBookId.'/reports') ?>">      <?= icon('chart-line') ?> Reports</a>
         <?php endif; ?>
         <?php if ($sidebarCan('logs','view')): ?>
-        <a href="/books/<?= $currentBookId ?>/logs"         title="Logs"        class="nav-item <?= navActive('/books/'.$currentBookId.'/logs') ?>">          <i class="fa-solid fa-clock-rotate-left"></i> Activity Log</a>
+        <a href="/books/<?= $currentBookId ?>/logs"         title="Logs"        class="nav-item <?= navActive('/books/'.$currentBookId.'/logs') ?>">          <?= icon('history') ?> Activity Log</a>
         <?php endif; ?>
 
         <?php else: ?>
         <a href="/books/<?= $currentBookId ?>/contacts"     title="Contacts"    class="nav-item <?= navActive('/books/'.$currentBookId.'/contacts') ?>">
-            <i class="fa-solid fa-address-book"></i> Contacts
+            <?= icon('address-book') ?> Contacts
         </a>
         <?php endif; ?>
 
         <?php if ($sidebarIsOwner): ?>
         <a href="/books/<?= $currentBookId ?>/edit"         title="Book Settings" class="nav-item <?= navActive('/books/'.$currentBookId.'/edit') ?>">
-            <i class="fa-solid fa-gear"></i> Book Settings
+            <?= icon('settings') ?> Book Settings
         </a>
         <a href="/books/<?= $currentBookId ?>/integrations" title="Online store" class="nav-item <?= navActive('/books/'.$currentBookId.'/integrations') ?>">
-            <i class="fa-solid fa-link"></i> Online store
+            <?= icon('link') ?> Online store
         </a>
         <?php endif; ?>
 
         <?php else: ?>
 
         <a href="/books" class="nav-item <?= activePage('books') ?>" data-label="Books" title="Books">
-            <i class="fa-solid fa-book"></i> <span class="nav-text">Books</span>
+            <?= icon('book') ?> <span class="nav-text">Books</span>
         </a>
 
         <a href="/wallet" class="nav-item <?= activePage('wallet') ?>" data-label="Wallet" title="Wallet">
-            <i class="fa-solid fa-wallet"></i> <span class="nav-text">Wallet</span> <span class="nav-soon">Soon</span>
+            <?= icon('wallet') ?> <span class="nav-text">Wallet</span> <span class="nav-soon">Soon</span>
         </a>
 
         <a href="/marketplace" class="nav-item <?= activePage('marketplace') ?>" data-label="Marketplace" title="Marketplace">
-            <i class="fa-solid fa-store"></i> <span class="nav-text">Marketplace</span> <span class="nav-soon">Soon</span>
+            <?= icon('store') ?> <span class="nav-text">Marketplace</span> <span class="nav-soon">Soon</span>
         </a>
 
         <?php endif; ?>
@@ -219,11 +220,11 @@ function navActive(string $path): string {
 
     <div class="sidebar-bottom">
         <button onclick="openNotifPanel(event)" class="nav-item" style="width:100%;text-align:left;background:none;border:none;cursor:pointer;position:relative" title="Notifications">
-            <i class="fa-solid fa-bell"></i> Notifications
+            <?= icon('bell') ?> Notifications
             <span class="notif-badge" id="sidebarNotifBadge" style="display:none;position:absolute;top:6px;left:22px"></span>
         </button>
         <a href="/settings" title="App Settings" class="nav-item" data-label="App Settings">
-            <i class="fa-solid fa-sliders"></i> <span class="nav-text">App Settings</span>
+            <?= icon('sliders') ?> <span class="nav-text">App Settings</span>
         </a>
         <div class="sidebar-user">
             <a href="/profile" class="s-avatar" style="text-decoration:none;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="Profile">
@@ -238,7 +239,7 @@ function navActive(string $path): string {
                 <div class="s-user-email"><?= e(auth()['email'] ?? '') ?></div>
             </div>
             <a href="/logout" title="Log out" class="s-logout-btn">
-                <i class="fa-solid fa-right-from-bracket"></i>
+                <?= icon('logout') ?>
             </a>
         </div>
     </div>
@@ -248,11 +249,11 @@ function navActive(string $path): string {
 <div class="app-main">
     <div class="mobile-topbar">
         <button type="button" class="topbar-btn" onclick="openDrawer()" aria-label="Open menu" aria-controls="sidebar">
-            <i class="fa-solid fa-bars"></i>
+            <?= icon('menu') ?>
         </button>
         <span class="mobile-title"><?= e($pageTitle ?? 'Byabsayee') ?></span>
         <button type="button" onclick="openNotifPanel(event)" class="topbar-btn" aria-label="Notifications">
-            <i class="fa-solid fa-bell"></i>
+            <?= icon('bell') ?>
             <span class="notif-badge" id="mobileNotifBadge" style="display:none"></span>
         </button>
         <a href="/profile" class="topbar-btn" aria-label="Profile">
@@ -268,13 +269,13 @@ function navActive(string $path): string {
 
     <div class="app-content">
         <?php if ($msg = flash('error')): ?>
-            <div class="flash flash-error"><i class="fa-solid fa-circle-xmark"></i> <?= e($msg) ?></div>
+            <div class="flash flash-error"><?= icon('x-circle') ?> <?= e($msg) ?></div>
         <?php endif; ?>
         <?php if ($msg = flash('success')): ?>
-            <div class="flash flash-success"><i class="fa-solid fa-circle-check"></i> <?= e($msg) ?></div>
+            <div class="flash flash-success"><?= icon('check-circle') ?> <?= e($msg) ?></div>
         <?php endif; ?>
         <?php if ($msg = flash('warning')): ?>
-            <div class="flash flash-warning"><i class="fa-solid fa-triangle-exclamation"></i> <?= e($msg) ?></div>
+            <div class="flash flash-warning"><?= icon('alert-triangle') ?> <?= e($msg) ?></div>
         <?php endif; ?>
 
         <?= $content ?? '' ?>
@@ -289,28 +290,28 @@ function navActive(string $path): string {
 $bbItems = [];   // [href|null, icon, label, active?, soon?]
 if ($sidebarBook) {
     $bid = $currentBookId;
-    $bbItems[] = ['/books/'.$bid, 'fa-gauge', 'Home', (bool)preg_match('#^/books/'.$bid.'/?$#', $uri), false];
+    $bbItems[] = ['/books/'.$bid, 'gauge', 'Home', (bool)preg_match('#^/books/'.$bid.'/?$#', $uri), false];
     if ($sidebarBook['type'] === 'business') {
         $cands = [
-            ['invoices', "/books/$bid/invoices", 'fa-file-invoice', 'Invoices',
+            ['invoices', "/books/$bid/invoices", 'invoice', 'Invoices',
                  navActive("/books/$bid/invoices") || navActive("/books/$bid/sales") || navActive("/books/$bid/purchases") || navActive("/books/$bid/returns") || navActive("/books/$bid/pos")],
-            ['products', "/books/$bid/products", 'fa-box',          'Products', navActive("/books/$bid/products")],
-            ['reports',  "/books/$bid/reports",  'fa-chart-line',   'Reports',  navActive("/books/$bid/reports")],
-            ['expenses', "/books/$bid/expenses", 'fa-receipt',      'Expenses', navActive("/books/$bid/expenses")],
+            ['products', "/books/$bid/products", 'package',          'Products', navActive("/books/$bid/products")],
+            ['reports',  "/books/$bid/reports",  'chart-line',   'Reports',  navActive("/books/$bid/reports")],
+            ['expenses', "/books/$bid/expenses", 'receipt',      'Expenses', navActive("/books/$bid/expenses")],
         ];
         foreach ($cands as $c) {
             if (count($bbItems) >= 4) break;
             if ($sidebarCan($c[0], 'view')) $bbItems[] = [$c[1], $c[2], $c[3], (bool)$c[4], false];
         }
     } else {
-        $bbItems[] = ["/books/$bid/contacts", 'fa-address-book', 'Contacts', (bool)navActive("/books/$bid/contacts"), false];
-        if ($sidebarIsOwner) $bbItems[] = ["/books/$bid/edit", 'fa-gear', 'Settings', (bool)navActive("/books/$bid/edit"), false];
+        $bbItems[] = ["/books/$bid/contacts", 'address-book', 'Contacts', (bool)navActive("/books/$bid/contacts"), false];
+        if ($sidebarIsOwner) $bbItems[] = ["/books/$bid/edit", 'settings', 'Settings', (bool)navActive("/books/$bid/edit"), false];
     }
 } else {
-    $bbItems[] = ['/books',       'fa-book',      'Books',    (bool)(activePage('books')),       false];
-    $bbItems[] = ['/wallet',      'fa-wallet',    'Wallet',   (bool)(activePage('wallet')),      true];
-    $bbItems[] = ['/marketplace', 'fa-store',     'Market',   (bool)(activePage('marketplace')), true];
-    $bbItems[] = ['/settings',    'fa-sliders',   'Settings', (bool)(activePage('settings')),    false];
+    $bbItems[] = ['/books',       'book',      'Books',    (bool)(activePage('books')),       false];
+    $bbItems[] = ['/wallet',      'wallet',    'Wallet',   (bool)(activePage('wallet')),      true];
+    $bbItems[] = ['/marketplace', 'store',     'Market',   (bool)(activePage('marketplace')), true];
+    $bbItems[] = ['/settings',    'sliders',   'Settings', (bool)(activePage('settings')),    false];
 }
 
 // Floating button fallback for pages that have no "add" button of their own:
@@ -318,24 +319,24 @@ if ($sidebarBook) {
 $fabDefault = null;
 if ($sidebarBook && $sidebarBook['type'] === 'business'
     && preg_match('#^/books/'.$currentBookId.'/?$#', $uri) && $sidebarCan('invoices', 'create')) {
-    $fabDefault = ['href' => "/books/$currentBookId/invoices/create?type=sale", 'label' => 'New sale', 'icon' => 'fa-plus'];
+    $fabDefault = ['href' => "/books/$currentBookId/invoices/create?type=sale", 'label' => 'New sale', 'icon' => 'plus'];
 }
 ?>
 <nav class="bottom-bar" id="bottomBar" aria-label="Quick navigation">
     <?php foreach ($bbItems as $it): ?>
     <a href="<?= e($it[0]) ?>" class="bb-item <?= $it[3] ? 'active' : '' ?>">
-        <i class="fa-solid <?= e($it[1]) ?>"></i><span><?= e($it[2]) ?></span>
+        <?= icon($it[1]) ?><span><?= e($it[2]) ?></span>
         <?php if ($it[4]): ?><em class="bb-soon" style="font-style:normal">Soon</em><?php endif; ?>
     </a>
     <?php endforeach; ?>
     <button type="button" class="bb-item" onclick="openDrawer()" aria-label="Open menu">
-        <i class="fa-solid fa-bars"></i><span>Menu</span>
+        <?= icon('menu') ?><span>Menu</span>
     </button>
 </nav>
 
 <button type="button" class="fab" id="appFab" aria-label="Add"
         <?php if ($fabDefault): ?>data-default-href="<?= e($fabDefault['href']) ?>" data-default-label="<?= e($fabDefault['label']) ?>"<?php endif; ?>>
-    <i class="fa-solid fa-plus"></i><span class="fab-label"></span>
+    <?= icon('plus') ?><span class="fab-label"></span>
 </button>
 
 <?php
@@ -346,22 +347,22 @@ $canSendNotification = $currentBookId && ($sidebarIsOwner || $sidebarCan('employ
 <div class="notif-backdrop" id="notifBackdrop" onclick="closeNotifPanel(event)">
     <div class="notif-panel">
         <div class="notif-panel-header">
-            <span><i class="fa-solid fa-bell"></i> Notifications</span>
+            <span><?= icon('bell') ?> Notifications</span>
             <div style="display:flex;align-items:center;gap:8px">
                 <?php if ($canSendNotification): ?>
                 <a href="/books/<?= $currentBookId ?>/notifications/send"
                    class="btn btn-sm btn-primary"
                    style="font-size:12px;padding:4px 10px;white-space:nowrap">
-                    <i class="fa-solid fa-paper-plane"></i> Send
+                    <?= icon('send') ?> Send
                 </a>
                 <?php endif; ?>
                 <button type="button" onclick="closeNotifPanel()" class="notif-close" aria-label="Close notifications">
-                    <i class="fa-solid fa-xmark"></i>
+                    <?= icon('close') ?>
                 </button>
             </div>
         </div>
         <div class="notif-panel-body" id="notifPanelBody">
-            <div class="notif-loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading…</div>
+            <div class="notif-loading"><?= icon('loader', 'ic-spin') ?> Loading…</div>
         </div>
     </div>
 </div>
@@ -391,7 +392,7 @@ function openNotifPanel(e) {
             notifLoaded = true;
             const body = document.getElementById('notifPanelBody');
             if (!data.length) {
-                body.innerHTML = '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>No notifications yet.</div>';
+                body.innerHTML = '<div class="notif-empty">' + Icons.svg("bell-off") + '<br>No notifications yet.</div>';
                 return;
             }
 
@@ -418,16 +419,16 @@ function openNotifPanel(e) {
                 let html = '';
 
                 if (bookNotifs.length) {
-                    html += `<div class="notif-section-label"><i class="fa-solid fa-building"></i> This Book</div>`;
+                    html += `<div class="notif-section-label">${Icons.svg('building')} This Book</div>`;
                     html += bookNotifs.map(renderNotif).join('');
                 }
                 if (globalNotifs.length) {
                     if (bookNotifs.length) {
-                        html += `<div class="notif-section-label" style="margin-top:12px"><i class="fa-solid fa-globe"></i> Other</div>`;
+                        html += `<div class="notif-section-label" style="margin-top:12px">${Icons.svg('globe')} Other</div>`;
                     }
                     html += globalNotifs.map(renderNotif).join('');
                 }
-                body.innerHTML = html || '<div class="notif-empty"><i class="fa-regular fa-bell-slash"></i><br>No notifications yet.</div>';
+                body.innerHTML = html || '<div class="notif-empty">' + Icons.svg("bell-off") + '<br>No notifications yet.</div>';
             } else {
                 body.innerHTML = data.map(renderNotif).join('');
             }
@@ -484,7 +485,7 @@ function toggleNavDropdown(id, e) {
     margin: 1px 6px;
     transition: background .12s, color .12s;
 }
-.nav-sub-item i { width:14px; text-align:center; font-size:12px; }
+.nav-sub-item .ic { width:14px; text-align:center; font-size:12px; }
 .nav-sub-item:hover { background:var(--hover-bg, rgba(0,0,0,.05)); color:var(--text); }
 .nav-soon { margin-left:auto; font-size:9px; font-weight:700; letter-spacing:.4px; text-transform:uppercase; padding:1px 6px; border-radius:999px; background:var(--amber-bg); color:var(--amber); }
 .sidebar.collapsed .nav-soon { display:none; }

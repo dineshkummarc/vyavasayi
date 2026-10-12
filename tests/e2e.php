@@ -5,7 +5,7 @@ $pdo = new PDO('mysql:host=127.0.0.1;dbname=byab;charset=utf8mb4', 'b', 'b', [PD
 $q = fn($sql, $p = []) => ($s = $pdo->prepare($sql)) && $s->execute($p) ? $s->fetchAll() : [];
 $one = fn($sql, $p = []) => ($q($sql, $p)[0] ?? null);
 $ok = 0; $bad = 0;
-function check(string $name, $cond, $detail = '') { global $ok, $bad; if ($cond) { $ok++; echo "  ✓ $name\n"; } else { $bad++; echo "  ✗ $name  $detail\n"; } }
+function check(string $name, $cond, $detail = '') { global $ok, $bad; if ($cond) { $ok++; echo "  PASS $name\n"; } else { $bad++; echo "  FAIL $name  $detail\n"; } }
 
 // ---- seed ----
 foreach (['users','books','customers','suppliers','products','invoices'] as $t) $pdo->exec("DELETE FROM $t");

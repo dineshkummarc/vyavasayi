@@ -35,7 +35,7 @@ case "${1:-}" in
     docker compose up -d
 
     echo ""
-    echo "✓  Byabsayee is running at http://$(hostname -I | awk '{print $1}'):1021"
+    echo "Byabsayee is running at http://$(hostname -I | awk '{print $1}'):1021"
     echo "   phpMyAdmin : http://$(hostname -I | awk '{print $1}'):8093"
     echo ""
     echo "Tip: edit any PHP/view/CSS/JS file and refresh — no rebuild needed."

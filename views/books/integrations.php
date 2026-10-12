@@ -24,7 +24,7 @@ ob_start();
 
 <div class="page-header"><div class="page-header-left">
   <div class="breadcrumb"><a href="/books/<?= $book['id'] ?>">Books</a> <span>›</span> <span>Online store</span></div>
-  <h1><i class="fa-solid fa-link" style="color:var(--brand)"></i> Online store
+  <h1><?= icon('link', '', 'color:var(--brand)') ?> Online store
     <?php if ($st): ?><span class="int-pill" style="background:<?= $badge[$st][1] ?>;margin-left:8px"><?= $badge[$st][0] ?></span><?php endif; ?></h1>
   <p>Keep products, stock, customers, orders and payments in step with your website — in both directions.</p>
 </div></div>
@@ -210,7 +210,7 @@ ob_start();
 <?php if ($log): ?>
 <div class="int-card"><h2>Recent activity</h2><p class="sub">Personal details are masked in this log.</p>
 <table class="int-table"><?php foreach ($log as $l): ?><tr><td style="white-space:nowrap"><small><?= e(fmt_datetime($l['created_at'])) ?></small></td>
-<td><?= $l['direction'] === 'in' ? '⬇ from site' : ($l['direction'] === 'out' ? '⬆ to site' : '⚙ system') ?></td><td style="color:<?= $l['ok'] ? 'inherit' : '#b91c1c' ?>"><?= e($l['summary']) ?></td></tr><?php endforeach; ?></table></div>
+<td><?= $l['direction'] === 'in' ? icon('arrow-down') . ' from site' : ($l['direction'] === 'out' ? icon('arrow-up') . ' to site' : icon('settings') . ' system') ?></td><td style="color:<?= $l['ok'] ? 'inherit' : '#b91c1c' ?>"><?= e($l['summary']) ?></td></tr><?php endforeach; ?></table></div>
 <?php endif; ?>
 <?php endif; ?>
 

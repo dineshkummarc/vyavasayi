@@ -9,15 +9,15 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>">Books</a> <span>›</span>
             <span>Coupons</span>
         </div>
-        <h1><i class="fa-solid fa-ticket" style="color:var(--brand)"></i> Coupons</h1>
+        <h1><?= icon('ticket', '', 'color:var(--brand)') ?> Coupons</h1>
         <p>Create discount codes for customers</p>
     </div>
     <div style="display:flex;gap:8px">
         <button class="btn btn-secondary btn-sm" data-modal="printModal" title="Print PDF">
-            <i class="fa-solid fa-print"></i> Print
+            <?= icon('printer') ?> Print
         </button>
         <button class="btn btn-primary" data-modal="addCouponModal">
-            <i class="fa-solid fa-plus"></i> New Coupon
+            <?= icon('plus') ?> New Coupon
         </button>
     </div>
 </div>
@@ -25,21 +25,21 @@ ob_start();
 <!-- Summary strip -->
 <div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
     <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:10px 18px;display:flex;align-items:center;gap:10px">
-        <i class="fa-solid fa-ticket" style="color:var(--brand);font-size:18px"></i>
+        <?= icon('ticket', '', 'color:var(--brand);font-size:18px') ?>
         <div>
             <div style="font-size:22px;font-weight:700;color:var(--brand)"><?= (int)($counts['total']??0) ?></div>
             <div style="font-size:11px;color:var(--text-muted)">Total Coupons</div>
         </div>
     </div>
     <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:10px 18px;display:flex;align-items:center;gap:10px">
-        <i class="fa-solid fa-circle-check" style="color:var(--green);font-size:18px"></i>
+        <?= icon('check-circle', '', 'color:var(--green);font-size:18px') ?>
         <div>
             <div style="font-size:22px;font-weight:700;color:var(--green)"><?= (int)($counts['active_count']??0) ?></div>
             <div style="font-size:11px;color:var(--text-muted)">Active</div>
         </div>
     </div>
     <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:10px 18px;display:flex;align-items:center;gap:10px">
-        <i class="fa-solid fa-circle-xmark" style="color:var(--text-muted);font-size:18px"></i>
+        <?= icon('x-circle', '', 'color:var(--text-muted);font-size:18px') ?>
         <div>
             <div style="font-size:22px;font-weight:700;color:var(--text-muted)"><?= (int)($counts['inactive_count']??0) ?></div>
             <div style="font-size:11px;color:var(--text-muted)">Inactive</div>
@@ -59,7 +59,7 @@ ob_start();
     <div style="margin-left:auto;display:flex;gap:6px;align-items:center">
         <!-- Selective print button -->
         <button id="printSelectedBtn" class="btn btn-sm btn-secondary" style="display:none" onclick="printSelected()">
-            <i class="fa-solid fa-print"></i> Print Selected
+            <?= icon('printer') ?> Print Selected
         </button>
         </div>
 </div>
@@ -68,9 +68,9 @@ ob_start();
 <!-- LM Controls -->
 <div class="lm-controls">
     <div class="lm-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <?= icon('search') ?>
         <input type="text" class="lm-search" id="coupTableSearch" placeholder="Search code, description…">
-        <button class="lm-search-clear" id="coupTableClear"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lm-search-clear" id="coupTableClear"><?= icon('close') ?></button>
     </div>
     <select class="lm-select" id="coupTableSort">
         <option value="az">Code A–Z</option>
@@ -89,7 +89,7 @@ ob_start();
 <?php if (empty($coupons)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon"><i class="fa-solid fa-ticket"></i></div>
+        <div class="empty-icon"><?= icon('ticket') ?></div>
         <h3>No coupons yet</h3>
         <p>Create your first discount coupon to use in invoices.</p>
     </div>
@@ -131,21 +131,21 @@ ob_start();
             <td>
                 <?php if ($c['discount_type'] === 'percent'): ?>
                 <span style="background:var(--amber-bg);color:var(--amber);padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700">
-                    <i class="fa-solid fa-percent"></i> <?= (float)$c['discount_value'] ?>% off
+                    <?= icon('percent') ?> <?= (float)$c['discount_value'] ?>% off
                 </span>
                 <?php else: ?>
                 <span style="background:var(--green-bg);color:var(--green);padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700">
-                    <i class="fa-solid fa-minus"></i> <?= format_money((float)$c['discount_value']) ?> off
+                    <?= icon('minus') ?> <?= format_money((float)$c['discount_value']) ?> off
                 </span>
                 <?php endif; ?>
             </td>
             <td style="font-size:12px">
                 <?php if (!$c['expires_at']): ?>
-                    <span style="color:var(--text-muted)"><i class="fa-solid fa-infinity" style="font-size:10px"></i> Permanent</span>
+                    <span style="color:var(--text-muted)"><?= icon('infinity', '', 'font-size:10px') ?> Permanent</span>
                 <?php elseif ($expired): ?>
-                    <span style="color:var(--red);font-weight:600"><i class="fa-solid fa-clock"></i> Expired <?= fmt_date($c['expires_at']) ?></span>
+                    <span style="color:var(--red);font-weight:600"><?= icon('clock') ?> Expired <?= fmt_date($c['expires_at']) ?></span>
                 <?php elseif ($expiring): ?>
-                    <span style="color:var(--amber);font-weight:600"><i class="fa-solid fa-triangle-exclamation"></i> <?= fmt_date($c['expires_at']) ?></span>
+                    <span style="color:var(--amber);font-weight:600"><?= icon('alert-triangle') ?> <?= fmt_date($c['expires_at']) ?></span>
                 <?php else: ?>
                     <span><?= fmt_date($c['expires_at']) ?></span>
                     <div style="font-size:11px;color:var(--text-muted)"><?= date('h:i A', strtotime($c['expires_at'])) ?></div>
@@ -153,11 +153,11 @@ ob_start();
             </td>
             <td>
                 <?php if ($expired): ?>
-                <span class="badge" style="background:var(--red-bg);color:var(--red)"><i class="fa-solid fa-circle" style="font-size:7px"></i> Expired</span>
+                <span class="badge" style="background:var(--red-bg);color:var(--red)"><?= icon('circle', '', 'font-size:7px') ?> Expired</span>
                 <?php elseif ($c['is_active']): ?>
-                <span class="badge badge-green"><i class="fa-solid fa-circle" style="font-size:7px"></i> Active</span>
+                <span class="badge badge-green"><?= icon('circle', '', 'font-size:7px') ?> Active</span>
                 <?php else: ?>
-                <span class="badge badge-gray"><i class="fa-solid fa-circle" style="font-size:7px"></i> Inactive</span>
+                <span class="badge badge-gray"><?= icon('circle', '', 'font-size:7px') ?> Inactive</span>
                 <?php endif; ?>
             </td>
             <td class="td-muted"><?= format_date($c['created_at']) ?></td>
@@ -165,14 +165,14 @@ ob_start();
                 <!-- Print single -->
                 <a href="/books/<?= $book['id'] ?>/coupons/print?ids=<?= $c['id'] ?>"
                    class="btn btn-sm btn-secondary" title="Print this coupon" target="_blank">
-                    <i class="fa-solid fa-print"></i>
+                    <?= icon('printer') ?>
                 </a>
                 <!-- Toggle -->
                 <form method="POST" action="/books/<?= $book['id'] ?>/coupons/<?= $c['id'] ?>/toggle" style="display:inline">
                     <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
                     <button class="btn btn-sm <?= $c['is_active'] ? 'btn-secondary' : 'btn-primary' ?>"
                             title="<?= $c['is_active'] ? 'Deactivate' : 'Activate' ?>">
-                        <i class="fa-solid <?= $c['is_active'] ? 'fa-toggle-on' : 'fa-toggle-off' ?>"></i>
+                        <?= icon($c['is_active'] ? 'toggle-on' : 'toggle-off') ?>
                     </button>
                 </form>
                 <!-- Edit -->
@@ -187,14 +187,14 @@ ob_start();
                             '<?= $c['expires_at'] ? 'date' : 'none' ?>',
                             '<?= $c['expires_at'] ? date('Y-m-d\TH:i', strtotime($c['expires_at'])) : '' ?>'
                         )">
-                    <i class="fa-solid fa-pen"></i>
+                    <?= icon('square-pen') ?>
                 </button>
                 <!-- Delete -->
                 <form method="POST" action="/books/<?= $book['id'] ?>/coupons/<?= $c['id'] ?>/delete"
                       style="display:inline" onsubmit="return confirm('Delete coupon <?= e($c['code']) ?>?')">
                     <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
                     <button class="btn btn-sm btn-secondary" title="Delete">
-                        <i class="fa-solid fa-trash" style="color:var(--red)"></i>
+                        <?= icon('trash', '', 'color:var(--red)') ?>
                     </button>
                 </form>
             </td>
@@ -211,7 +211,7 @@ ob_start();
 <div class="modal-backdrop" id="addCouponModal">
     <div class="modal">
         <div class="modal-title">
-            <i class="fa-solid fa-ticket" style="color:var(--brand)"></i> New Coupon
+            <?= icon('ticket', '', 'color:var(--brand)') ?> New Coupon
         </div>
         <form method="POST" action="/books/<?= $book['id'] ?>/coupons/add">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
@@ -223,7 +223,7 @@ ob_start();
                 <div class="form-group full">
                     <label>Coupon Code *
                         <button type="button" class="btn btn-sm btn-secondary" style="margin-left:8px;padding:2px 8px;font-size:11px" onclick="generateCode('addCouponCode')">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> Generate
+                            <?= icon('sparkles') ?> Generate
                         </button>
                     </label>
                     <input type="text" name="code" id="addCouponCode" required
@@ -274,7 +274,7 @@ ob_start();
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa-solid fa-plus"></i> Create Coupon
+                    <?= icon('plus') ?> Create Coupon
                 </button>
             </div>
         </form>
@@ -286,7 +286,7 @@ ob_start();
 <div class="modal-backdrop" id="editCouponModal">
     <div class="modal">
         <div class="modal-title">
-            <i class="fa-solid fa-pen" style="color:var(--brand)"></i> Edit Coupon
+            <?= icon('square-pen', '', 'color:var(--brand)') ?> Edit Coupon
         </div>
         <form method="POST" id="editCouponForm">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
@@ -344,7 +344,7 @@ ob_start();
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa-solid fa-check"></i> Save Changes
+                    <?= icon('check') ?> Save Changes
                 </button>
             </div>
         </form>

@@ -72,9 +72,9 @@ ob_start();
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
         <a href="/books/<?= $book['id'] ?>/invoices/<?= $invoice['id'] ?>/pdf"
-           class="btn btn-primary" target="_blank"><i class="fa-solid fa-print"></i> Print / PDF</a>
+           class="btn btn-primary" target="_blank"><?= icon('printer') ?> Print / PDF</a>
         <a href="/books/<?= $book['id'] ?>/invoices/<?= $invoice['id'] ?>/thermal?w=58"
-           class="btn btn-secondary" target="_blank"><i class="fa-solid fa-print"></i> 58/80mm</a>
+           class="btn btn-secondary" target="_blank"><?= icon('printer') ?> 58/80mm</a>
         <?php if ($invoice['status'] === 'draft'): ?>
         <form method="POST" action="/books/<?= $book['id'] ?>/invoices/<?= $invoice['id'] ?>/sent">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
@@ -87,7 +87,7 @@ ob_start();
         <?php if (($invoice['source'] ?? null) === 'online_store' || !empty($invoice['sync_to_store'])): ?>
         <form method="POST" action="/books/<?= $book['id'] ?>/invoices/<?= $invoice['id'] ?>/fulfilment" style="display:flex;gap:6px;align-items:center">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
-            <span title="Online order<?= !empty($invoice['external_number']) ? ' ' . e($invoice['external_number']) : '' ?>" style="font-size:.8rem;color:var(--text-muted)"><i class="fa-solid fa-link"></i> <?= e($invoice['external_number'] ?: 'Online') ?></span>
+            <span title="Online order<?= !empty($invoice['external_number']) ? ' ' . e($invoice['external_number']) : '' ?>" style="font-size:.8rem;color:var(--text-muted)"><?= icon('link') ?> <?= e($invoice['external_number'] ?: 'Online') ?></span>
             <?php $__storeConn = null; try { $__storeConn = \App\Services\Integration\Conn::linkedForBook((int)$book['id']); } catch (\Throwable $e) {} ?>
             <?php if ($__storeConn && !empty($__storeConn['site_domain']) && !empty($invoice['external_number'])): ?>
             <a href="https://<?= e($__storeConn['site_domain']) ?>/admin/orders.php?q=<?= e(rawurlencode($invoice['external_number'])) ?>" target="_blank" rel="noopener" style="font-size:.8rem">Open in store admin ↗</a>
@@ -110,7 +110,7 @@ ob_start();
 <!-- Privilege hint -->
 <?php if (!empty($assignedPrivs) && in_array($invoice['type'], ['sale','pos'])): ?>
 <div style="background:var(--green-bg);border:1px solid #bbf7d0;border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:13px;color:var(--green)">
-    <i class="fa-solid fa-ticket"></i> <strong><?= e($customer['name']) ?></strong> has:
+    <?= icon('ticket') ?> <strong><?= e($customer['name']) ?></strong> has:
     <?php foreach ($assignedPrivs as $priv): ?>
         <strong><?= e($priv['name']) ?></strong>
         (<?= $priv['discount_type']==='percent' ? $priv['discount_value'].'%' : $sym.number_format($priv['discount_value'],2) ?> off)
@@ -131,13 +131,13 @@ ob_start();
                 <div style="font-size:13px;line-height:1.9">
                     <strong><?= e($details['business_name'] ?? $book['name']) ?></strong><br>
                     <?php if ($book['phone'] ?? $details['phone'] ?? ''): ?>
-                        <span style="color:var(--text-muted)"><i class="fa-solid fa-phone"></i></span> <?= e($book['phone'] ?? $details['phone']) ?><br>
+                        <span style="color:var(--text-muted)"><?= icon('phone') ?></span> <?= e($book['phone'] ?? $details['phone']) ?><br>
                     <?php endif; ?>
                     <?php if ($book['email'] ?? $details['email'] ?? ''): ?>
-                        <span style="color:var(--text-muted)"><i class="fa-regular fa-envelope"></i></span> <?= e($book['email'] ?? $details['email']) ?><br>
+                        <span style="color:var(--text-muted)"><?= icon('mail') ?></span> <?= e($book['email'] ?? $details['email']) ?><br>
                     <?php endif; ?>
                     <?php if ($book['address'] ?? $details['address'] ?? ''): ?>
-                        <span style="color:var(--text-muted)"><i class="fa-solid fa-location-dot"></i></span> <?= e($book['address'] ?? $details['address']) ?>
+                        <span style="color:var(--text-muted)"><?= icon('map-pin') ?></span> <?= e($book['address'] ?? $details['address']) ?>
                     <?php endif; ?>
                 </div>
             </div>
@@ -148,13 +148,13 @@ ob_start();
                 <div style="font-size:13px;line-height:1.9">
                     <?php if ($customer): ?>
                         <strong><?= e($customer['name']) ?></strong><br>
-                        <?php if ($customer['phone']): ?><span style="color:var(--text-muted)"><i class="fa-solid fa-phone"></i></span> <?= e($customer['phone']) ?><br><?php endif; ?>
-                        <?php if ($customer['email'] ?? ''): ?><span style="color:var(--text-muted)"><i class="fa-regular fa-envelope"></i></span> <?= e($customer['email']) ?><br><?php endif; ?>
-                        <?php if ($customer['address']): ?><span style="color:var(--text-muted)"><i class="fa-solid fa-location-dot"></i></span> <?= e($customer['address']) ?><?php endif; ?>
+                        <?php if ($customer['phone']): ?><span style="color:var(--text-muted)"><?= icon('phone') ?></span> <?= e($customer['phone']) ?><br><?php endif; ?>
+                        <?php if ($customer['email'] ?? ''): ?><span style="color:var(--text-muted)"><?= icon('mail') ?></span> <?= e($customer['email']) ?><br><?php endif; ?>
+                        <?php if ($customer['address']): ?><span style="color:var(--text-muted)"><?= icon('map-pin') ?></span> <?= e($customer['address']) ?><?php endif; ?>
                     <?php elseif ($supplier): ?>
                         <strong><?= e($supplier['name']) ?></strong><br>
                         <?php if ($supplier['company']): ?><?= e($supplier['company']) ?><br><?php endif; ?>
-                        <?php if ($supplier['phone']): ?><span style="color:var(--text-muted)"><i class="fa-solid fa-phone"></i></span> <?= e($supplier['phone']) ?><?php endif; ?>
+                        <?php if ($supplier['phone']): ?><span style="color:var(--text-muted)"><?= icon('phone') ?></span> <?= e($supplier['phone']) ?><?php endif; ?>
                     <?php else: ?>
                         <span style="color:var(--text-muted)">Walk-in Customer</span>
                     <?php endif; ?>
@@ -371,7 +371,7 @@ ob_start();
             <?php foreach ($attachments as $att): ?>
             <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--bg);border-radius:8px;border:1px solid var(--border)">
                 <div style="font-size:13px">
-                    📎 <?= e($att['filename']) ?>
+                    <?= icon('paperclip') ?> <?= e($att['filename']) ?>
                     <span style="color:var(--text-muted);font-size:11px;margin-left:8px"><?= number_format($att['size']/1024,1) ?> KB</span>
                 </div>
                 <a href="<?= asset('uploads/'.$att['path']) ?>" target="_blank" class="btn btn-sm btn-secondary">View</a>
@@ -422,7 +422,7 @@ ob_start();
             <?php if ($due > 0 && $invoice['status'] !== 'cancelled'): ?>
             <button class="btn btn-primary" style="width:100%" data-modal="paymentModal">+ Record Payment</button>
             <?php else: ?>
-            <div style="text-align:center;font-size:13px;color:var(--green);font-weight:500"><i class="fa-solid fa-check"></i> Fully Paid</div>
+            <div style="text-align:center;font-size:13px;color:var(--green);font-weight:500"><?= icon('check') ?> Fully Paid</div>
             <?php endif; ?>
         </div>
     </div>
@@ -521,7 +521,7 @@ ob_start();
             <?php endif; ?>
             <div style="margin-top:4px">
                 <a href="/books/<?= $book['id'] ?>/customers/<?= $customer['id'] ?>" class="btn btn-sm btn-secondary" style="width:100%;justify-content:center">
-                    View Customer Profile <i class="fa-solid fa-arrow-right-long"></i>
+                    View Customer Profile <?= icon('arrow-right') ?>
                 </a>
             </div>
         </div>
@@ -534,7 +534,7 @@ ob_start();
         <p class="card-title">Public Link</p>
         <p style="font-size:12px;color:var(--text-muted);margin-bottom:8px">Share with customer — no login needed</p>
         <a href="<?= asset('invoice/'.$invoice['public_token']) ?>" target="_blank"
-           class="btn btn-sm btn-secondary" style="width:100%;justify-content:center"><i class="fa-solid fa-link"></i> View Public Invoice</a>
+           class="btn btn-sm btn-secondary" style="width:100%;justify-content:center"><?= icon('link') ?> View Public Invoice</a>
     </div>
     <?php endif; ?>
 

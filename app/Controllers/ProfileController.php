@@ -744,9 +744,9 @@ class ProfileController
         $gender   = !empty($user['gender']) ? ucfirst(str_replace('_',' ', $user['gender'])) : '';
         $themeColor = $profile['profile_theme_color'] ?? '#1a6b4a';
 
-        $socialIcons = ['linkedin'=>'fa-linkedin','github'=>'fa-github','facebook'=>'fa-facebook',
-                        'instagram'=>'fa-instagram','twitter'=>'fa-x-twitter','youtube'=>'fa-youtube',
-                        'tiktok'=>'fa-tiktok','website'=>'fa-globe'];
+        $socialIcons = ['linkedin'=>'linkedin','github'=>'github','facebook'=>'facebook',
+                        'instagram'=>'instagram','twitter'=>'x','youtube'=>'youtube',
+                        'tiktok'=>'tiktok','website'=>'globe'];
 
         ob_start();
         ?><!DOCTYPE html>

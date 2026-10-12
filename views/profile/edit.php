@@ -7,7 +7,7 @@ $themeColor = $profile['profile_theme_color'] ?? '#1a6b4a';
 
 // Define platforms at top level so the <script> block can always access it
 $platforms = ['linkedin','github','facebook','instagram','twitter','youtube','tiktok','behance','dribbble','medium','stackoverflow','website'];
-$platformIcons = ['linkedin'=>'fa-linkedin','github'=>'fa-github','facebook'=>'fa-facebook','instagram'=>'fa-instagram','twitter'=>'fa-x-twitter','youtube'=>'fa-youtube','tiktok'=>'fa-tiktok','behance'=>'fa-behance','dribbble'=>'fa-dribbble','medium'=>'fa-medium','stackoverflow'=>'fa-stack-overflow','website'=>'fa-globe'];
+$platformIcons = ['linkedin'=>'linkedin','github'=>'github','facebook'=>'facebook','instagram'=>'instagram','twitter'=>'x','youtube'=>'youtube','tiktok'=>'tiktok','behance'=>'behance','dribbble'=>'dribbble','medium'=>'medium','stackoverflow'=>'stackoverflow','website'=>'globe'];
 
 // Visibility helper
 function vis(array $vis, string $field, bool $default = false): bool {
@@ -39,12 +39,12 @@ $countryCodes = [
 <div class="page-header">
     <div class="page-header-left">
         <div class="breadcrumb"><span>My Profile</span></div>
-        <h1><i class="fa-solid fa-id-card" style="color:var(--brand)"></i> My Profile</h1>
+        <h1><?= icon('id-card', '', 'color:var(--brand)') ?> My Profile</h1>
         <p>Edit your personal information, CV, and public profile</p>
     </div>
     <?php if ($handle): ?>
     <a href="/user/@<?= e($handle['handle']) ?>" target="_blank" class="btn btn-secondary btn-sm">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Public Profile
+        <?= icon('external-link') ?> View Public Profile
     </a>
     <?php endif; ?>
 </div>
@@ -66,16 +66,16 @@ $countryCodes = [
             </div>
         </div>
         <div class="st-nav-group">Personal</div>
-        <a href="?tab=basic"      class="<?= $tab==='basic'?'active':'' ?>"><i class="fa-solid fa-user"></i> Basic Info</a>
-        <a href="?tab=profile"    class="<?= $tab==='profile'?'active':'' ?>"><i class="fa-solid fa-address-card"></i> Profile Details</a>
-        <a href="?tab=education"  class="<?= $tab==='education'?'active':'' ?>"><i class="fa-solid fa-graduation-cap"></i> Education</a>
-        <a href="?tab=experience" class="<?= $tab==='experience'?'active':'' ?>"><i class="fa-solid fa-briefcase"></i> Experience</a>
-        <a href="?tab=social"     class="<?= $tab==='social'?'active':'' ?>"><i class="fa-solid fa-share-nodes"></i> Social Links</a>
+        <a href="?tab=basic"      class="<?= $tab==='basic'?'active':'' ?>"><?= icon('user') ?> Basic Info</a>
+        <a href="?tab=profile"    class="<?= $tab==='profile'?'active':'' ?>"><?= icon('id-card') ?> Profile Details</a>
+        <a href="?tab=education"  class="<?= $tab==='education'?'active':'' ?>"><?= icon('graduation-cap') ?> Education</a>
+        <a href="?tab=experience" class="<?= $tab==='experience'?'active':'' ?>"><?= icon('briefcase') ?> Experience</a>
+        <a href="?tab=social"     class="<?= $tab==='social'?'active':'' ?>"><?= icon('share') ?> Social Links</a>
         <div class="st-nav-group">Privacy & Security</div>
-        <a href="?tab=visibility" class="<?= $tab==='visibility'?'active':'' ?>"><i class="fa-solid fa-eye"></i> Visibility</a>
-        <a href="?tab=security"   class="<?= $tab==='security'?'active':'' ?>"><i class="fa-solid fa-shield-halved"></i> Security</a>
+        <a href="?tab=visibility" class="<?= $tab==='visibility'?'active':'' ?>"><?= icon('eye') ?> Visibility</a>
+        <a href="?tab=security"   class="<?= $tab==='security'?'active':'' ?>"><?= icon('shield') ?> Security</a>
         <div class="st-nav-group">CV</div>
-        <a href="/profile/cv/pdf" target="_blank"><i class="fa-solid fa-print"></i> Print / Download CV</a>
+        <a href="/profile/cv/pdf" target="_blank"><?= icon('printer') ?> Print / Download CV</a>
     </nav>
 
     <!-- Content -->
@@ -86,7 +86,7 @@ $countryCodes = [
 
     <?php if ($handle): ?>
     <div class="link-card" style="margin-bottom:20px">
-        <i class="fa-solid fa-link"></i>
+        <?= icon('link') ?>
         <div class="link-text">
             <strong>Your Public Profile Link</strong>
             <a href="/user/@<?= e($handle['handle']) ?>" target="_blank">
@@ -112,7 +112,7 @@ $countryCodes = [
                     Preview: <strong>https://byabsayee.com/user/@<?= e($handle['handle'] ?? 'yourname') ?></strong>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Save Handle</button>
+            <button type="submit" class="btn btn-primary"><?= icon('check') ?> Save Handle</button>
         </form>
     </div>
 
@@ -134,7 +134,7 @@ $countryCodes = [
                 </div>
                 <div>
                     <label for="avatarFile" class="btn btn-secondary btn-sm" style="cursor:pointer">
-                        <i class="fa-solid fa-camera"></i> Change Photo
+                        <?= icon('camera') ?> Change Photo
                     </label>
                     <input type="file" id="avatarFile" name="avatar" accept="image/*" style="display:none"
                            onchange="previewAvatar(this)">
@@ -205,7 +205,7 @@ $countryCodes = [
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Basic Info</button>
+            <button type="submit" class="btn btn-primary"><?= icon('save') ?> Save Basic Info</button>
         </form>
     </div>
 
@@ -220,7 +220,7 @@ $countryCodes = [
             <div class="fg">
                 <label>Profile Banner <span class="hint">Wide background image behind your profile. Recommended 1200×300px</span></label>
                 <div class="banner-upload" onclick="document.getElementById('bannerFile').click()">
-                    <i class="fa-solid fa-image" style="font-size:24px;color:var(--text-muted)"></i>
+                    <?= icon('image', '', 'font-size:24px;color:var(--text-muted)') ?>
                     <div style="font-size:13px;color:var(--text-muted);margin-top:6px">Click to upload banner · JPG, PNG, WEBP · Max 5MB</div>
                     <input type="file" id="bannerFile" name="profile_banner" accept="image/*" style="display:none"
                            onchange="previewBanner(this)">
@@ -350,7 +350,7 @@ $countryCodes = [
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Profile Details</button>
+            <button type="submit" class="btn btn-primary"><?= icon('save') ?> Save Profile Details</button>
         </form>
     </div>
 
@@ -381,7 +381,7 @@ $countryCodes = [
                             </label>
                         </div>
                     </div>
-                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><i class="fa-solid fa-xmark"></i></button>
+                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><?= icon('close') ?></button>
                 </div>
                 <?php endforeach; ?>
                 <?php if (empty($education)): ?>
@@ -396,11 +396,11 @@ $countryCodes = [
                         <div class="fg" style="margin:0"><label style="font-size:11px">To Year</label>
                             <input type="number" name="to_year[]" min="1950" max="2050" placeholder="2022"></div>
                     </div>
-                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><i class="fa-solid fa-xmark"></i></button>
+                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><?= icon('close') ?></button>
                 </div>
                 <?php endif; ?>
             </div>
-            <button type="button" class="add-row-btn" onclick="addEduRow()"><i class="fa-solid fa-plus"></i> Add Institution</button>
+            <button type="button" class="add-row-btn" onclick="addEduRow()"><?= icon('plus') ?> Add Institution</button>
 
             <hr>
             <h3 style="font-size:14px;font-weight:700;margin:16px 0 12px">Grades / Qualifications</h3>
@@ -418,7 +418,7 @@ $countryCodes = [
                         <div class="fg" style="margin:0"><label style="font-size:11px">Year</label>
                             <input type="number" name="grade_year[]" value="<?= e($g['year']??'') ?>" min="1990" max="2050" placeholder="2020"></div>
                     </div>
-                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><i class="fa-solid fa-xmark"></i></button>
+                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()">' + Icons.svg("close") + '</button>
                 </div>
                 <?php endforeach; ?>
                 <?php if (empty($grades)): ?>
@@ -433,14 +433,14 @@ $countryCodes = [
                         <div class="fg" style="margin:0"><label style="font-size:11px">Year</label>
                             <input type="number" name="grade_year[]" min="1990" max="2050" placeholder="2020"></div>
                     </div>
-                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><i class="fa-solid fa-xmark"></i></button>
+                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()">' + Icons.svg("close") + '</button>
                 </div>
                 <?php endif; ?>
             </div>
-            <button type="button" class="add-row-btn" onclick="addGradeRow()"><i class="fa-solid fa-plus"></i> Add Grade</button>
+            <button type="button" class="add-row-btn" onclick="addGradeRow()">' + Icons.svg("plus") + ' Add Grade</button>
 
             <div style="margin-top:20px">
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Education</button>
+                <button type="submit" class="btn btn-primary">' + Icons.svg("save") + ' Save Education</button>
             </div>
         </form>
     </div>
@@ -448,7 +448,7 @@ $countryCodes = [
     <?php elseif ($tab === 'experience'): ?>
     <!-- ── WORK EXPERIENCE ─────────────────────────────────────────────── -->
     <div class="st-panel">
-        <div class="st-head"><div class="st-icon"><i class="fa-solid fa-briefcase"></i></div><div><h2>Work Experience</h2><p class="panel-desc">Add your professional work history. Each entry can be toggled visible on your public profile via the Visibility tab.</p></div></div>
+        <div class="st-head"><div class="st-icon">' + Icons.svg("briefcase") + '</div><div><h2>Work Experience</h2><p class="panel-desc">Add your professional work history. Each entry can be toggled visible on your public profile via the Visibility tab.</p></div></div>
         <form method="POST" action="/profile/experience">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
             <div id="expList">
@@ -481,7 +481,7 @@ $countryCodes = [
                         <div class="fg" style="grid-column:span 2;margin:0"><label style="font-size:11px">Description / Responsibilities</label>
                             <textarea name="exp_desc[]" rows="2" placeholder="Brief description of your role and achievements..."><?= e($exp['description']??'') ?></textarea></div>
                     </div>
-                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><i class="fa-solid fa-xmark"></i></button>
+                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()">' + Icons.svg("close") + '</button>
                 </div>
                 <?php endforeach; else: ?>
                 <div class="repeat-item" id="expRow0">
@@ -514,13 +514,13 @@ $countryCodes = [
                         <div class="fg" style="grid-column:span 2;margin:0"><label style="font-size:11px">Description / Responsibilities</label>
                             <textarea name="exp_desc[]" rows="2" placeholder="Brief description of your role and achievements..."></textarea></div>
                     </div>
-                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><i class="fa-solid fa-xmark"></i></button>
+                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()">' + Icons.svg("close") + '</button>
                 </div>
                 <?php endif; ?>
             </div>
-            <button type="button" class="add-row-btn" onclick="addExpRow()"><i class="fa-solid fa-plus"></i> Add Experience</button>
+            <button type="button" class="add-row-btn" onclick="addExpRow()">' + Icons.svg("plus") + ' Add Experience</button>
             <div style="margin-top:20px">
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Experience</button>
+                <button type="submit" class="btn btn-primary">' + Icons.svg("save") + ' Save Experience</button>
             </div>
         </form>
     </div>
@@ -537,7 +537,7 @@ $countryCodes = [
                     foreach ($socialLinks as $sl): ?>
                 <div class="social-platform-row">
                     <div class="social-platform-icon">
-                        <i class="fa-brands <?= e($platformIcons[$sl['platform']] ?? 'fa-link') ?>"></i>
+                        <?= icon($platformIcons[$sl['platform']] ?? 'link') ?>
                     </div>
                     <select name="platform[]" style="width:140px" onchange="updateSocialIcon(this)">
                         <?php foreach ($platforms as $p): ?>
@@ -545,25 +545,25 @@ $countryCodes = [
                         <?php endforeach; ?>
                     </select>
                     <input type="url" name="social_url[]" value="<?= e($sl['url']) ?>" placeholder="https://..." style="flex:1">
-                    <button type="button" onclick="this.closest('.social-platform-row').remove()" class="repeat-del"><i class="fa-solid fa-xmark"></i></button>
+                    <button type="button" onclick="this.closest('.social-platform-row').remove()" class="repeat-del">' + Icons.svg("close") + '</button>
                 </div>
                 <?php endforeach; ?>
                 <?php else: ?>
                 <div class="social-platform-row">
-                    <div class="social-platform-icon"><i class="fa-brands fa-linkedin"></i></div>
+                    <div class="social-platform-icon">' + Icons.svg("linkedin") + '</div>
                     <select name="platform[]" style="width:140px" onchange="updateSocialIcon(this)">
                         <?php foreach ($platforms as $p): ?>
                         <option value="<?=$p?>"><?= ucfirst($p) ?></option>
                         <?php endforeach; ?>
                     </select>
                     <input type="url" name="social_url[]" placeholder="https://linkedin.com/in/yourname" style="flex:1">
-                    <button type="button" onclick="this.closest('.social-platform-row').remove()" class="repeat-del"><i class="fa-solid fa-xmark"></i></button>
+                    <button type="button" onclick="this.closest('.social-platform-row').remove()" class="repeat-del">' + Icons.svg("close") + '</button>
                 </div>
                 <?php endif; ?>
             </div>
-            <button type="button" class="add-row-btn" style="margin-top:8px" onclick="addSocialRow()"><i class="fa-solid fa-plus"></i> Add Link</button>
+            <button type="button" class="add-row-btn" style="margin-top:8px" onclick="addSocialRow()">' + Icons.svg("plus") + ' Add Link</button>
             <div style="margin-top:20px">
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Social Links</button>
+                <button type="submit" class="btn btn-primary">' + Icons.svg("save") + ' Save Social Links</button>
             </div>
         </form>
     </div>
@@ -571,7 +571,7 @@ $countryCodes = [
     <?php elseif ($tab === 'visibility'): ?>
     <!-- ── VISIBILITY ──────────────────────────────────────────────────── -->
     <div class="st-panel">
-        <div class="st-head"><div class="st-icon"><i class="fa-solid fa-eye"></i></div><div><h2>Public Visibility</h2><p class="panel-desc">Choose what information is visible to anyone who visits your public profile link. Unchecked fields remain private.</p></div></div>
+        <div class="st-head"><div class="st-icon">' + Icons.svg("eye") + '</div><div><h2>Public Visibility</h2><p class="panel-desc">Choose what information is visible to anyone who visits your public profile link. Unchecked fields remain private.</p></div></div>
         <form method="POST" action="/profile/visibility">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
             <?php
@@ -613,7 +613,7 @@ $countryCodes = [
             </div>
             <?php endforeach; ?>
             <div style="margin-top:20px">
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Visibility</button>
+                <button type="submit" class="btn btn-primary">' + Icons.svg("save") + ' Save Visibility</button>
             </div>
         </form>
     </div>
@@ -626,21 +626,21 @@ $countryCodes = [
     $verifyMethod  = $_GET['verify_method'] ?? null; // method being added
     $setupTotp     = isset($_GET['setup_totp']);      // dedicated TOTP setup panel
     $methodDefs = [
-        'email'    => ['label'=>'Email OTP',         'icon'=>'fa-envelope',            'desc'=>'A code sent to your email address'],
-        'whatsapp' => ['label'=>'WhatsApp OTP',       'icon'=>'fa-brands fa-whatsapp',  'desc'=>'A code sent to your WhatsApp number'],
-        'app'      => ['label'=>'Authenticator App',  'icon'=>'fa-mobile-screen-button','desc'=>'Google/Microsoft Authenticator'],
+        'email'    => ['label'=>'Email OTP',         'icon'=>'mail',            'desc'=>'A code sent to your email address'],
+        'whatsapp' => ['label'=>'WhatsApp OTP',       'icon'=>'whatsapp',  'desc'=>'A code sent to your WhatsApp number'],
+        'app'      => ['label'=>'Authenticator App',  'icon'=>'smartphone','desc'=>'Google/Microsoft Authenticator'],
     ];
     ?>
 
     <!-- Password confirmation notice -->
     <div style="background:rgba(26,107,74,.06);border:1px solid rgba(26,107,74,.2);border-radius:10px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text)">
-        <i class="fa-solid fa-circle-info" style="color:var(--brand);font-size:16px;flex-shrink:0"></i>
+        ' + Icons.svg("info", "", "color:var(--brand);font-size:16px;flex-shrink:0") + '
         <span>All security changes require your <strong>current password</strong> to confirm. Some actions also require a 2FA code if enabled.</span>
     </div>
 
     <!-- Change Password -->
     <div class="st-panel">
-        <div class="st-head"><div class="st-icon"><i class="fa-solid fa-lock"></i></div><div><h2>Change Password</h2><p class="panel-desc">Keep your account safe with a strong, unique password.</p></div></div>
+        <div class="st-head"><div class="st-icon">' + Icons.svg("lock") + '</div><div><h2>Change Password</h2><p class="panel-desc">Keep your account safe with a strong, unique password.</p></div></div>
 
         <?php if ($pwd2faMode): ?>
         <!-- Step 2: Confirm with 2FA code -->
@@ -653,7 +653,7 @@ $countryCodes = [
                 <label>2FA Code <span class="hint">From your authenticator app or email/WhatsApp</span></label>
                 <input type="text" name="tfa_code" inputmode="numeric" maxlength="6" placeholder="000000" autofocus style="font-size:20px;font-weight:700;letter-spacing:6px;text-align:center">
             </div>
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-shield-check"></i> Confirm Password Change</button>
+            <button type="submit" class="btn btn-primary">' + Icons.svg("shield-check") + ' Confirm Password Change</button>
         </form>
         <?php else: ?>
         <form method="POST" action="/profile/change-password">
@@ -662,7 +662,7 @@ $countryCodes = [
                 <label>Current Password</label>
                 <div style="position:relative">
                     <input type="password" name="current_password" id="pwdCurrent" required placeholder="Enter your current password" style="padding-right:42px">
-                    <button type="button" onclick="togglePwd('pwdCurrent',this)" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:14px"><i class="fa-solid fa-eye"></i></button>
+                    <button type="button" onclick="togglePwd('pwdCurrent',this)" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:14px">' + Icons.svg("eye") + '</button>
                 </div>
             </div>
             <div class="fg-row">
@@ -670,7 +670,7 @@ $countryCodes = [
                     <label>New Password <span class="hint">Min 8 characters</span></label>
                     <div style="position:relative">
                         <input type="password" name="new_password" id="pwdNew" required placeholder="New password" minlength="8" oninput="checkPwdStrength(this.value)" style="padding-right:42px">
-                        <button type="button" onclick="togglePwd('pwdNew',this)" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:14px"><i class="fa-solid fa-eye"></i></button>
+                        <button type="button" onclick="togglePwd('pwdNew',this)" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:14px">' + Icons.svg("eye") + '</button>
                     </div>
                     <div id="pwdStrengthBar" style="height:4px;border-radius:2px;margin-top:6px;background:#eee;overflow:hidden">
                         <div id="pwdStrengthFill" style="height:100%;width:0;transition:width .3s,background .3s;border-radius:2px"></div>
@@ -681,31 +681,31 @@ $countryCodes = [
                     <label>Confirm New Password</label>
                     <div style="position:relative">
                         <input type="password" name="confirm_password" id="pwdConfirm" required placeholder="Repeat new password" style="padding-right:42px">
-                        <button type="button" onclick="togglePwd('pwdConfirm',this)" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:14px"><i class="fa-solid fa-eye"></i></button>
+                        <button type="button" onclick="togglePwd('pwdConfirm',this)" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:14px">' + Icons.svg("eye") + '</button>
                     </div>
                 </div>
             </div>
             <?php if ($tfa2Enabled): ?>
             <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:14px;font-size:12px;color:var(--text-muted)">
-                <i class="fa-solid fa-shield-halved" style="color:var(--brand)"></i>
+                ' + Icons.svg("shield", "", "color:var(--brand)") + '
                 Since 2FA is enabled, you'll be asked to enter a 2FA code after submitting.
             </div>
             <?php endif; ?>
             <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:var(--text-muted)">
                 <strong style="color:var(--text)">Tips:</strong> Use 12+ characters · Mix uppercase, lowercase, numbers, symbols
             </div>
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-key"></i> Update Password</button>
+            <button type="submit" class="btn btn-primary"><?= icon('key') ?> Update Password</button>
         </form>
         <?php endif; ?>
     </div>
 
     <!-- Two-Factor Authentication -->
     <div class="st-panel">
-        <div class="st-head"><div class="st-icon"><i class="fa-solid fa-shield-halved"></i></div><div><h2>Two-Factor Authentication</h2><p class="panel-desc">You can enable multiple 2FA methods. During login, you'll choose which one to use.</p></div></div>
+        <div class="st-head"><div class="st-icon"><?= icon('shield') ?></div><div><h2>Two-Factor Authentication</h2><p class="panel-desc">You can enable multiple 2FA methods. During login, you'll choose which one to use.</p></div></div>
 
         <!-- Status overview -->
         <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:10px;margin-bottom:20px">
-            <i class="fa-solid <?= $tfa2Enabled ? 'fa-shield-check' : 'fa-shield-xmark' ?>" style="font-size:22px;color:<?= $tfa2Enabled ? 'var(--brand)' : '#ef4444' ?>"></i>
+            <?= icon($tfa2Enabled ? 'shield-check' : 'shield-x', '', 'font-size:22px;color:' . ($tfa2Enabled ? 'var(--brand)' : '#ef4444')) ?>
             <div style="flex:1">
                 <strong style="font-size:14px;color:var(--text)">2FA is <?= $tfa2Enabled ? 'Enabled' : 'Disabled' ?></strong>
                 <?php if ($tfa2Enabled && !empty($activeMethods)): ?>
@@ -714,7 +714,7 @@ $countryCodes = [
                 </div>
                 <?php endif; ?>
             </div>
-            <span class="<?= $tfa2Enabled ? 'st-badge-on' : 'st-badge-off' ?>"><?= $tfa2Enabled ? '✓ Active' : '✗ Off' ?></span>
+            <span class="<?= $tfa2Enabled ? 'st-badge-on' : 'st-badge-off' ?>"><?= $tfa2Enabled ? icon('check') . ' Active' : icon('close') . ' Off' ?></span>
         </div>
 
         <!-- Method cards: show add/remove per method -->
@@ -726,31 +726,31 @@ $countryCodes = [
         <div style="border:1.5px solid <?= $isEnabled ? 'var(--brand)' : 'var(--border)' ?>;border-radius:10px;padding:14px 16px;background:<?= $isEnabled ? 'rgba(26,107,74,.04)' : 'var(--bg)' ?>">
             <div style="display:flex;align-items:center;gap:12px">
                 <div style="width:38px;height:38px;border-radius:9px;background:<?= $isEnabled ? 'var(--brand)' : 'var(--card-bg)' ?>;border:1px solid <?= $isEnabled ? 'var(--brand)' : 'var(--border)' ?>;display:flex;align-items:center;justify-content:center;font-size:16px;color:<?= $isEnabled ? '#fff' : 'var(--text-muted)' ?>;flex-shrink:0">
-                    <i class="fa-solid <?= $mDef['icon'] ?>"></i>
+                    <?= icon($mDef['icon']) ?>
                 </div>
                 <div style="flex:1">
                     <div style="font-size:13px;font-weight:700;color:var(--text)"><?= $mDef['label'] ?>
-                        <?php if ($isEnabled): ?><span class="st-badge-on" style="margin-left:6px">✓ Active</span><?php endif; ?>
+                        <?php if ($isEnabled): ?><span class="st-badge-on" style="margin-left:6px"><?= icon('check') ?> Active</span><?php endif; ?>
                     </div>
                     <div style="font-size:12px;color:var(--text-muted);margin-top:1px"><?= $mDef['desc'] ?></div>
                 </div>
                 <?php if ($isEnabled): ?>
                 <button type="button" class="btn btn-secondary btn-sm" onclick="openRemoveModal('<?= $mKey ?>', '<?= e($mDef['label']) ?>')">
-                    <i class="fa-solid fa-xmark"></i> Remove
+                    ' + Icons.svg("close") + ' Remove
                 </button>
                 <?php if ($mKey === 'app'): ?>
                 <a href="?tab=security&setup_totp=1" class="btn btn-secondary btn-sm" style="margin-left:4px;text-decoration:none">
-                    <i class="fa-solid fa-qrcode"></i> View QR
+                    ' + Icons.svg("qr-code") + ' View QR
                 </a>
                 <?php endif; ?>
                 <?php else: ?>
                 <?php if ($mKey === 'app'): ?>
                 <a href="?tab=security&setup_totp=1" class="btn btn-primary btn-sm" style="text-decoration:none">
-                    <i class="fa-solid fa-qrcode"></i> Set Up
+                    ' + Icons.svg("qr-code") + ' Set Up
                 </a>
                 <?php else: ?>
                 <button type="button" class="btn btn-primary btn-sm" onclick="openAddModal('<?= $mKey ?>', '<?= e($mDef['label']) ?>')">
-                    <i class="fa-solid fa-plus"></i> Enable
+                    ' + Icons.svg("plus") + ' Enable
                 </button>
                 <?php endif; ?>
                 <?php endif; ?>
@@ -760,7 +760,7 @@ $countryCodes = [
             <!-- OTP verification form for email/whatsapp enable -->
             <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
                 <div style="font-size:13px;color:var(--text-muted);margin-bottom:10px">
-                    <i class="fa-solid fa-circle-info" style="color:var(--brand)"></i>
+                    ' + Icons.svg("info", "", "color:var(--brand)") + '
                     A code was sent to your <?= $mKey === 'email' ? 'email' : 'WhatsApp' ?>. Enter it below to enable this method.
                 </div>
                 <form method="POST" action="/profile/security/2fa" style="display:flex;gap:8px;align-items:flex-end">
@@ -772,7 +772,7 @@ $countryCodes = [
                         <label style="font-size:12px">Enter OTP Code</label>
                         <input type="text" name="otp_code" inputmode="numeric" maxlength="6" placeholder="000000" autofocus style="font-size:18px;font-weight:700;letter-spacing:4px;text-align:center">
                     </div>
-                    <button type="submit" class="btn btn-primary" style="white-space:nowrap"><i class="fa-solid fa-check"></i> Verify &amp; Enable</button>
+                    <button type="submit" class="btn btn-primary" style="white-space:nowrap">' + Icons.svg("check") + ' Verify &amp; Enable</button>
                 </form>
             </div>
             <?php endif; ?>
@@ -783,7 +783,7 @@ $countryCodes = [
         <!-- ── Dedicated TOTP Setup Panel ─────────────────────────────────── -->
         <?php if ($setupTotp): ?>
         <div class="st-panel highlight" id="totpSetupPanel">
-            <div class="st-head"><div class="st-icon"><i class="fa-solid fa-qrcode"></i></div><div><h2>Set Up Authenticator App</h2><p class="panel-desc">Use Google Authenticator, Microsoft Authenticator, Authy, or any TOTP-compatible app.</p></div></div>
+            <div class="st-head"><div class="st-icon">' + Icons.svg("qr-code") + '</div><div><h2>Set Up Authenticator App</h2><p class="panel-desc">Use Google Authenticator, Microsoft Authenticator, Authy, or any TOTP-compatible app.</p></div></div>
 
             <div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;margin-bottom:20px">
                 <!-- QR Code -->
@@ -799,7 +799,7 @@ $countryCodes = [
                     <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
                         <code id="totpSecretFull" style="flex:1;font-size:13px;font-weight:700;letter-spacing:2px;background:var(--bg);border:1px solid var(--border);padding:8px 12px;border-radius:8px;word-break:break-all;color:var(--text)">Loading…</code>
                         <button type="button" onclick="copySecret()" style="flex-shrink:0;padding:8px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg);cursor:pointer;font-size:12px;color:var(--text)" title="Copy secret">
-                            <i class="fa-solid fa-copy" id="copyIcon"></i>
+                            <span id="copyIcon" class="ic-wrap"><?= icon('copy') ?></span>
                         </button>
                     </div>
                     <ol style="font-size:13px;color:var(--text-muted);padding-left:18px;line-height:1.8;margin:0 0 16px">
@@ -831,13 +831,13 @@ $countryCodes = [
                                    style="width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:10px;font-size:14px;background:var(--input-bg,var(--bg));color:var(--text)">
                         </div>
                         <button type="submit" class="btn btn-primary" style="white-space:nowrap;padding:11px 20px">
-                            <i class="fa-solid fa-shield-check"></i> Enable Authenticator
+                            <?= icon('shield-check') ?> Enable Authenticator
                         </button>
                     </div>
                 </form>
                 <div style="margin-top:10px">
                     <a href="?tab=security" style="font-size:13px;color:var(--text-muted);text-decoration:none">
-                        <i class="fa-solid fa-arrow-left" style="font-size:11px"></i> Cancel
+                        <?= icon('arrow-left', '', 'font-size:11px') ?> Cancel
                     </a>
                 </div>
             </div>
@@ -866,15 +866,15 @@ $countryCodes = [
                 document.getElementById('totpCodeInput').focus();
             })
             .catch(() => {
-                document.getElementById('qrSpinner').innerHTML = '⚠ Could not load QR';
+                document.getElementById('qrSpinner').innerHTML = Icons.svg('alert-triangle') + ' Could not load QR';
             });
 
         function copySecret() {
             const secret = document.getElementById('totpSecretFull').dataset.secret || document.getElementById('totpSecretFull').textContent;
             navigator.clipboard.writeText(secret).then(() => {
                 const icon = document.getElementById('copyIcon');
-                icon.className = 'fa-solid fa-check';
-                setTimeout(() => icon.className = 'fa-solid fa-copy', 2000);
+                Icons.set(icon, 'check');
+                setTimeout(() => Icons.set(icon, 'copy'), 2000);
             });
         }
 
@@ -897,7 +897,7 @@ $countryCodes = [
             <input type="hidden" name="action" value="disable_all">
             <input type="hidden" name="confirm_password" id="disableAllPwd">
             <button type="button" class="btn btn-secondary" onclick="openDisableAllModal()" style="border-color:rgba(239,68,68,.4);color:#ef4444">
-                <i class="fa-solid fa-shield-xmark"></i> Disable All 2FA
+                <?= icon('shield-x') ?> Disable All 2FA
             </button>
         </form>
         <?php endif; ?>
@@ -905,7 +905,7 @@ $countryCodes = [
 
     <!-- Active Sessions -->
     <div class="st-panel">
-        <div class="st-head"><div class="st-icon"><i class="fa-solid fa-desktop"></i></div><div><h2>Active Sessions</h2><p class="panel-desc">Devices and browsers signed into your account. The current session is highlighted.</p></div></div>
+        <div class="st-head"><div class="st-icon"><?= icon('monitor') ?></div><div><h2>Active Sessions</h2><p class="panel-desc">Devices and browsers signed into your account. The current session is highlighted.</p></div></div>
 
         <?php
         $currentSessId = session_id();
@@ -920,9 +920,9 @@ $countryCodes = [
             $isCurrent = ($sess['session_id'] === $currentSessId);
             $ua = $sess['user_agent'] ?? 'Unknown browser';
             // Parse device type from UA
-            $deviceIcon = 'fa-desktop';
-            if (preg_match('/Mobile|Android|iPhone|iPad/i', $ua)) $deviceIcon = 'fa-mobile-screen-button';
-            elseif (preg_match('/Tablet/i', $ua)) $deviceIcon = 'fa-tablet-screen-button';
+            $deviceIcon = 'monitor';
+            if (preg_match('/Mobile|Android|iPhone|iPad/i', $ua)) $deviceIcon = 'smartphone';
+            elseif (preg_match('/Tablet/i', $ua)) $deviceIcon = 'tablet';
             // Shorten UA
             $uaShort = $ua;
             if (preg_match('/Chrome\/[\d.]+/', $ua, $m)) $uaShort = 'Chrome ' . explode('/', $m[0])[1];
@@ -933,10 +933,10 @@ $countryCodes = [
         ?>
         <div class="session-item">
             <div class="session-icon <?= $isCurrent ? 'session-current' : '' ?>">
-                <i class="fa-solid <?= $deviceIcon ?>"></i>
+                <?= icon($deviceIcon) ?>
             </div>
             <div style="flex:1">
-                <strong style="font-size:13px;color:var(--text)"><?= e($uaShort) ?><?= $isCurrent ? ' <span style="color:var(--brand);font-size:11px;font-weight:700">● You</span>' : '' ?></strong>
+                <strong style="font-size:13px;color:var(--text)"><?= e($uaShort) ?><?= $isCurrent ? ' <span style="color:var(--brand);font-size:11px;font-weight:700">' . icon('circle-dot', 'ic-xs') . ' You</span>' : '' ?></strong>
                 <div style="font-size:12px;color:var(--text-muted);margin-top:1px">
                     IP: <?= e($sess['ip_address'] ?? '—') ?> &nbsp;·&nbsp; Last active: <?= $lastActive ?>
                 </div>
@@ -949,7 +949,7 @@ $countryCodes = [
                 <input type="hidden" name="session_db_id" value="<?= (int)($sess['id'] ?? 0) ?>">
                 <button type="submit" class="btn btn-sm" style="background:none;border:1px solid #e5e7eb;color:#ef4444;padding:4px 10px;font-size:12px;border-radius:8px;cursor:pointer"
                         onclick="return confirm('Sign out this session?')">
-                    <i class="fa-solid fa-right-from-bracket"></i> Sign out
+                    <?= icon('logout') ?> Sign out
                 </button>
             </form>
             <?php endif; ?>
@@ -960,7 +960,7 @@ $countryCodes = [
         <?php if ($hasOther): ?>
         <div style="margin-top:16px">
             <button type="button" class="btn btn-secondary btn-sm" onclick="openSessionsModal()">
-                <i class="fa-solid fa-right-from-bracket"></i> Sign Out All Other Sessions
+                <?= icon('logout') ?> Sign Out All Other Sessions
             </button>
         </div>
         <?php endif; ?>
@@ -968,7 +968,7 @@ $countryCodes = [
 
     <!-- Danger Zone -->
     <div class="st-panel danger">
-        <div class="st-head"><div class="st-icon red"><i class="fa-solid fa-triangle-exclamation"></i></div><div><h2>Danger Zone</h2><p class="panel-desc">Irreversible account actions. Proceed with caution.</p></div></div>
+        <div class="st-head"><div class="st-icon red"><?= icon('alert-triangle') ?></div><div><h2>Danger Zone</h2><p class="panel-desc">Irreversible account actions. Proceed with caution.</p></div></div>
         <div style="background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
             <div>
                 <strong style="font-size:14px;color:#ef4444">Delete My Account</strong>
@@ -976,7 +976,7 @@ $countryCodes = [
             </div>
             <button type="button" class="btn btn-sm" style="background:#ef4444;color:#fff;border:none;white-space:nowrap"
                     onclick="if(confirm('Are you absolutely sure? This cannot be undone.')) window.location='/profile/security/delete-account'">
-                <i class="fa-solid fa-trash"></i> Delete Account
+                <?= icon('trash') ?> Delete Account
             </button>
         </div>
     </div>
@@ -1164,7 +1164,7 @@ function addEduRow() {
         <div class="fg" style="margin:0"><label style="font-size:11px">From Year</label><input type="number" name="from_year[]" min="1950" max="2050" placeholder="2018"></div>
         <div class="fg" style="margin:0"><label style="font-size:11px">To Year</label><input type="number" name="to_year[]" min="1950" max="2050" placeholder="2022"></div>
     </div>
-    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><i class="fa-solid fa-xmark"></i></button>`;
+    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()">${Icons.svg('close')}</button>`;
     list.appendChild(div);
 }
 function addGradeRow() {
@@ -1177,7 +1177,7 @@ function addGradeRow() {
         <div class="fg" style="margin:0"><label style="font-size:11px">Board</label><input type="text" name="grade_board[]" placeholder="Dhaka Board"></div>
         <div class="fg" style="margin:0"><label style="font-size:11px">Year</label><input type="number" name="grade_year[]" min="1990" max="2050" placeholder="2020"></div>
     </div>
-    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><i class="fa-solid fa-xmark"></i></button>`;
+    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()">${Icons.svg('close')}</button>`;
     list.appendChild(div);
 }
 function addExpRow() {
@@ -1198,7 +1198,7 @@ function addExpRow() {
         <div class="fg" style="grid-column:span 2;margin:0"><label style="font-size:11px">Description / Responsibilities</label>
             <textarea name="exp_desc[]" rows="2" placeholder="Brief description of your role and achievements..."></textarea></div>
     </div>
-    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><i class="fa-solid fa-xmark"></i></button>`;
+    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()">${Icons.svg('close')}</button>`;
     list.appendChild(div);
 }
 function toggleEndDate(cb) {
@@ -1213,23 +1213,22 @@ function addSocialRow() {
     const opts = keys.map((k,i) => `<option value="${k}">${platforms[i]}</option>`).join('');
     const div = document.createElement('div');
     div.className = 'social-platform-row';
-    div.innerHTML = `<div class="social-platform-icon"><i class="fa-brands fa-linkedin"></i></div>
+    div.innerHTML = `<div class="social-platform-icon">${Icons.svg('linkedin')}</div>
         <select name="platform[]" style="width:140px" onchange="updateSocialIcon(this)">${opts}</select>
         <input type="url" name="social_url[]" placeholder="https://..." style="flex:1">
-        <button type="button" onclick="this.closest('.social-platform-row').remove()" class="repeat-del"><i class="fa-solid fa-xmark"></i></button>`;
+        <button type="button" onclick="this.closest('.social-platform-row').remove()" class="repeat-del">${Icons.svg('close')}</button>`;
     list.appendChild(div);
 }
 function updateSocialIcon(sel) {
-    const icon = platformIcons[sel.value] || 'fa-link';
-    const el = sel.closest('.social-platform-row').querySelector('.social-platform-icon i');
-    if (el) el.className = 'fa-brands ' + icon;
+    const el = sel.closest('.social-platform-row').querySelector('.social-platform-icon');
+    Icons.set(el, platformIcons[sel.value] || 'link');
 }
 function togglePwd(id, btn) {
     const inp = document.getElementById(id);
     if (!inp) return;
     const show = inp.type === 'password';
     inp.type = show ? 'text' : 'password';
-    btn.querySelector('i').className = show ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+    Icons.set(btn, show ? 'eye-off' : 'eye');
 }
 function checkPwdStrength(val) {
     const fill = document.getElementById('pwdStrengthFill');

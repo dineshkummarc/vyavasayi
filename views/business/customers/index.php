@@ -9,16 +9,16 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>"><?= e($book['name']) ?></a> <span>›</span>
             <span>Customers</span>
         </div>
-        <h1><i class="fa-solid fa-users" style="color:var(--brand)"></i> Customers</h1>
+        <h1><?= icon('users', '', 'color:var(--brand)') ?> Customers</h1>
         <p>Add, edit, remove customers and keep track of all of them</p>
         <p><?= count($customers) ?> customer<?= count($customers) !== 1 ? 's' : '' ?></p>
     </div>
     <div style="display:flex;gap:8px;align-items:center">
         <button class="btn btn-secondary" data-modal="managePrivModal">
-            <i class="fa-solid fa-star" style="font-size:13px"></i> Manage Privileges
+            <?= icon('star-filled', '', 'font-size:13px') ?> Manage Privileges
         </button>
         <button class="btn btn-secondary btn-sm" data-modal="printModal" title="Print PDF">
-            <i class="fa-solid fa-print"></i> Print
+            <?= icon('printer') ?> Print
         </button>
         <button class="btn btn-primary" data-modal="addCustomerModal">+ Add Customer</button>
     </div>
@@ -27,9 +27,9 @@ ob_start();
 <!-- LM Controls -->
 <div class="lm-controls">
     <div class="lm-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <?= icon('search') ?>
         <input type="text" class="lm-search" id="custTableSearch" placeholder="Search name, phone, email, address…">
-        <button class="lm-search-clear" id="custTableClear"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lm-search-clear" id="custTableClear"><?= icon('close') ?></button>
     </div>
     <select class="lm-select" id="custTableSort">
         <option value="az">Name A–Z</option>
@@ -42,7 +42,7 @@ ob_start();
 <?php if (empty($customers)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon">👥</div>
+        <div class="empty-icon"><?= icon('users') ?></div>
         <h3>No customers yet</h3>
         <p>Add your first customer to start creating invoices.</p>
     </div>
@@ -91,12 +91,12 @@ ob_start();
                 <span class="td-amount <?= $due > 0 ? 'out' : '' ?>"><?= format_money($due) ?></span>
             </td>
             <td style="white-space:nowrap">
-                <a href="/books/<?= $book['id'] ?>/customers/<?= $c['id'] ?>" title="View" class="btn btn-sm btn-secondary"><i class="fa-solid fa-eye"></i></a>
-                <button class="btn btn-sm btn-secondary" title="Edit" data-modal="editCustomerModal"><i class="fa-solid fa-pen"></i></button>
+                <a href="/books/<?= $book['id'] ?>/customers/<?= $c['id'] ?>" title="View" class="btn btn-sm btn-secondary"><?= icon('eye') ?></a>
+                <button class="btn btn-sm btn-secondary" title="Edit" data-modal="editCustomerModal"><?= icon('square-pen') ?></button>
                 <form method="POST" action="/books/<?= $book['id'] ?>/customers/<?= $c['id'] ?>/delete" style="display: inline;"
                     data-confirm="Delete <?= e($c['name']) ?>?">
                     <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
-                    <button class="btn btn-sm btn-danger" title="Delete"><i class="fa-solid fa-trash" style="color: #fff;"></i></button>
+                    <button class="btn btn-sm btn-danger" title="Delete"><?= icon('trash', '', 'color: #fff;') ?></button>
                 </form>
             </td>
         </tr>
@@ -148,13 +148,13 @@ ob_start();
 <div class="modal-backdrop" id="managePrivModal">
     <div class="modal" style="max-width:640px;width:100%">
         <div class="modal-title" style="display:flex;justify-content:space-between;align-items:center">
-            <span><i class="fa-solid fa-star" style="color:var(--brand);margin-right:6px"></i> Customer Privileges</span>
+            <span><?= icon('star-filled', '', 'color:var(--brand);margin-right:6px') ?> Customer Privileges</span>
             <button type="button" class="btn btn-primary btn-sm" data-modal="addPrivModal" style="font-size:13px">+ New Privilege</button>
         </div>
 
         <?php if (empty($privileges)): ?>
         <div class="empty-state" style="padding:32px 0">
-            <div class="empty-icon">🎫</div>
+            <div class="empty-icon"><?= icon('ticket') ?></div>
             <h3>No privileges yet</h3>
             <p>Create discount groups like "Relative (2% off)" or "Staff (10% off)".</p>
         </div>

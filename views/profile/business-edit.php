@@ -33,12 +33,12 @@ $countryCodes = [
             <a href="/books/<?= $book['id'] ?>/edit">Book Settings</a> <span>›</span>
             <span>Business Profile</span>
         </div>
-        <h1><i class="fa-solid fa-briefcase" style="color:var(--brand)"></i> Business Profile</h1>
+        <h1><?= icon('briefcase', '', 'color:var(--brand)') ?> Business Profile</h1>
         <p>Public profile for <?= e($book['name']) ?></p>
     </div>
     <?php if ($handle): ?>
     <a href="/business/@<?= e($handle['handle']) ?>" target="_blank" class="btn btn-secondary btn-sm">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Public Profile
+        <?= icon('external-link') ?> View Public Profile
     </a>
     <?php endif; ?>
 </div>
@@ -54,14 +54,14 @@ $countryCodes = [
             </div>
         </div>
         <div class="st-nav-group">Profile</div>
-        <a href="?tab=info"       class="<?= $tab==='info'?'active':'' ?>"><i class="fa-solid fa-building"></i> Business Info</a>
-        <a href="?tab=pages"      class="<?= $tab==='pages'?'active':'' ?>"><i class="fa-solid fa-file-lines"></i> Pages</a>
-        <a href="?tab=social"     class="<?= $tab==='social'?'active':'' ?>"><i class="fa-solid fa-share-nodes"></i> Social & Links</a>
-        <a href="?tab=photos"     class="<?= $tab==='photos'?'active':'' ?>"><i class="fa-solid fa-images"></i> Photos</a>
+        <a href="?tab=info"       class="<?= $tab==='info'?'active':'' ?>"><?= icon('building') ?> Business Info</a>
+        <a href="?tab=pages"      class="<?= $tab==='pages'?'active':'' ?>"><?= icon('file-text') ?> Pages</a>
+        <a href="?tab=social"     class="<?= $tab==='social'?'active':'' ?>"><?= icon('share') ?> Social & Links</a>
+        <a href="?tab=photos"     class="<?= $tab==='photos'?'active':'' ?>"><?= icon('images') ?> Photos</a>
         <div class="st-nav-group">Privacy</div>
-        <a href="?tab=visibility" class="<?= $tab==='visibility'?'active':'' ?>"><i class="fa-solid fa-eye"></i> Visibility</a>
+        <a href="?tab=visibility" class="<?= $tab==='visibility'?'active':'' ?>"><?= icon('eye') ?> Visibility</a>
         <div class="st-nav-group">Go Back</div>
-        <a href="/books/<?= $book['id'] ?>/edit"><i class="fa-solid fa-arrow-left"></i> Book Settings</a>
+        <a href="/books/<?= $book['id'] ?>/edit"><?= icon('arrow-left') ?> Book Settings</a>
     </nav>
 
     <!-- Content -->
@@ -69,7 +69,7 @@ $countryCodes = [
 
     <?php if ($handle): ?>
     <div class="link-card">
-        <i class="fa-solid fa-link"></i>
+        <?= icon('link') ?>
         <div class="link-text">
             <strong>Public Business Profile</strong>
             <a href="/business/@<?= e($handle['handle']) ?>" target="_blank">
@@ -94,7 +94,7 @@ $countryCodes = [
                     <input type="text" name="handle" value="<?= e($handle['handle'] ?? '') ?>" placeholder="yourbusiness" pattern="[a-z0-9_]+" minlength="3" maxlength="50" required style="font-size:17px;font-weight:600">
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Save Handle</button>
+            <button type="submit" class="btn btn-primary"><?= icon('check') ?> Save Handle</button>
         </form>
     </div>
 
@@ -113,7 +113,7 @@ $countryCodes = [
                         <img src="<?= asset('uploads/'.$profile['logo']) ?>" class="logo-preview" id="logoPreview" style="display:block">
                         <?php else: ?>
                         <img class="logo-preview" id="logoPreview">
-                        <i class="fa-solid fa-image" style="font-size:28px;color:var(--text-muted)"></i>
+                        <?= icon('image', '', 'font-size:28px;color:var(--text-muted)') ?>
                         <div style="font-size:12px;color:var(--text-muted);margin-top:6px">Click to upload logo</div>
                         <?php endif; ?>
                         <input type="file" name="logo" accept="image/*" onchange="previewLogo(this)">
@@ -126,7 +126,7 @@ $countryCodes = [
                         <img src="<?= asset('uploads/'.$profile['banner']) ?>" class="banner-preview" id="bannerPreview" style="display:block">
                         <?php else: ?>
                         <div class="banner-zone-inner">
-                            <i class="fa-solid fa-panorama" style="font-size:24px;color:var(--text-muted)"></i>
+                            <?= icon('image', '', 'font-size:24px;color:var(--text-muted)') ?>
                             <div style="font-size:12px;color:var(--text-muted);margin-top:6px">Click to upload banner</div>
                         </div>
                         <img class="banner-preview" id="bannerPreview">
@@ -233,7 +233,7 @@ $countryCodes = [
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Business Info</button>
+            <button type="submit" class="btn btn-primary"><?= icon('save') ?> Save Business Info</button>
         </form>
     </div>
 
@@ -249,7 +249,7 @@ $countryCodes = [
                 <textarea name="<?= $field ?>" rows="10" placeholder="Write your <?= $label ?> content here... (Markdown supported)"><?= e($profile[$field]??'') ?></textarea>
             </div>
             <?php endforeach; ?>
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Pages</button>
+            <button type="submit" class="btn btn-primary"><?= icon('save') ?> Save Pages</button>
         </form>
     </div>
 
@@ -260,10 +260,10 @@ $countryCodes = [
         <form method="POST" action="/books/<?= $book['id'] ?>/business-profile/social">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
             <?php
-            $socials = ['social_facebook'=>['fa-facebook','Facebook'],'social_instagram'=>['fa-instagram','Instagram'],'social_twitter'=>['fa-x-twitter','Twitter / X'],'social_linkedin'=>['fa-linkedin','LinkedIn'],'social_youtube'=>['fa-youtube','YouTube'],'social_tiktok'=>['fa-tiktok','TikTok']];
+            $socials = ['social_facebook'=>['facebook','Facebook'],'social_instagram'=>['instagram','Instagram'],'social_twitter'=>['x','Twitter / X'],'social_linkedin'=>['linkedin','LinkedIn'],'social_youtube'=>['youtube','YouTube'],'social_tiktok'=>['tiktok','TikTok']];
             foreach ($socials as $field=>[$icon,$label]):?>
             <div class="fg">
-                <label><i class="fa-brands <?=$icon?>" style="color:var(--brand);margin-right:6px"></i><?=$label?></label>
+                <label><?= icon($icon, '', 'color:var(--brand);margin-right:6px') ?><?=$label?></label>
                 <input type="url" name="<?=$field?>" value="<?= e($profile[$field]??'') ?>" placeholder="https://...">
             </div>
             <?php endforeach; ?>
@@ -276,13 +276,13 @@ $countryCodes = [
                         <input type="text" name="ext_name[]" value="<?= e($el['label']) ?>" placeholder="Label">
                         <input type="url" name="ext_url[]" value="<?= e($el['url']) ?>" placeholder="https://...">
                     </div>
-                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><i class="fa-solid fa-xmark"></i></button>
+                    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><?= icon('close') ?></button>
                 </div>
                 <?php endforeach; ?>
             </div>
-            <button type="button" class="add-row-btn" onclick="addExtLink()"><i class="fa-solid fa-plus"></i> Add Link</button>
+            <button type="button" class="add-row-btn" onclick="addExtLink()"><?= icon('plus') ?> Add Link</button>
             <div style="margin-top:20px">
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Social & Links</button>
+                <button type="submit" class="btn btn-primary"><?= icon('save') ?> Save Social & Links</button>
             </div>
         </form>
     </div>
@@ -307,14 +307,14 @@ $countryCodes = [
                 <input type="file" name="photo" accept="image/*" class="btn btn-secondary" style="padding:8px;cursor:pointer;width:auto">
                 <div style="font-size:12px;color:var(--text-muted);margin-top:6px">JPG, PNG, WEBP · Max 5MB</div>
             </div>
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-upload"></i> Upload Photo</button>
+            <button type="submit" class="btn btn-primary"><?= icon('upload') ?> Upload Photo</button>
         </form>
     </div>
 
     <?php elseif ($tab === 'visibility'): ?>
     <!-- ── VISIBILITY ────────────────────────────────────────────────── -->
     <div class="st-panel">
-        <div class="st-head"><div class="st-icon"><i class="fa-solid fa-eye"></i></div><div><h2>Public Visibility</h2><p class="panel-desc">Control what information is visible on your public business profile.</p></div></div>
+        <div class="st-head"><div class="st-icon"><?= icon('eye') ?></div><div><h2>Public Visibility</h2><p class="panel-desc">Control what information is visible on your public business profile.</p></div></div>
         <form method="POST" action="/books/<?= $book['id'] ?>/business-profile/visibility">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
             <?php
@@ -351,7 +351,7 @@ $countryCodes = [
             </div>
             <?php endforeach; ?>
             <div style="margin-top:20px">
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Visibility</button>
+                <button type="submit" class="btn btn-primary"><?= icon('save') ?> Save Visibility</button>
             </div>
         </form>
     </div>
@@ -387,7 +387,7 @@ function addExtLink() {
         <input type="text" name="ext_name[]" placeholder="Label (e.g. Menu, Map)">
         <input type="url" name="ext_url[]" placeholder="https://...">
     </div>
-    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()"><i class="fa-solid fa-xmark"></i></button>`;
+    <button type="button" class="repeat-del" onclick="this.closest('.repeat-item').remove()">${Icons.svg('close')}</button>`;
     list.appendChild(div);
 }
 </script>

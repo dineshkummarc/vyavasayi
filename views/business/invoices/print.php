@@ -137,29 +137,29 @@ $inWords = invoiceNumToWords((int)round($total), $curCode) . ' Only';
 <div class="top-bar">
     <h3>Invoice Preview &amp; Print</h3>
     <a href="javascript:void(0)" class="tbtn tbtn-share" onclick="toggleShare()">
-        <i class="fa-solid fa-link"></i> Share Link
+        <?= icon('link') ?> Share Link
     </a>
     <?php if (!empty($invoice['public_token'])): ?>
     <div class="share-box" id="shareBox">
         <input type="text" id="shareUrl" value="<?= e($shareUrl) ?>" readonly onclick="this.select()">
-        <button class="tbtn tbtn-share" onclick="copyShareLink()"><i class="fa-solid fa-copy"></i> Copy</button>
+        <button class="tbtn tbtn-share" onclick="copyShareLink()"><?= icon('copy') ?> Copy</button>
         <span id="copyMsg" style="font-size:12px;color:#065f46;display:none">Copied!</span>
     </div>
     <?php endif; ?>
     <a href="/books/<?= $book['id'] ?>/invoices/<?= $invoice['id'] ?>/thermal?w=80" target="_blank" class="tbtn tbtn-ghost">
-        <i class="fa-solid fa-print"></i> 58/80mm
+        <?= icon('printer') ?> 58/80mm
     </a>
     <a href="/books/<?= $book['id'] ?>/invoices/<?= $invoice['id'] ?>" class="tbtn tbtn-ghost">
-        <i class="fa-solid fa-left-right-long"></i> Back
+        <?= icon('arrow-left') ?> Back
     </a>
     <button onclick="window.print()" class="tbtn tbtn-primary">
-        <i class="fa-solid fa-print"></i> Print / Save PDF
+        <?= icon('printer') ?> Print / Save PDF
     </button>
 </div>
 <?php else: ?>
 <div class="top-bar">
     <h3><?= e($bizName) ?> — Invoice <?= e($invoiceNo) ?></h3>
-    <button onclick="window.print()" class="tbtn tbtn-primary">🖨 Print / Save PDF</button>
+    <button onclick="window.print()" class="tbtn tbtn-primary"><?= icon('printer') ?> Print / Save PDF</button>
 </div>
 <?php endif; ?>
 
@@ -172,7 +172,7 @@ $inWords = invoiceNumToWords((int)round($total), $curCode) . ' Only';
             <h1>Invoice</h1>
             <div class="inv-type"><?= $isSale ? 'Sales Invoice' : 'Purchase Invoice' ?></div>
             <?php if ($due <= 0 && $paid > 0): ?>
-            <span class="status-badge paid-badge">✓ Paid</span>
+            <span class="status-badge paid-badge"><?= icon('check') ?> Paid</span>
             <?php elseif ($due > 0 && $paid > 0): ?>
             <span class="status-badge partial-badge">Partial</span>
             <?php elseif ($invoice['status'] === 'draft'): ?>

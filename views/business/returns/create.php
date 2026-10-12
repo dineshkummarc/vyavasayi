@@ -13,7 +13,7 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>/returns">Returns</a> <span>›</span>
             <span>New <?= $isSale ? 'Sales' : 'Purchase' ?> Return</span>
         </div>
-        <h1><?= $isSale ? '↩ Sales Return' : '↪ Purchase Return' ?></h1>
+        <h1><?= $isSale ? icon('undo') . ' Sales Return' : icon('redo') . ' Purchase Return' ?></h1>
         <p style="color:var(--text-muted);font-size:13px">
             <?= $isSale
                 ? 'Customer returning goods → stock added back. Discounts kept by business → added as income in Reports.'
@@ -88,7 +88,7 @@ ob_start();
         </table>
         </div>
         <button type="button" onclick="addManualRow()" class="btn btn-sm btn-secondary" style="margin-top:10px">
-            <i class="fa-solid fa-plus"></i> Add Item Manually
+            <?= icon('plus') ?> Add Item Manually
         </button>
     </div>
 
@@ -135,12 +135,12 @@ ob_start();
 
         <?php if ($isSale): ?>
         <div style="margin-top:12px;padding:10px;background:var(--amber-light,#fff8e1);border-radius:8px;border:1px solid #ffe082;font-size:12px;color:#856404">
-            <i class="fa-solid fa-circle-info"></i>
+            <?= icon('info') ?>
             Returned goods go back into stock. Any discount you keep is recorded as income in Reports.
         </div>
         <?php else: ?>
         <div style="margin-top:12px;padding:10px;background:#e8f5e9;border-radius:8px;border:1px solid #a5d6a7;font-size:12px;color:#1b5e20">
-            <i class="fa-solid fa-circle-info"></i>
+            <?= icon('info') ?>
             Returned goods are removed from stock. Any amount the supplier doesn't refund is recorded as a loss in Reports.
         </div>
         <?php endif; ?>

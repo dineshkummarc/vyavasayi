@@ -138,7 +138,7 @@
         position: relative;
         -webkit-tap-highlight-color: transparent;
     }
-    .bb-item i { font-size: 18px; line-height: 1; }
+    .bb-item .ic { font-size: 18px; line-height: 1; }
     .bb-item span { max-width: 100%; padding: 0 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .bb-item.active { color: var(--brand); }
     .bb-item.active::before {
@@ -166,7 +166,7 @@
         cursor: pointer; -webkit-tap-highlight-color: transparent;
         transition: transform .15s ease, opacity .15s ease;
     }
-    .fab i { font-size: 18px; }
+    .fab .ic { font-size: 18px; }
     .fab.ready { display: inline-flex; }
     .fab:active { transform: scale(.94); }
     body.has-bottom-bar .fab { bottom: calc(var(--bottombar-h) + 14px + var(--safe-bottom)); }
@@ -250,7 +250,7 @@
 /* ── Very small phones ──────────────────────────────────────── */
 @media (max-width: 380px) {
     .bb-item { font-size: 10px; }
-    .bb-item i { font-size: 17px; }
+    .bb-item .ic { font-size: 17px; }
     .app-content { padding-left: 10px; padding-right: 10px; }
 }
 

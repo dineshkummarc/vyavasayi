@@ -44,7 +44,7 @@
 
         var warn = document.createElement('div');
         warn.className = 'file-size-warning';
-        warn.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> File is too large. Maximum allowed size is ' + label + '.';
+        warn.innerHTML = Icons.svg("alert-circle") + ' File is too large. Maximum allowed size is ' + label + '.';
         warn.style.cssText = 'color:#c0392b;font-size:12px;margin-top:5px;display:flex;align-items:center;gap:5px';
         input.parentNode.insertBefore(warn, input.nextSibling);
 
@@ -335,7 +335,7 @@ var ListManager = (function() {
             noRow.className = 'lm-no-results';
             var noTd = document.createElement('td');
             noTd.setAttribute('colspan', colCount);
-            noTd.innerHTML = '<i class="fa-solid fa-search" style="display:block;font-size:28px;opacity:.2;margin-bottom:8px"></i>'
+            noTd.innerHTML = Icons.svg("search", "", "display:block;font-size:28px;opacity:.2;margin-bottom:8px")
                 + (state.search ? 'No results for &ldquo;' + escHtml(state.search) + '&rdquo;' : 'No records found.');
             noRow.appendChild(noTd);
             tbody.appendChild(noRow);
@@ -582,7 +582,7 @@ global.MonthNav = MonthNav;
             var span = el.querySelector('.nav-text');
             if (span) { el.setAttribute('data-label', span.textContent.trim()); return; }
             var clone = el.cloneNode(true);
-            clone.querySelectorAll('i, .notif-badge, .nav-chevron, .nav-dropdown-menu, .nav-soon').forEach(function (n) { n.remove(); });
+            clone.querySelectorAll('svg, .notif-badge, .nav-chevron, .nav-dropdown-menu, .nav-soon').forEach(function (n) { n.remove(); });
             var label = clone.textContent.replace(/\s+/g, ' ').trim();
             if (label) el.setAttribute('data-label', label);
         });
@@ -603,7 +603,7 @@ global.MonthNav = MonthNav;
         try { pref = localStorage.getItem(PREF_KEY) || '0'; } catch (e) {}
         var collapsed = pref === '1';
         sb.classList.toggle('collapsed', collapsed);
-        if (icon) icon.className = collapsed ? 'fa-solid fa-angles-right' : 'fa-solid fa-angles-left';
+        if (icon) Icons.set(icon, collapsed ? 'chevrons-right' : 'chevrons-left');
         if (cb) cb.title = collapsed ? 'Expand' : 'Collapse';
         if (main) main.style.marginLeft = collapsed ? 'var(--sidebar-collapsed-w)' : 'var(--sidebar-w)';
     }

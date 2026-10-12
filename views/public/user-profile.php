@@ -7,7 +7,7 @@
     <link rel="icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/86c0c1c09a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="<?= asset('css/icons.css') ?>">
     <?php
     $accent    = $profile['profile_theme_color'] ?? '#1a6b4a';
     $accentRgb = implode(',', sscanf($accent, '#%02x%02x%02x') ?? [26,107,74]);
@@ -22,10 +22,10 @@
         'full_time'=>'Full-time','part_time'=>'Part-time','contract'=>'Contract',
         'freelance'=>'Freelance','internship'=>'Internship','volunteer'=>'Volunteer',
     ];
-    $socialIcons = ['linkedin'=>'fa-linkedin','github'=>'fa-github','facebook'=>'fa-facebook',
-                    'instagram'=>'fa-instagram','twitter'=>'fa-x-twitter','youtube'=>'fa-youtube',
-                    'tiktok'=>'fa-tiktok','behance'=>'fa-behance','dribbble'=>'fa-dribbble',
-                    'medium'=>'fa-medium','stackoverflow'=>'fa-stack-overflow','website'=>'fa-globe'];
+    $socialIcons = ['linkedin'=>'linkedin','github'=>'github','facebook'=>'facebook',
+                    'instagram'=>'instagram','twitter'=>'x','youtube'=>'youtube',
+                    'tiktok'=>'tiktok','behance'=>'behance','dribbble'=>'dribbble',
+                    'medium'=>'medium','stackoverflow'=>'stackoverflow','website'=>'globe'];
     ?>
     <style>
     *{box-sizing:border-box;margin:0;padding:0}
@@ -50,7 +50,7 @@
     .pub-headline{font-size:15px;color:#555;line-height:1.5;margin-bottom:10px}
     .pub-meta-pills{display:flex;flex-wrap:wrap;gap:8px}
     .pub-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:#f0f0f0;border-radius:20px;font-size:12px;font-weight:500;color:#555}
-    .pub-pill i{font-size:11px;color:<?= e($accent) ?>}
+    .pub-pill .ic{font-size:11px;color:<?= e($accent) ?>}
     .pub-header-actions{display:flex;gap:8px;padding-top:8px;flex-wrap:wrap;align-self:center}
     .pub-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;transition:all .15s;border:none;cursor:pointer;font-family:inherit}
     .pub-btn-primary{background:<?= e($accent) ?>;color:#fff}
@@ -65,7 +65,7 @@
     .pub-section{border:1px solid #eee;border-radius:12px;overflow:hidden}
     .pub-sec-head{padding:14px 18px;background:#fafafa;border-bottom:1px solid #eee;display:flex;align-items:center;gap:10px}
     .pub-sec-head h3{font-size:14px;font-weight:700;color:#1a1a1a}
-    .pub-sec-head i{color:<?= e($accent) ?>;font-size:15px;width:18px;text-align:center}
+    .pub-sec-head .ic{color:<?= e($accent) ?>;font-size:15px;width:18px;text-align:center}
     .pub-sec-body{padding:18px}
 
     .pub-bio{font-size:14px;color:#444;line-height:1.7}
@@ -77,7 +77,7 @@
     .exp-item{padding:14px 0;border-bottom:1px solid #f0f0f0;display:flex;gap:14px}
     .exp-item:last-child{border-bottom:none;padding-bottom:0}
     .exp-icon{width:40px;height:40px;border-radius:10px;background:rgba(<?= $accentRgb ?>,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .exp-icon i{color:<?= e($accent) ?>;font-size:16px}
+    .exp-icon .ic{color:<?= e($accent) ?>;font-size:16px}
     .exp-org{font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
     .exp-title{font-size:13px;color:<?= e($accent) ?>;font-weight:600;margin-bottom:2px}
     .exp-meta{font-size:12px;color:#999;margin-bottom:4px}
@@ -89,7 +89,7 @@
     .edu-item{padding:12px 0;border-bottom:1px solid #f0f0f0;display:flex;gap:12px}
     .edu-item:last-child{border-bottom:none;padding-bottom:0}
     .edu-icon{width:36px;height:36px;border-radius:8px;background:rgba(<?= $accentRgb ?>,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .edu-icon i{color:<?= e($accent) ?>;font-size:14px}
+    .edu-icon .ic{color:<?= e($accent) ?>;font-size:14px}
     .edu-institute{font-size:14px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
     .edu-subject{font-size:13px;color:#666;margin-bottom:2px}
     .edu-years{font-size:12px;color:#999}
@@ -102,14 +102,14 @@
 
     .contact-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:13px}
     .contact-item:last-child{border-bottom:none}
-    .contact-item i{color:<?= e($accent) ?>;width:16px;text-align:center;font-size:14px;flex-shrink:0}
+    .contact-item .ic{color:<?= e($accent) ?>;width:16px;text-align:center;font-size:14px;flex-shrink:0}
     .contact-item a{color:#333;text-decoration:none;word-break:break-all}
     .contact-item a:hover{color:<?= e($accent) ?>}
 
     .social-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0f0;text-decoration:none;color:#333;font-size:13px;font-weight:500;transition:color .12s}
     .social-item:last-child{border-bottom:none}
     .social-item:hover{color:<?= e($accent) ?>}
-    .social-item i{font-size:16px;width:20px;text-align:center;color:inherit}
+    .social-item .ic{font-size:16px;width:20px;text-align:center;color:inherit}
 
     .biz-badge{background:linear-gradient(135deg,rgba(<?= $accentRgb ?>,0.1),rgba(<?= $accentRgb ?>,0.05));border:1px solid rgba(<?= $accentRgb ?>,0.2);border-radius:10px;padding:14px 16px}
     .biz-badge .biz-name{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
@@ -146,7 +146,7 @@
     </a>
     <div class="pub-nav-right">
         <?php if (auth()): ?>
-        <a href="/dashboard">Go to App →</a>
+        <a href="/dashboard">Go to App <?= icon('arrow-right') ?></a>
         <?php else: ?>
         <a href="/login">Sign In</a>
         <?php endif; ?>
@@ -179,29 +179,29 @@
             <?php endif; ?>
             <div class="pub-meta-pills">
                 <?php if (!empty($profile['city']) && vis($vis,'address',true)): ?>
-                <span class="pub-pill"><i class="fa-solid fa-location-dot"></i> <?= e($profile['city']) ?><?= !empty($profile['country']) ? ', '.e($profile['country']) : '' ?></span>
+                <span class="pub-pill"><?= icon('map-pin') ?> <?= e($profile['city']) ?><?= !empty($profile['country']) ? ', '.e($profile['country']) : '' ?></span>
                 <?php endif; ?>
                 <?php if (!empty($profile['experience_years']) && vis($vis,'experience_years',true)): ?>
-                <span class="pub-pill"><i class="fa-solid fa-briefcase"></i> <?= e($profile['experience_years']) ?> yrs exp</span>
+                <span class="pub-pill"><?= icon('briefcase') ?> <?= e($profile['experience_years']) ?> yrs exp</span>
                 <?php endif; ?>
                 <?php if (!empty($user['blood_group']) && vis($vis,'blood_group',true)): ?>
-                <span class="pub-pill"><i class="fa-solid fa-droplet"></i> <?= e($user['blood_group']) ?></span>
+                <span class="pub-pill"><?= icon('droplet') ?> <?= e($user['blood_group']) ?></span>
                 <?php endif; ?>
                 <?php if (!empty($profile['relationship_status']) && vis($vis,'relationship_status',true)):
                     $relLabels = ['single'=>'Single','in_relationship'=>'In a Relationship','married'=>'Married','widowed'=>'Widowed','prefer_not'=>'—']; ?>
-                <span class="pub-pill"><i class="fa-solid fa-heart"></i> <?= $relLabels[$profile['relationship_status']] ?? '' ?></span>
+                <span class="pub-pill"><?= icon('heart-filled') ?> <?= $relLabels[$profile['relationship_status']] ?? '' ?></span>
                 <?php endif; ?>
             </div>
         </div>
         <div class="pub-header-actions">
             <?php if (!empty($profile['public_email']) && vis($vis,'email',true)): ?>
             <a href="mailto:<?= e($profile['public_email']) ?>" class="pub-btn pub-btn-primary">
-                <i class="fa-solid fa-envelope"></i> Email Me
+                <?= icon('mail') ?> Email Me
             </a>
             <?php endif; ?>
             <?php if (!empty($user['whatsapp_number']) && vis($vis,'whatsapp_number',true)): ?>
             <a href="https://wa.me/<?= e(preg_replace('/\D/','',$user['whatsapp_country_code'].$user['whatsapp_number'])) ?>" target="_blank" class="pub-btn pub-btn-secondary">
-                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                <?= icon('whatsapp') ?> WhatsApp
             </a>
             <?php endif; ?>
         </div>
@@ -215,7 +215,7 @@
 
         <?php if (!empty($profile['bio']) && vis($vis,'bio',true)): ?>
         <div class="pub-section">
-            <div class="pub-sec-head"><i class="fa-solid fa-user"></i><h3>About</h3></div>
+            <div class="pub-sec-head"><?= icon('user') ?><h3>About</h3></div>
             <div class="pub-sec-body">
                 <p class="pub-bio"><?= nl2br(e($profile['bio'])) ?></p>
             </div>
@@ -224,7 +224,7 @@
 
         <?php if (!empty($profile['expertise']) && vis($vis,'expertise',true)): ?>
         <div class="pub-section">
-            <div class="pub-sec-head"><i class="fa-solid fa-code"></i><h3>Skills &amp; Expertise</h3></div>
+            <div class="pub-sec-head"><?= icon('code') ?><h3>Skills &amp; Expertise</h3></div>
             <div class="pub-sec-body">
                 <div class="skill-tags">
                     <?php foreach (array_map('trim', explode(',', $profile['expertise'])) as $skill):
@@ -238,7 +238,7 @@
 
         <?php if (!empty($profile['languages']) && vis($vis,'languages',true)): ?>
         <div class="pub-section">
-            <div class="pub-sec-head"><i class="fa-solid fa-language"></i><h3>Languages</h3></div>
+            <div class="pub-sec-head"><?= icon('languages') ?><h3>Languages</h3></div>
             <div class="pub-sec-body">
                 <div class="skill-tags">
                     <?php foreach (array_map('trim', explode(',', $profile['languages'])) as $lang):
@@ -252,7 +252,7 @@
 
         <?php if (!empty($profile['hobbies']) && vis($vis,'hobbies',true)): ?>
         <div class="pub-section">
-            <div class="pub-sec-head"><i class="fa-solid fa-heart"></i><h3>Interests &amp; Hobbies</h3></div>
+            <div class="pub-sec-head"><?= icon('heart-filled') ?><h3>Interests &amp; Hobbies</h3></div>
             <div class="pub-sec-body">
                 <div class="skill-tags">
                     <?php foreach (array_map('trim', explode(',', $profile['hobbies'])) as $hobby):
@@ -272,7 +272,7 @@
 
         if ($hasExpSection): ?>
         <div class="pub-section">
-            <div class="pub-sec-head"><i class="fa-solid fa-briefcase"></i><h3>Work Experience</h3></div>
+            <div class="pub-sec-head"><?= icon('briefcase') ?><h3>Work Experience</h3></div>
             <div class="pub-sec-body" style="padding:8px 18px">
                 <?php foreach ($experience as $exp):
                     $startFmt = !empty($exp['start_date']) ? date('M Y', strtotime($exp['start_date'])) : '';
@@ -280,7 +280,7 @@
                     $typeLabel = $empTypeLabels[$exp['employment_type'] ?? ''] ?? '';
                 ?>
                 <div class="exp-item">
-                    <div class="exp-icon"><i class="fa-solid fa-building"></i></div>
+                    <div class="exp-icon"><?= icon('building') ?></div>
                     <div style="flex:1">
                         <div class="exp-org"><?= e($exp['organisation']) ?>
                             <?php if ($typeLabel): ?><span class="exp-badge"><?= e($typeLabel) ?></span><?php endif; ?>
@@ -301,7 +301,7 @@
         </div>
         <?php elseif ($hasLegacyBiz): ?>
         <div class="pub-section">
-            <div class="pub-sec-head"><i class="fa-solid fa-building"></i><h3>Work Experience</h3></div>
+            <div class="pub-sec-head"><?= icon('building') ?><h3>Work Experience</h3></div>
             <div class="pub-sec-body">
                 <div class="biz-badge">
                     <div class="biz-name"><?= e($business['business_name'] ?? $business['name']) ?></div>
@@ -309,7 +309,7 @@
                     <div class="biz-desig"><?= e($profile['designation']) ?></div>
                     <?php endif; ?>
                     <?php if (!empty($profile['working_since']) && vis($vis,'working_since',true)): ?>
-                    <div class="biz-since"><i class="fa-solid fa-calendar-days" style="margin-right:4px"></i>Since <?= date('M Y', strtotime($profile['working_since'])) ?></div>
+                    <div class="biz-since"><?= icon('calendar', '', 'margin-right:4px') ?>Since <?= date('M Y', strtotime($profile['working_since'])) ?></div>
                     <?php endif; ?>
                 </div>
             </div>
@@ -318,11 +318,11 @@
 
         <?php if (!empty($education) && vis($vis,'education',true)): ?>
         <div class="pub-section">
-            <div class="pub-sec-head"><i class="fa-solid fa-graduation-cap"></i><h3>Education</h3></div>
+            <div class="pub-sec-head"><?= icon('graduation-cap') ?><h3>Education</h3></div>
             <div class="pub-sec-body" style="padding:12px 18px">
                 <?php foreach ($education as $edu): ?>
                 <div class="edu-item">
-                    <div class="edu-icon"><i class="fa-solid fa-school"></i></div>
+                    <div class="edu-icon"><?= icon('school') ?></div>
                     <div>
                         <div class="edu-institute"><?= e($edu['institute']) ?></div>
                         <?php if ($edu['subject']): ?><div class="edu-subject"><?= e($edu['subject']) ?></div><?php endif; ?>
@@ -339,7 +339,7 @@
 
         <?php if (!empty($grades) && vis($vis,'grades',true)): ?>
         <div class="pub-section">
-            <div class="pub-sec-head"><i class="fa-solid fa-award"></i><h3>Academic Results</h3></div>
+            <div class="pub-sec-head"><?= icon('award') ?><h3>Academic Results</h3></div>
             <div class="pub-sec-body" style="padding:8px 18px">
                 <?php foreach ($grades as $g): ?>
                 <div class="grade-row">
@@ -366,33 +366,33 @@
                    || (vis($vis,'website',true) && !empty($profile['website']));
         if ($hasContact): ?>
         <div class="pub-section">
-            <div class="pub-sec-head"><i class="fa-solid fa-address-card"></i><h3>Contact</h3></div>
+            <div class="pub-sec-head"><?= icon('id-card') ?><h3>Contact</h3></div>
             <div class="pub-sec-body" style="padding:8px 18px">
                 <?php if (vis($vis,'email',true) && !empty($profile['public_email'])): ?>
-                <div class="contact-item"><i class="fa-solid fa-envelope"></i><a href="mailto:<?= e($profile['public_email']) ?>"><?= e($profile['public_email']) ?></a></div>
+                <div class="contact-item"><?= icon('mail') ?><a href="mailto:<?= e($profile['public_email']) ?>"><?= e($profile['public_email']) ?></a></div>
                 <?php endif; ?>
                 <?php if (vis($vis,'phone',true) && !empty($profile['public_phone'])): ?>
-                <div class="contact-item"><i class="fa-solid fa-phone"></i><a href="tel:<?= e($profile['public_phone']) ?>"><?= e($profile['public_phone']) ?></a></div>
+                <div class="contact-item"><?= icon('phone') ?><a href="tel:<?= e($profile['public_phone']) ?>"><?= e($profile['public_phone']) ?></a></div>
                 <?php endif; ?>
                 <?php if (vis($vis,'whatsapp_number',true) && !empty($user['whatsapp_number'])): ?>
                 <div class="contact-item">
-                    <i class="fa-brands fa-whatsapp"></i>
+                    <?= icon('whatsapp') ?>
                     <a href="https://wa.me/<?= e(preg_replace('/\D/','',$user['whatsapp_country_code'].$user['whatsapp_number'])) ?>" target="_blank">
                         <?= e($user['whatsapp_country_code'].' '.$user['whatsapp_number']) ?>
                     </a>
                 </div>
                 <?php endif; ?>
                 <?php if (vis($vis,'website',true) && !empty($profile['website'])): ?>
-                <div class="contact-item"><i class="fa-solid fa-globe"></i><a href="<?= e($profile['website']) ?>" target="_blank"><?= e(preg_replace('#^https?://#','',$profile['website'])) ?></a></div>
+                <div class="contact-item"><?= icon('globe') ?><a href="<?= e($profile['website']) ?>" target="_blank"><?= e(preg_replace('#^https?://#','',$profile['website'])) ?></a></div>
                 <?php endif; ?>
                 <?php if (vis($vis,'address',true) && (!empty($profile['city']) || !empty($profile['address']))): ?>
-                <div class="contact-item"><i class="fa-solid fa-location-dot"></i><span><?= e(implode(', ', array_filter([$profile['address']??'',$profile['city']??'',$profile['country']??'']))) ?></span></div>
+                <div class="contact-item"><?= icon('map-pin') ?><span><?= e(implode(', ', array_filter([$profile['address']??'',$profile['city']??'',$profile['country']??'']))) ?></span></div>
                 <?php endif; ?>
                 <?php if (vis($vis,'date_of_birth',true) && !empty($user['date_of_birth'])): ?>
-                <div class="contact-item"><i class="fa-solid fa-cake-candles"></i><span><?= date('d M Y', strtotime($user['date_of_birth'])) ?></span></div>
+                <div class="contact-item"><?= icon('cake') ?><span><?= date('d M Y', strtotime($user['date_of_birth'])) ?></span></div>
                 <?php endif; ?>
                 <?php if (vis($vis,'gender',true) && !empty($user['gender'])): ?>
-                <div class="contact-item"><i class="fa-solid fa-venus-mars"></i><span><?= ucfirst(str_replace('_',' ',$user['gender'])) ?></span></div>
+                <div class="contact-item"><?= icon('gender') ?><span><?= ucfirst(str_replace('_',' ',$user['gender'])) ?></span></div>
                 <?php endif; ?>
             </div>
         </div>
@@ -400,11 +400,11 @@
 
         <?php if (!empty($social) && vis($vis,'social_links',true)): ?>
         <div class="pub-section">
-            <div class="pub-sec-head"><i class="fa-solid fa-share-nodes"></i><h3>Social</h3></div>
+            <div class="pub-sec-head"><?= icon('share') ?><h3>Social</h3></div>
             <div class="pub-sec-body" style="padding:8px 18px">
                 <?php foreach ($social as $sl): ?>
                 <a href="<?= e($sl['url']) ?>" target="_blank" rel="noopener" class="social-item">
-                    <i class="fa-brands <?= e($socialIcons[$sl['platform']] ?? 'fa-link') ?>"></i>
+                    <?= icon($socialIcons[$sl['platform']] ?? 'link') ?>
                     <?= e(ucfirst($sl['platform'])) ?>
                 </a>
                 <?php endforeach; ?>

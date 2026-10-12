@@ -795,7 +795,7 @@ class EmployeeController
         Database::transaction(function () use ($book, $employee, $amount, $period, $note, $method, $from, $to, $date) {
             $cat = Database::row('SELECT id FROM expense_categories WHERE book_id=? AND name="Salary" LIMIT 1', [$book['id']]);
             if (!$cat) {
-                Database::run('INSERT INTO expense_categories (book_id, name, icon, is_active) VALUES (?,?,?,1)', [$book['id'], 'Salary', 'fa-users']);
+                Database::run('INSERT INTO expense_categories (book_id, name, icon, is_active) VALUES (?,?,?,1)', [$book['id'], 'Salary', 'users']);
                 $catId = (int)Database::lastId();
             } else $catId = (int)$cat['id'];
 

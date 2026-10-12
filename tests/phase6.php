@@ -1,7 +1,7 @@
 <?php
 // Phase 6 behaviour checks. Run after tests/e2e.php:  php tests/phase6.php
 $ok = 0; $bad = 0;
-function check(string $n, $c, $d = '') { global $ok, $bad; if ($c) { $ok++; echo "  ✓ $n\n"; } else { $bad++; echo "  ✗ $n  $d\n"; } }
+function check(string $n, $c, $d = '') { global $ok, $bad; if ($c) { $ok++; echo "  PASS $n\n"; } else { $bad++; echo "  FAIL $n  $d\n"; } }
 $pdo = new PDO('mysql:host=127.0.0.1;dbname=byab;charset=utf8mb4', 'b', 'b', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
 $val = fn($sql, $p = []) => (($s = $pdo->prepare($sql)) && $s->execute($p) && ($r = $s->fetch())) ? array_values($r)[0] : null;
 @mkdir('/tmp/sess');

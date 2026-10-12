@@ -660,7 +660,7 @@ async function applyCoupon() {
             window._appliedCoupon = null;
             if (discEl) discEl.value = '0';
             if (rowEl)  rowEl.style.display = 'none';
-            if (statusEl) statusEl.innerHTML = `<span style="color:var(--red)"><i class="fa-solid fa-circle-xmark"></i> ${data.error}</span>`;
+            if (statusEl) statusEl.innerHTML = `<span style="color:var(--red)">" + Icons.svg('x-circle') + " ${data.error}</span>`;
             recalc();
             return;
         }
@@ -673,7 +673,7 @@ async function applyCoupon() {
         const label = data.discount_type === 'percent'
             ? `${data.discount_value}% off`
             : `${currentSym}${data.discount_value} off`;
-        if (statusEl) statusEl.innerHTML = `<span style="color:var(--green)"><i class="fa-solid fa-circle-check"></i> <strong>${data.name}</strong> — ${label} applied!</span>`;
+        if (statusEl) statusEl.innerHTML = `<span style="color:var(--green)">" + Icons.svg('check-circle') + " <strong>${data.name}</strong> — ${label} applied!</span>`;
 
         recalc();
     } catch(e) {

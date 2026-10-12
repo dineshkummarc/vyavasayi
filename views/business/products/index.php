@@ -9,7 +9,7 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>">Books</a> <span>›</span>
             <span>Products</span>
         </div>
-        <h1><i class="fa-solid fa-box" style="color:var(--brand)"></i> Products & Stock</h1>
+        <h1><?= icon('package', '', 'color:var(--brand)') ?> Products & Stock</h1>
         <p>Add, edit, remove products and keep track of all of them &nbsp;
             <span style="font-size:11px;background:var(--brand);color:#fff;border-radius:20px;padding:2px 9px;font-weight:700">
                 <?= $inventoryMethod ?? 'FIFO' ?> mode
@@ -19,7 +19,7 @@ ob_start();
     <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button class="btn btn-secondary" data-modal="addCategoryModal">+ Category</button>
         <button class="btn btn-secondary btn-sm" data-modal="printModal" title="Print PDF">
-            <i class="fa-solid fa-print"></i> Print
+            <?= icon('printer') ?> Print
         </button>
         <button class="btn btn-primary"   data-modal="addProductModal">+ Add Product</button>
     </div>
@@ -36,9 +36,9 @@ ob_start();
 <!-- Controls -->
 <div class="lm-controls">
     <div class="lm-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <?= icon('search') ?>
         <input type="text" class="lm-search" id="prodSearch" placeholder="Search name, code, barcode…">
-        <button class="lm-search-clear" id="prodClear"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lm-search-clear" id="prodClear"><?= icon('close') ?></button>
     </div>
     <select class="lm-select" id="prodSort" title="Sort products">
         <option value="name-asc">Name A–Z</option>
@@ -68,7 +68,7 @@ ob_start();
 <?php if (empty($products)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon">📦</div>
+        <div class="empty-icon"><?= icon('package') ?></div>
         <h3>No products yet</h3>
         <p>Add products to track inventory and use them in invoices.</p>
     </div>
@@ -143,20 +143,20 @@ ob_start();
             <td style="white-space:nowrap">
                 <button class="btn btn-sm btn-secondary" title="Adjust"
                         onclick="openAdjust(<?= $p['id'] ?>,'<?= e(addslashes($p['name'])) ?>',<?= $displayStock ?>)">
-                    <i class="fa-solid fa-sliders"></i>
+                    <?= icon('sliders') ?>
                 </button>
                 <button class="btn btn-sm btn-secondary" title="Edit"
                         onclick="openEdit(<?= htmlspecialchars(json_encode($p),ENT_QUOTES) ?>,<?= htmlspecialchars(json_encode($variants),ENT_QUOTES) ?>)">
-                    <i class="fa-solid fa-pen"></i>
+                    <?= icon('square-pen') ?>
                 </button>
                 <a href="/books/<?= $book['id'] ?>/products/barcodes?product_id=<?= $p['id'] ?>"
                    title="Print Barcode" target="_blank" class="btn btn-sm btn-secondary">
-                    <i class="fa-solid fa-barcode"></i>
+                    <?= icon('barcode') ?>
                 </a>
                 <form method="POST" action="/books/<?= $book['id'] ?>/products/<?= $p['id'] ?>/delete"
                       style="display:inline" data-confirm="Delete &quot;<?= e($p['name']) ?>&quot;?">
                     <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
-                    <button class="btn btn-sm btn-danger" title="Delete"><i class="fa-solid fa-trash" style="color:#fff"></i></button>
+                    <button class="btn btn-sm btn-danger" title="Delete"><?= icon('trash', '', 'color:#fff') ?></button>
                 </form>
             </td>
         </tr>
@@ -213,21 +213,21 @@ ob_start();
             <td style="white-space:nowrap">
                 <button class="btn btn-sm btn-secondary" title="Adjust"
                         onclick="openAdjust(<?= $p['id'] ?>,'<?= e(addslashes($p['name'])) ?> (Batch <?= $bIdx+1 ?>)',<?= $bStock ?>)">
-                    <i class="fa-solid fa-sliders"></i>
+                    <?= icon('sliders') ?>
                 </button>
                 <button class="btn btn-sm btn-secondary" title="Edit Product"
                         onclick="openEdit(<?= htmlspecialchars(json_encode($p),ENT_QUOTES) ?>,<?= htmlspecialchars(json_encode($variants),ENT_QUOTES) ?>)">
-                    <i class="fa-solid fa-pen"></i>
+                    <?= icon('square-pen') ?>
                 </button>
                 <a href="/books/<?= $book['id'] ?>/products/barcodes?product_id=<?= $p['id'] ?>"
                    title="Print Barcode" target="_blank" class="btn btn-sm btn-secondary">
-                    <i class="fa-solid fa-barcode"></i>
+                    <?= icon('barcode') ?>
                 </a>
                 <?php if ($bIdx === count($activeBatches)-1): // Delete only on last batch row ?>
                 <form method="POST" action="/books/<?= $book['id'] ?>/products/<?= $p['id'] ?>/delete"
                       style="display:inline" data-confirm="Delete &quot;<?= e($p['name']) ?>&quot; and ALL its batches?">
                     <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
-                    <button class="btn btn-sm btn-danger" title="Delete Product"><i class="fa-solid fa-trash" style="color:#fff"></i></button>
+                    <button class="btn btn-sm btn-danger" title="Delete Product"><?= icon('trash', '', 'color:#fff') ?></button>
                 </form>
                 <?php endif; ?>
             </td>

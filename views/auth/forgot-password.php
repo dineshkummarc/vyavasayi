@@ -18,7 +18,7 @@ ob_start();
     <button type="submit" class="btn-primary">Send reset link</button>
 </form>
 
-<p class="form-footer"><a href="/login">← Back to login</a></p>
+<p class="form-footer"><a href="/login"><?= icon('arrow-left') ?> Back to login</a></p>
 
 <?php
 $content = ob_get_clean();

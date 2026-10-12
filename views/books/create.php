@@ -15,7 +15,7 @@ ob_start();
     <label class="type-opt" id="opt-personal">
         <input type="radio" name="_type_pick" value="personal" checked onchange="pickType('personal')">
         <div class="type-opt-inner">
-            <div class="type-opt-icon">👤</div>
+            <div class="type-opt-icon"><?= icon('user') ?></div>
             <div class="type-opt-title">Personal</div>
             <div class="type-opt-desc">Track your own income and expenses.</div>
         </div>
@@ -23,7 +23,7 @@ ob_start();
     <label class="type-opt" id="opt-business">
         <input type="radio" name="_type_pick" value="business" onchange="pickType('business')">
         <div class="type-opt-inner">
-            <div class="type-opt-icon">🏪</div>
+            <div class="type-opt-icon"><?= icon('store') ?></div>
             <div class="type-opt-title">Business</div>
             <div class="type-opt-desc">Customers, invoices, stock, employees and more.</div>
         </div>

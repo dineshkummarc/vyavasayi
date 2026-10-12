@@ -1,7 +1,7 @@
 <?php
 // Legacy-shaped drift → migrate_core repairs it. php tests/migrate_repair.php
 $pdo = new PDO('mysql:host=127.0.0.1;dbname=byab', 'b', 'b', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
-$ok=0;$bad=0; function check($n,$c,$d=''){global $ok,$bad; if($c){$ok++;echo "  ✓ $n\n";}else{$bad++;echo "  ✗ $n $d\n";}}
+$ok=0;$bad=0; function check($n,$c,$d=''){global $ok,$bad; if($c){$ok++;echo "  PASS $n\n";}else{$bad++;echo "  FAIL $n $d\n";}}
 foreach (['invoices','expenses','employee_salary_payments','dues','debts','employees'] as $t) $pdo->exec("DELETE FROM $t");
 $pdo->exec("INSERT IGNORE INTO users (id,name,email,password_hash) VALUES (1,'O','o@x','x')");
 $pdo->exec("INSERT IGNORE INTO books (id,user_id,name,type) VALUES (1,1,'S','business')");

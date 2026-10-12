@@ -151,18 +151,18 @@ class ExpensesController
         if (!book_can($book, 'expenses', 'create')) abort_403();
 
         $name = trim($_POST['name'] ?? '');
-        $icon = trim($_POST['icon'] ?? 'fa-tag');
+        $icon = trim($_POST['icon'] ?? 'tag');
 
-        // Only allow known FA icon names (prevent arbitrary injection)
+        // Only allow known icon names from the SVG collection (prevent arbitrary injection)
         $allowedIcons = [
-            'fa-tag','fa-bolt','fa-building','fa-users','fa-truck','fa-wrench',
-            'fa-bullhorn','fa-ellipsis','fa-utensils','fa-laptop','fa-phone',
-            'fa-car','fa-home','fa-heart','fa-shield','fa-graduation-cap',
-            'fa-globe','fa-box','fa-tools','fa-paint-brush','fa-seedling',
-            'fa-leaf','fa-water','fa-fire','fa-star','fa-coffee','fa-tshirt',
+            'tag','zap','building','users','truck','wrench',
+            'megaphone','ellipsis','utensils','laptop','phone',
+            'car-front','home','heart-filled','shield','graduation-cap',
+            'globe','package','hammer','paintbrush','sprout',
+            'leaf','droplet','flame','star-filled','coffee','shirt',
         ];
         if (!in_array($icon, $allowedIcons, true)) {
-            $icon = 'fa-tag';
+            $icon = 'tag';
         }
 
         if (!$name) {
@@ -187,13 +187,13 @@ class ExpensesController
     public static function seedDefaultCategories(int $bookId): void
     {
         $defaults = [
-            ['Utility',       'fa-bolt'],
-            ['Rent',          'fa-building'],
-            ['Salary',        'fa-users'],
-            ['Transport',     'fa-truck'],
-            ['Maintenance',   'fa-wrench'],
-            ['Marketing',     'fa-bullhorn'],
-            ['Miscellaneous', 'fa-tag'],
+            ['Utility',       'zap'],
+            ['Rent',          'building'],
+            ['Salary',        'users'],
+            ['Transport',     'truck'],
+            ['Maintenance',   'wrench'],
+            ['Marketing',     'megaphone'],
+            ['Miscellaneous', 'tag'],
         ];
         foreach ($defaults as [$name, $icon]) {
             $exists = Database::row(

@@ -33,7 +33,7 @@ It prints `ok` / `--` per step and is safe to re-run. When it says "Done", delet
 5. In Kafeel finish the **setup review** (match/link products, customers, categories). From then on both sides sync.
 
 ## 7. What now works (tested end-to-end against the real Kafeel code)
-Pairing + domain-ownership proof, signed requests, replay protection; products, categories, customers, coupons, payment methods, tax, delivery charges; orders ⇄ sales invoices (stock, FIFO/LIFO layers, dues all updated); payments (void instead of edit); returns with restock; stock as movements; conflicts queue; dead-letter retry; pause/resume; key rotation; disconnect & same-pair reconnect; reconciliation feed for the store.
+Pairing + domain-ownership proof, signed requests, replay protection; products, categories, customers, coupons, payment methods, tax, delivery charges; orders <-> sales invoices (stock, FIFO/LIFO layers, dues all updated); payments (void instead of edit); returns with restock; stock as movements; conflicts queue; dead-letter retry; pause/resume; key rotation; disconnect & same-pair reconnect; reconciliation feed for the store.
 
 ## 8. Bugs I fixed on the way
 - **Deleting an invoice left stock, dues and payments untouched** → now reverses all of it (online orders are cancelled and kept on record).

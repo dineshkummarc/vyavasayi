@@ -9,7 +9,7 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>">Books</a> <span>›</span>
             <span>Activity Logs</span>
         </div>
-        <h1><i class="fa-solid fa-clock-rotate-left" style="color:var(--brand)"></i> Activity Logs</h1>
+        <h1><?= icon('history', '', 'color:var(--brand)') ?> Activity Logs</h1>
         <p>Every action recorded in this book — who did what, when and how.</p>
     </div>
 </div>
@@ -33,7 +33,7 @@ ob_start();
 <?php if (empty($logs)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <div class="empty-icon"><?= icon('history') ?></div>
         <h3>No logs yet</h3>
         <p>Activity will be recorded as actions happen in this book.</p>
     </div>
@@ -58,7 +58,7 @@ ob_start();
         <tr<?php if ($log['link_url']): ?> class="log-row-link" onclick="window.location='<?= e($log['link_url']) ?>'" title="Go to <?= e($log['action_label']) ?>"<?php endif; ?>>
             <td style="text-align:center;padding:10px 8px">
                 <span style="color:<?= $log['icon_color'] ?>;font-size:14px">
-                    <i class="fa-solid <?= $log['icon'] ?>"></i>
+                    <?= icon($log['icon']) ?>
                 </span>
             </td>
             <td>
@@ -87,7 +87,7 @@ ob_start();
             <td>
                 <?php if (!empty($log['old_data']) || !empty($log['new_data'])): ?>
                 <button class="btn btn-sm btn-secondary" onclick="toggleChanges(this, event)" style="font-size:11px;padding:3px 8px">
-                    <i class="fa-solid fa-code-branch"></i> Show
+                    <?= icon('git-branch') ?> Show
                 </button>
                 <div class="log-changes" style="display:none;margin-top:8px;font-size:11px;font-family:monospace;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px;max-width:320px;word-break:break-all">
                     <?php if (!empty($log['old_data'])): ?>
@@ -129,10 +129,10 @@ function toggleChanges(btn, e) {
     var box = btn.nextElementSibling;
     if (box.style.display === 'none') {
         box.style.display = 'block';
-        btn.innerHTML = '<i class="fa-solid fa-code-branch"></i> Hide';
+        btn.innerHTML = Icons.svg("git-branch") + ' Hide';
     } else {
         box.style.display = 'none';
-        btn.innerHTML = '<i class="fa-solid fa-code-branch"></i> Show';
+        btn.innerHTML = Icons.svg("git-branch") + ' Show';
     }
 }
 </script>
