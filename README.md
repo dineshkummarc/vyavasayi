@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/byabsayee/byabsayee/main/public/assets/images/ByabsayeeLogo.png" alt="Byabsayee Logo" width="220" />
 
-# Byabsayee
+# vyavasayi
 
 **Open source ERP for small businesses — invoices, inventory, employees, accounting and more.**
 
