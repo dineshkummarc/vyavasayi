@@ -23,5 +23,5 @@
   @media print{.bsy-devwarn{display:none!important}body{padding-bottom:0!important}}
 </style>
 <div class="bsy-devwarn" role="note" aria-label="Development notice">
-  <b>⚠ IN DEVELOPMENT</b><span class="bsy-short">Testing only — not for real work.</span><span class="bsy-long">Byabsayee is still in development and is updated often. Please do <u>not</u> use it for real work yet — it is unstable and could lose or destroy valuable data. For testing only.</span>
+  <b><?= icon('alert-triangle') ?> IN DEVELOPMENT</b><span class="bsy-short">Testing only — not for real work.</span><span class="bsy-long">Byabsayee is still in development and is updated often. Please do <u>not</u> use it for real work yet — it is unstable and could lose or destroy valuable data. For testing only.</span>
 </div>

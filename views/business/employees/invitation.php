@@ -9,7 +9,7 @@ ob_start();
 <div style="max-width:480px;width:100%;text-align:center">
 
     <div style="width:64px;height:64px;border-radius:50%;background:var(--brand-light);display:flex;align-items:center;justify-content:center;margin:0 auto 20px">
-        <i class="fa-solid fa-envelope-open-text" style="font-size:28px;color:var(--brand)"></i>
+        <?= icon('mail-open', '', 'font-size:28px;color:var(--brand)') ?>
     </div>
 
     <h1 style="font-size:22px;margin-bottom:8px">You've been invited!</h1>
@@ -36,14 +36,14 @@ ob_start();
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
             <input type="hidden" name="action" value="reject">
             <button type="submit" class="btn btn-secondary" style="min-width:120px">
-                <i class="fa-solid fa-xmark"></i> Decline
+                <?= icon('close') ?> Decline
             </button>
         </form>
         <form method="POST" action="/invitations/<?= e($inv['token']) ?>/respond">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
             <input type="hidden" name="action" value="accept">
             <button type="submit" class="btn btn-primary" style="min-width:120px">
-                <i class="fa-solid fa-check"></i> Accept Invitation
+                <?= icon('check') ?> Accept Invitation
             </button>
         </form>
     </div>

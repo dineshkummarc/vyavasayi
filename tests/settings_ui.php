@@ -1,7 +1,7 @@
 <?php
 // Phase 5: the four settings pages share one structure. php tests/settings_ui.php  (needs the DB seeded by tests/e2e.php)
 $ok = 0; $bad = 0;
-function check(string $n, $c, $d = '') { global $ok, $bad; if ($c) { $ok++; echo "  ✓ $n\n"; } else { $bad++; echo "  ✗ $n  $d\n"; } }
+function check(string $n, $c, $d = '') { global $ok, $bad; if ($c) { $ok++; echo "  PASS $n\n"; } else { $bad++; echo "  FAIL $n  $d\n"; } }
 function get(string $uri, array $flash = []): array {
     @mkdir('/tmp/sess');
     // write the session in a child process so this script never starts a session after output

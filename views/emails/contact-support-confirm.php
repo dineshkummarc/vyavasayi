@@ -36,7 +36,7 @@ $brand   = '#1a6b4a';
     <!-- Body -->
     <tr>
       <td style="padding:32px 36px 24px">
-        <p style="margin:0 0 16px;font-size:18px;font-weight:600;color:#1e293b">We got your message ✅</p>
+        <p style="margin:0 0 16px;font-size:18px;font-weight:600;color:#1e293b">We got your message</p>
         <p style="margin:0 0 20px;font-size:14px;color:#475569;line-height:1.75">
           Hi <?= htmlspecialchars($name) ?>, thanks for reaching out!
           We've received your message and our team will get back to you as soon as possible, typically within 1–2 business days.

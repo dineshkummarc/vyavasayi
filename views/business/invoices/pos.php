@@ -7,10 +7,10 @@ ob_start();
 <div class="page-header">
     <div class="page-header-left">
         <div class="breadcrumb">
-            <a href="/books/<?= $book['id'] ?>">← <?= e($book['name']) ?></a> <span>›</span>
+            <a href="/books/<?= $book['id'] ?>"><?= icon('arrow-left') ?> <?= e($book['name']) ?></a> <span>›</span>
             <span>POS Quick Sale</span>
         </div>
-        <h1>🖨 POS Quick Sale</h1>
+        <h1><?= icon('cash-register') ?> POS Quick Sale</h1>
         <p>Fast in-person sales — auto-marked as paid</p>
     </div>
     <a href="/books/<?= $book['id'] ?>/invoices/create?type=sale" class="btn btn-secondary">
@@ -32,7 +32,7 @@ ob_start();
     <div class="card" style="padding:14px">
         <div style="position:relative">
             <input type="text" id="posSearch" autofocus
-                   placeholder="🔍  Scan barcode or type product code / name…"
+                   placeholder="Scan barcode or type product code / name…"
                    oninput="posSearchProducts(this.value)"
                    style="width:100%;padding:10px 14px;border:2px solid var(--brand);border-radius:9px;font-size:14px;font-family:inherit;outline:none">
         </div>
@@ -132,7 +132,7 @@ ob_start();
         <button type="submit" class="btn btn-primary"
                 style="width:100%;height:52px;font-size:16px;border-radius:10px"
                 id="posSubmitBtn" disabled>
-            💳 Confirm Sale
+            <?= icon('credit-card') ?> Confirm Sale
         </button>
         <a href="/books/<?= $book['id'] ?>" class="btn btn-secondary"
            style="width:100%;text-align:center;margin-top:8px">Cancel</a>

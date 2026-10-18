@@ -35,7 +35,7 @@
 }
 .st-nav a:hover, .st-nav .st-tab:hover { background:var(--hover-bg); }
 .st-nav a.active, .st-nav .st-tab.active { background:var(--brand-light); color:var(--brand); font-weight:600; }
-.st-nav a i, .st-nav .st-tab i { width:18px; text-align:center; font-size:14px; flex-shrink:0; }
+.st-nav a .ic, .st-nav .st-tab .ic { width:18px; text-align:center; font-size:14px; flex-shrink:0; }
 .st-nav .st-tab.danger, .st-nav a.danger { color:var(--red); }
 .st-nav .st-tab.danger.active { background:var(--red-bg); }
 .st-nav .st-badge { margin-left:auto; background:var(--brand); color:#fff; border-radius:20px; font-size:10px; font-weight:800; padding:1px 7px; }
@@ -138,11 +138,11 @@
 
 /* ── Small shared widgets ──────────────────────────────────── */
 .info-card { display:flex; gap:12px; padding:14px; border:1px solid var(--border); border-radius:8px; margin-bottom:10px; align-items:flex-start; }
-.info-card > i { font-size:18px; color:var(--brand); margin-top:2px; flex-shrink:0; }
+.info-card > .ic { font-size:18px; color:var(--brand); margin-top:2px; flex-shrink:0; }
 .info-card strong { display:block; font-size:14px; font-weight:600; color:var(--text); margin-bottom:2px; }
 .info-card span { font-size:13px; color:var(--text-muted); }
 .link-card { display:flex; align-items:center; gap:14px; padding:14px 18px; margin-bottom:20px; background:var(--brand-light); border:1px solid var(--brand); border-radius:10px; }
-.link-card > i { font-size:22px; color:var(--brand); }
+.link-card > .ic { font-size:22px; color:var(--brand); }
 .link-card .link-text { flex:1; min-width:0; }
 .link-card strong { display:block; font-size:14px; font-weight:700; color:var(--text); }
 .link-card a { font-size:13px; color:var(--brand); word-break:break-all; text-decoration:none; }
@@ -157,10 +157,10 @@
 .faq-item { border:1px solid var(--border); border-radius:8px; margin-bottom:8px; overflow:hidden; }
 .faq-q { padding:14px 16px; font-weight:600; font-size:14px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:12px; color:var(--text); background:var(--card-bg); }
 .faq-q:hover { background:var(--hover-bg); }
-.faq-q i { font-size:12px; color:var(--text-muted); transition:transform .2s; }
+.faq-q .ic { font-size:12px; color:var(--text-muted); transition:transform .2s; }
 .faq-a { display:none; padding:12px 16px; font-size:13px; color:var(--text-muted); line-height:1.6; border-top:1px solid var(--border); background:var(--bg); }
 .faq-item.open .faq-a { display:block; }
-.faq-item.open .faq-q i { transform:rotate(180deg); }
+.faq-item.open .faq-q .ic { transform:rotate(180deg); }
 
 /* ── Phones: nav becomes a horizontal tab strip ────────────── */
 @media (max-width:760px) {

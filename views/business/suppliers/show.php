@@ -66,13 +66,13 @@ ob_start();
                     All <span class="badge badge-gray" style="margin-left:4px"><?= count($activity) ?></span>
                 </button>
                 <button class="filter-btn" onclick="filterActivity('purchase',this)">
-                    <i class="fa-solid fa-cart-shopping"></i> Purchases <span class="badge badge-gray" style="margin-left:4px"><?= count($invoices) ?></span>
+                    <?= icon('shopping-cart') ?> Purchases <span class="badge badge-gray" style="margin-left:4px"><?= count($invoices) ?></span>
                 </button>
                 <button class="filter-btn" onclick="filterActivity('debt',this)">
-                    <i class="fa-solid fa-file-circle-minus"></i> Debts <span class="badge badge-gray" style="margin-left:4px"><?= count($debts) ?></span>
+                    <?= icon('file-minus') ?> Debts <span class="badge badge-gray" style="margin-left:4px"><?= count($debts) ?></span>
                 </button>
                 <button class="filter-btn" onclick="filterActivity('return',this)">
-                    <i class="fa-solid fa-rotate-left"></i> Returns <span class="badge badge-gray" style="margin-left:4px"><?= count($returns) ?></span>
+                    <?= icon('rotate-ccw') ?> Returns <span class="badge badge-gray" style="margin-left:4px"><?= count($returns) ?></span>
                 </button>
             </div>
             <a href="/books/<?= $book['id'] ?>/returns/create?type=purchase_return&supplier_id=<?= $supplier['id'] ?>" class="btn btn-sm btn-secondary">+ Return</a>
@@ -87,15 +87,15 @@ ob_start();
                 <tbody>
                 <?php
                 $typeColors = ['purchase'=>'blue','debt'=>'amber','return'=>'red'];
-                $typeIcons  = ['purchase'=>'fa-cart-shopping','debt'=>'fa-file-circle-minus','return'=>'fa-rotate-left'];
+                $typeIcons  = ['purchase'=>'shopping-cart','debt'=>'file-minus','return'=>'rotate-ccw'];
                 $statusColors = ['draft'=>'gray','sent'=>'blue','partial'=>'amber','paid'=>'green','overdue'=>'red','cancelled'=>'gray','unpaid'=>'amber','returned'=>'blue'];
                 foreach ($activity as $row):
                     $tc = $typeColors[$row['type']] ?? 'gray';
-                    $ti = $typeIcons[$row['type']]  ?? 'fa-circle';
+                    $ti = $typeIcons[$row['type']]  ?? 'circle';
                     $sc = $statusColors[$row['status']] ?? 'gray';
                 ?>
                 <tr data-type="<?= $row['type'] ?>">
-                    <td><span class="badge badge-<?= $tc ?>" style="font-size:10px"><i class="fa-solid <?= $ti ?>"></i> <?= ucfirst($row['type']) ?></span></td>
+                    <td><span class="badge badge-<?= $tc ?>" style="font-size:10px"><?= icon($ti) ?> <?= ucfirst($row['type']) ?></span></td>
                     <td style="font-weight:500"><?= e($row['ref']) ?></td>
                     <td class="td-muted"><?= $row['date'] ? format_date($row['date']) : '—' ?></td>
                     <td><span class="badge badge-<?= $sc ?>"><?= ucfirst($row['status']) ?></span></td>

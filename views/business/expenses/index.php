@@ -9,18 +9,18 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>">Books</a> <span>›</span>
             <span>Expenses</span>
         </div>
-        <h1><i class="fa-solid fa-receipt" style="color:var(--brand)"></i> Expenses</h1>
+        <h1><?= icon('receipt', '', 'color:var(--brand)') ?> Expenses</h1>
         <p>Track all outgoing costs</p>
     </div>
     <div style="display:flex;gap:8px">
         <button class="btn btn-secondary btn-sm" data-modal="printModal" title="Print PDF">
-            <i class="fa-solid fa-print"></i> Print
+            <?= icon('printer') ?> Print
         </button>
         <button class="btn btn-secondary btn-sm" data-modal="addCategoryModal">
-            <i class="fa-solid fa-folder-plus"></i> Add Category
+            <?= icon('folder-plus') ?> Add Category
         </button>
         <button class="btn btn-primary" data-modal="addExpenseModal">
-            <i class="fa-solid fa-plus"></i> Add Expense
+            <?= icon('plus') ?> Add Expense
         </button>
     </div>
 </div>
@@ -28,9 +28,9 @@ ob_start();
 <!-- LM Controls -->
 <div class="lm-controls" style="margin-bottom:8px">
     <div class="lm-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <?= icon('search') ?>
         <input type="text" class="lm-search" id="expTableSearch" placeholder="Search title, category, note…">
-        <button class="lm-search-clear" id="expTableClear"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lm-search-clear" id="expTableClear"><?= icon('close') ?></button>
     </div>
     <select class="lm-select" id="expTableSort">
         <option value="date-desc">Newest First</option>
@@ -47,18 +47,18 @@ ob_start();
     $isCurrent = $month === date('Y-m');
     ?>
     <a href="?month=<?= $prevMonth ?>&cat=<?= $catId ?>" class="btn btn-secondary btn-sm">
-        <i class="fa-solid fa-chevron-left"></i>
+        <?= icon('chevron-left') ?>
     </a>
     <span style="font-weight:600;font-size:14px;min-width:120px;text-align:center">
         <?= date('F Y', strtotime($month . '-01')) ?>
     </span>
     <?php if (!$isCurrent): ?>
     <a href="?month=<?= $nextMonth ?>&cat=<?= $catId ?>" class="btn btn-secondary btn-sm">
-        <i class="fa-solid fa-chevron-right"></i>
+        <?= icon('chevron-right') ?>
     </a>
     <?php else: ?>
     <span class="btn btn-secondary btn-sm" style="opacity:.4;cursor:not-allowed">
-        <i class="fa-solid fa-chevron-right"></i>
+        <?= icon('chevron-right') ?>
     </span>
     <?php endif; ?>
     <span style="font-size:13px;color:var(--text-muted)">
@@ -76,7 +76,7 @@ ob_start();
     <?php foreach ($categories as $cat): ?>
     <a href="?month=<?= $month ?>&cat=<?= $cat['id'] ?>"
        class="btn btn-sm <?= $catId===$cat['id'] ? 'btn-primary' : 'btn-secondary' ?>">
-        <i class="fa-solid <?= e($cat['icon'] ?? 'fa-tag') ?>"></i>
+        <?= icon($cat['icon'] ?? 'tag') ?>
         <?= e($cat['name']) ?>
     </a>
     <?php endforeach; ?>
@@ -87,7 +87,7 @@ ob_start();
 <?php if (empty($expenses)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon"><i class="fa-solid fa-receipt"></i></div>
+        <div class="empty-icon"><?= icon('receipt') ?></div>
         <h3>No expenses this month</h3>
         <p>Click "Add Expense" to record an outgoing cost.</p>
     </div>
@@ -119,7 +119,7 @@ ob_start();
             <td>
                 <?php if (!empty($exp['category_name'])): ?>
                 <span style="display:inline-flex;align-items:center;gap:5px;background:var(--bg);padding:2px 8px;border-radius:99px;font-size:12px">
-                    <i class="fa-solid <?= e($exp['category_icon'] ?? 'fa-tag') ?>" style="font-size:10px;color:var(--text-muted)"></i>
+                    <?= icon($exp['category_icon'] ?? 'tag', '', 'font-size:10px;color:var(--text-muted)') ?>
                     <?= e($exp['category_name']) ?>
                 </span>
                 <?php else: ?>
@@ -134,7 +134,7 @@ ob_start();
                    target="_blank"
                    class="btn btn-sm btn-secondary"
                    title="View receipt">
-                    <i class="fa-solid fa-file-image"></i>
+                    <?= icon('file-image') ?>
                 </a>
                 <?php else: ?>
                 <span class="td-muted">—</span>
@@ -152,7 +152,7 @@ ob_start();
                             '<?= e(addslashes($exp['paid_to'] ?? '')) ?>',
                             '<?= e(addslashes($exp['note'] ?? '')) ?>'
                         )">
-                    <i class="fa-solid fa-pen"></i>
+                    <?= icon('square-pen') ?>
                 </button>
                 <form method="POST"
                       action="/books/<?= $book['id'] ?>/expenses/<?= $exp['id'] ?>/delete"
@@ -160,7 +160,7 @@ ob_start();
                       onsubmit="return confirm('Delete this expense?')">
                     <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
                     <button class="btn btn-sm btn-secondary" title="Delete">
-                        <i class="fa-solid fa-trash" style="color:var(--red)"></i>
+                        <?= icon('trash', '', 'color:var(--red)') ?>
                     </button>
                 </form>
                 <?php else:
@@ -170,7 +170,7 @@ ob_start();
                         default    => '/books/'.$book['id'].'/employees',
                     };
                     $srcLabel = match ($exp['source_table']) { 'invoices' => 'invoice', 'returns' => 'return', default => 'salary payment' }; ?>
-                <a href="<?= e($srcHref) ?>" class="btn btn-sm btn-secondary" title="Created automatically from a <?= $srcLabel ?> — change it there"><i class="fa-solid fa-link"></i> From <?= $srcLabel ?></a>
+                <a href="<?= e($srcHref) ?>" class="btn btn-sm btn-secondary" title="Created automatically from a <?= $srcLabel ?> — change it there"><?= icon('link') ?> From <?= $srcLabel ?></a>
                 <?php endif; ?>
             </td>
         </tr>
@@ -196,7 +196,7 @@ ob_start();
 <div class="modal-backdrop" id="addExpenseModal">
     <div class="modal">
         <div class="modal-title">
-            <i class="fa-solid fa-receipt" style="color:var(--red)"></i> Add Expense
+            <?= icon('receipt', '', 'color:var(--red)') ?> Add Expense
         </div>
         <form method="POST" action="/books/<?= $book['id'] ?>/expenses/add"
               enctype="multipart/form-data">
@@ -240,7 +240,7 @@ ob_start();
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa-solid fa-plus"></i> Add Expense
+                    <?= icon('plus') ?> Add Expense
                 </button>
             </div>
         </form>
@@ -252,7 +252,7 @@ ob_start();
 <div class="modal-backdrop" id="editExpenseModal">
     <div class="modal">
         <div class="modal-title">
-            <i class="fa-solid fa-pen" style="color:var(--brand)"></i> Edit Expense
+            <?= icon('square-pen', '', 'color:var(--brand)') ?> Edit Expense
         </div>
         <form method="POST" id="editExpenseForm">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
@@ -290,7 +290,7 @@ ob_start();
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa-solid fa-check"></i> Save Changes
+                    <?= icon('check') ?> Save Changes
                 </button>
             </div>
         </form>
@@ -302,7 +302,7 @@ ob_start();
 <div class="modal-backdrop" id="addCategoryModal">
     <div class="modal" style="max-width:380px">
         <div class="modal-title">
-            <i class="fa-solid fa-folder-plus" style="color:var(--brand)"></i> Add Category
+            <?= icon('folder-plus', '', 'color:var(--brand)') ?> Add Category
         </div>
         <form method="POST" action="/books/<?= $book['id'] ?>/expenses/category/add">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
@@ -316,29 +316,29 @@ ob_start();
                     <div class="icon-picker" id="iconPicker">
                         <?php
                         $iconList = [
-                            'fa-tag'=>'Tag','fa-bolt'=>'Electric','fa-building'=>'Building',
-                            'fa-users'=>'Team','fa-truck'=>'Truck','fa-wrench'=>'Tools',
-                            'fa-bullhorn'=>'Marketing','fa-utensils'=>'Food','fa-laptop'=>'Tech',
-                            'fa-car'=>'Vehicle','fa-home'=>'Home','fa-heart'=>'Health',
-                            'fa-graduation-cap'=>'Education','fa-globe'=>'Internet',
-                            'fa-box'=>'Supplies','fa-coffee'=>'Coffee','fa-seedling'=>'Agri',
+                            'tag'=>'Tag','zap'=>'Electric','building'=>'Building',
+                            'users'=>'Team','truck'=>'Truck','wrench'=>'Tools',
+                            'megaphone'=>'Marketing','utensils'=>'Food','laptop'=>'Tech',
+                            'car-front'=>'Vehicle','home'=>'Home','heart-filled'=>'Health',
+                            'graduation-cap'=>'Education','globe'=>'Internet',
+                            'package'=>'Supplies','coffee'=>'Coffee','sprout'=>'Agri',
                         ];
                         foreach ($iconList as $cls => $lbl):
                         ?>
                         <button type="button" class="icon-opt" data-icon="<?= $cls ?>" title="<?= $lbl ?>"
                                 onclick="selectIcon(this)">
-                            <i class="fa-solid <?= $cls ?>"></i>
+                            <?= icon($cls) ?>
                         </button>
                         <?php endforeach; ?>
                     </div>
-                    <input type="hidden" name="icon" id="selectedIcon" value="fa-tag">
+                    <input type="hidden" name="icon" id="selectedIcon" value="tag">
                     <small class="form-hint" id="selectedIconLabel">Selected: Tag</small>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa-solid fa-check"></i> Save Category
+                    <?= icon('check') ?> Save Category
                 </button>
             </div>
         </form>
@@ -359,7 +359,7 @@ ob_start();
 
 <script>
 // Icon picker
-document.querySelector('.icon-opt[data-icon="fa-tag"]')?.classList.add('selected');
+document.querySelector('.icon-opt[data-icon="tag"]')?.classList.add('selected');
 
 function selectIcon(btn) {
     document.querySelectorAll('.icon-opt').forEach(b => b.classList.remove('selected'));

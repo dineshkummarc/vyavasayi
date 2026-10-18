@@ -28,19 +28,19 @@ Run it entirely on your own server. Your data never leaves your hands.
 
 ## Features
 
-- 🧾 **Invoicing** — Create, send, and track invoices with PDF export
-- 📦 **Inventory** — Manage products, categories, and stock levels
-- 👥 **Customers & Suppliers** — Full contact management
-- 👷 **Employees** — Profiles, roles, and privilege management
-- 💰 **Accounting** — Expenses, funds, debts, dues, and payments
-- 📊 **Reports** — Sales, expenses, and business summaries
-- 🏪 **POS** — Point of sale interface
-- 📚 **Books** — Multi-book support for different business units
-- 🔔 **Notifications** — In-app notification system
-- 🔐 **Two-Factor Authentication** — TOTP-based 2FA for security
-- 📱 **WhatsApp Integration** — Send messages via WhatsApp API
-- 🌐 **Public Invoice Pages** — Share invoices with customers via link
-- 🐳 **Docker ready** — Deploy in minutes with one compose file
+- **Invoicing** — Create, send, and track invoices with PDF export
+- **Inventory** — Manage products, categories, and stock levels
+- **Customers & Suppliers** — Full contact management
+- **Employees** — Profiles, roles, and privilege management
+- **Accounting** — Expenses, funds, debts, dues, and payments
+- **Reports** — Sales, expenses, and business summaries
+- **POS** — Point of sale interface
+- **Books** — Multi-book support for different business units
+- **Notifications** — In-app notification system
+- **Two-Factor Authentication** — TOTP-based 2FA for security
+- **WhatsApp Integration** — Send messages via WhatsApp API
+- **Public Invoice Pages** — Share invoices with customers via link
+- **Docker ready** — Deploy in minutes with one compose file
 
 ---
 
@@ -275,6 +275,6 @@ You are free to use, modify, and distribute it for personal or commercial purpos
 
 <div align="center">
 
-Made with ❤️ in Bangladesh
+Made in Bangladesh
 
 </div>

@@ -7,7 +7,7 @@
             <a href="/books/<?= $book['id'] ?>/employees">Employees</a> <span>›</span>
             <span>Send Notification</span>
         </div>
-        <h1><i class="fa-solid fa-paper-plane" style="color:var(--brand)"></i> Send Notification</h1>
+        <h1><?= icon('send', '', 'color:var(--brand)') ?> Send Notification</h1>
         <p>Send an in-app message (and optional email) to selected employees.</p>
     </div>
 </div>
@@ -43,17 +43,17 @@
         <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
             <label class="filter-btn active" id="mode-all-btn" style="cursor:pointer">
                 <input type="radio" name="target_mode" value="all" checked style="display:none" onclick="setMode('all')">
-                <i class="fa-solid fa-users"></i> All Employees
+                <?= icon('users') ?> All Employees
             </label>
             <?php if (!empty($designations)): ?>
             <label class="filter-btn" id="mode-desig-btn" style="cursor:pointer">
                 <input type="radio" name="target_mode" value="designation" style="display:none" onclick="setMode('designation')">
-                <i class="fa-solid fa-sitemap"></i> By Designation
+                <?= icon('sitemap') ?> By Designation
             </label>
             <?php endif; ?>
             <label class="filter-btn" id="mode-select-btn" style="cursor:pointer">
                 <input type="radio" name="target_mode" value="selected" style="display:none" onclick="setMode('selected')">
-                <i class="fa-solid fa-list-check"></i> Select Individually
+                <?= icon('list-check') ?> Select Individually
             </label>
         </div>
 
@@ -92,7 +92,7 @@
         </div>
 
         <div id="all-msg" style="font-size:13px;color:var(--text-muted);margin-top:4px">
-            <i class="fa-solid fa-info-circle"></i>
+            <?= icon('info') ?>
             Notification will be sent to all <?= count($employees) ?> employee<?= count($employees)!==1?'s':'' ?> with app access.
         </div>
     </div>
@@ -100,7 +100,7 @@
     <div style="display:flex;gap:10px">
         <a href="/books/<?= $book['id'] ?>/employees" class="btn btn-secondary">Cancel</a>
         <button type="submit" class="btn btn-primary">
-            <i class="fa-solid fa-paper-plane"></i> Send Notification
+            <?= icon('send') ?> Send Notification
         </button>
     </div>
 </form>

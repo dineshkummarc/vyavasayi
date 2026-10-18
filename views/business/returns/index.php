@@ -12,18 +12,18 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>">Books</a> <span>›</span>
             <span>Returns</span>
         </div>
-        <h1><i class="fa-solid fa-rotate-left" style="color:var(--brand)"></i> Returns</h1>
+        <h1><?= icon('rotate-ccw', '', 'color:var(--brand)') ?> Returns</h1>
         <p>Sales returns from customers &amp; purchase returns to suppliers</p>
     </div>
     <div style="display:flex;gap:8px">
         <button class="btn btn-secondary btn-sm" data-modal="printModal" title="Print PDF">
-            <i class="fa-solid fa-print"></i> Print
+            <?= icon('printer') ?> Print
         </button>
         <a href="/books/<?= $book['id'] ?>/returns/create?type=sales_return" class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i> Sales Return
+            <?= icon('plus') ?> Sales Return
         </a>
         <a href="/books/<?= $book['id'] ?>/returns/create?type=purchase_return" class="btn btn-secondary">
-            <i class="fa-solid fa-truck-ramp-box"></i> Purchase Return
+            <?= icon('package-return') ?> Purchase Return
         </a>
     </div>
 </div>
@@ -49,9 +49,9 @@ ob_start();
     <!-- LM Controls -->
 <div class="lm-controls">
     <div class="lm-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <?= icon('search') ?>
         <input type="text" class="lm-search" id="retTableSearch" placeholder="Search return no., party…">
-        <button class="lm-search-clear" id="retTableClear"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lm-search-clear" id="retTableClear"><?= icon('close') ?></button>
     </div>
     <select class="lm-select" id="retTableSort">
         <option value="date-desc">Newest First</option>
@@ -69,7 +69,7 @@ ob_start();
 <!-- Month navigator -->
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap">
     <a href="?month=<?= $prevMonth ?>&type=<?= $typeFilter ?>" class="btn btn-secondary btn-sm">
-        <i class="fa-solid fa-chevron-left"></i>
+        <?= icon('chevron-left') ?>
     </a>
     <div style="text-align:center;min-width:140px">
         <div style="font-weight:600;font-size:14px"><?= date('F Y', strtotime($month.'-01')) ?></div>
@@ -78,12 +78,12 @@ ob_start();
     <a href="?month=<?= $nextMonth ?>&type=<?= $typeFilter ?>"
        class="btn btn-secondary btn-sm <?= $isCurrent ? 'disabled' : '' ?>"
        style="<?= $isCurrent ? 'opacity:.35;pointer-events:none' : '' ?>">
-        <i class="fa-solid fa-chevron-right"></i>
+        <?= icon('chevron-right') ?>
     </a>
 </div>
 <?php if (empty($returns)): ?>
     <div style="padding:48px;text-align:center;color:var(--text-muted)">
-        <i class="fa-solid fa-rotate-left" style="font-size:40px;opacity:.3;margin-bottom:12px;display:block"></i>
+        <?= icon('rotate-ccw', '', 'font-size:40px;opacity:.3;margin-bottom:12px;display:block') ?>
         No returns recorded yet.
     </div>
     <?php else: ?>
@@ -138,11 +138,11 @@ ob_start();
                     <?= $sym.number_format($r['total_refund'],0) ?>
                 </td>
                 <td style="white-space:nowrap">
-                    <a href="/books/<?= $book['id'] ?>/returns/<?= $r['id'] ?>" class="btn btn-sm btn-secondary" title="View"><i class="fa-solid fa-eye"></i></a>
+                    <a href="/books/<?= $book['id'] ?>/returns/<?= $r['id'] ?>" class="btn btn-sm btn-secondary" title="View"><?= icon('eye') ?></a>
                     <form method="POST" action="/books/<?= $book['id'] ?>/returns/<?= $r['id'] ?>/delete"
                         onsubmit="return confirm('Delete this return? Stock changes will NOT be reversed.')">
                         <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
-                        <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash" style="color: #fff;"></i></button>
+                        <button class="btn btn-sm btn-danger"><?= icon('trash', '', 'color: #fff;') ?></button>
                     </form>
                 </td>
             </tr>

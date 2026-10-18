@@ -9,7 +9,7 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>">Books</a> <span>›</span>
             <span>Contacts</span>
         </div>
-        <h1><i class="fa-solid fa-address-book" style="color:var(--brand)"></i> Contacts</h1>
+        <h1><?= icon('address-book', '', 'color:var(--brand)') ?> Contacts</h1>
         <p><?= $totalCount ?> contact<?= $totalCount !== 1 ? 's' : '' ?> across all types</p>
     </div>
 </div>
@@ -17,9 +17,9 @@ ob_start();
 <!-- FILTER TABS + SEARCH -->
 <div class="lm-controls">
     <div class="lm-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <?= icon('search') ?>
         <input type="text" class="lm-search" id="conTableSearch" placeholder="Search name, phone, email…">
-        <button class="lm-search-clear" id="conTableClear"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lm-search-clear" id="conTableClear"><?= icon('close') ?></button>
     </div>
     <select class="lm-select" id="conTableSort">
         <option value="az">Name A–Z</option>
@@ -32,13 +32,13 @@ ob_start();
         All <span class="badge badge-gray" style="margin-left:4px"><?= $totalCount ?></span>
     </button>
     <button class="btn btn-sm btn-secondary" data-contact-tab="customer" onclick="filterTab('customer')">
-        <i class="fa-solid fa-users"></i> Customers <span class="badge badge-gray" style="margin-left:4px"><?= count($customers) ?></span>
+        <?= icon('users') ?> Customers <span class="badge badge-gray" style="margin-left:4px"><?= count($customers) ?></span>
     </button>
     <button class="btn btn-sm btn-secondary" data-contact-tab="supplier" onclick="filterTab('supplier')">
-        <i class="fa-solid fa-user-tie"></i> Suppliers <span class="badge badge-gray" style="margin-left:4px"><?= count($suppliers) ?></span>
+        <?= icon('user-tie') ?> Suppliers <span class="badge badge-gray" style="margin-left:4px"><?= count($suppliers) ?></span>
     </button>
     <button class="btn btn-sm btn-secondary" data-contact-tab="employee" onclick="filterTab('employee')">
-        <i class="fa-solid fa-id-badge"></i> Employees <span class="badge badge-gray" style="margin-left:4px"><?= count($employees) ?></span>
+        <?= icon('id-card') ?> Employees <span class="badge badge-gray" style="margin-left:4px"><?= count($employees) ?></span>
     </button>
 </div>
 
@@ -87,18 +87,18 @@ foreach ($employees as $e) {
 usort($allContacts, fn($a,$b) => strcasecmp($a['name'], $b['name']));
 
 $typeColors = ['customer'=>'blue','supplier'=>'amber','employee'=>'green'];
-$typeIcons  = ['customer'=>'fa-users','supplier'=>'fa-user-tie','employee'=>'fa-id-badge'];
+$typeIcons  = ['customer'=>'users','supplier'=>'user-tie','employee'=>'id-card'];
 ?>
 
 <?php if (empty($allContacts)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon">📋</div>
+        <div class="empty-icon"><?= icon('address-book') ?></div>
         <h3>No contacts yet</h3>
         <p>Contacts are automatically added when you create customers, suppliers, or employees.</p>
         <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
         <button class="btn btn-secondary btn-sm" data-modal="printModal" title="Print PDF">
-            <i class="fa-solid fa-print"></i> Print
+            <?= icon('printer') ?> Print
         </button>
             <a href="/books/<?= $book['id'] ?>/customers" class="btn btn-secondary">+ Customer</a>
             <a href="/books/<?= $book['id'] ?>/suppliers" class="btn btn-secondary">+ Supplier</a>
@@ -130,7 +130,7 @@ $typeIcons  = ['customer'=>'fa-users','supplier'=>'fa-user-tie','employee'=>'fa-
             </td>
             <td>
                 <span class="badge badge-<?= $typeColors[$c['type']] ?>">
-                    <i class="fa-solid <?= $typeIcons[$c['type']] ?>"></i>
+                    <?= icon($typeIcons[$c['type']]) ?>
                     <?= ucfirst($c['type']) ?>
                 </span>
             </td>

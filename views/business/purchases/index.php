@@ -9,15 +9,15 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>">Books</a> <span>›</span>
             <span>Purchases</span>
         </div>
-        <h1><i class="fa-solid fa-cart-shopping" style="color:var(--brand)"></i> Purchases</h1>
+        <h1><?= icon('shopping-cart', '', 'color:var(--brand)') ?> Purchases</h1>
         <p>Purchase bills, supplier invoices and stock records</p>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button class="btn btn-secondary btn-sm" data-modal="printModal" title="Print PDF">
-            <i class="fa-solid fa-print"></i> Print
+            <?= icon('printer') ?> Print
         </button>
         <a href="/books/<?= $book['id'] ?>/invoices/create?type=purchase" class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i> New Purchase
+            <?= icon('plus') ?> New Purchase
         </a>
     </div>
 </div>
@@ -25,19 +25,19 @@ ob_start();
 <!-- Summary -->
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px">
     <div class="card" style="text-align:center">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:.5px"><i class="fa-solid fa-cart-flatbed"></i> Total Purchases</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:.5px"><?= icon('trolley') ?> Total Purchases</div>
         <div style="font-size:22px;font-weight:800;color:var(--red);margin-top:4px"><?= format_money($summary['total_purchases'] ?? 0) ?></div>
     </div>
     <div class="card" style="text-align:center">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:.5px"><i class="fa-solid fa-check-double"></i> Paid</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:.5px"><?= icon('check-double') ?> Paid</div>
         <div style="font-size:22px;font-weight:800;color:var(--brand);margin-top:4px"><?= format_money($summary['paid'] ?? 0) ?></div>
     </div>
     <div class="card" style="text-align:center">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:.5px"><i class="fa-solid fa-clock"></i> Due</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:.5px"><?= icon('clock') ?> Due</div>
         <div style="font-size:22px;font-weight:800;color:var(--red);margin-top:4px"><?= format_money($summary['due'] ?? 0) ?></div>
     </div>
     <div class="card" style="text-align:center">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:.5px"><i class="fa-solid fa-file-invoice"></i> Bills</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:.5px"><?= icon('invoice') ?> Bills</div>
         <div style="font-size:22px;font-weight:800;margin-top:4px"><?= (int)($summary['count'] ?? 0) ?></div>
     </div>
 </div>
@@ -45,9 +45,9 @@ ob_start();
 <!-- Controls -->
 <div class="lm-controls">
     <div class="lm-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <?= icon('search') ?>
         <input type="text" class="lm-search" id="invSearch" placeholder="Search invoice no., supplier name…">
-        <button class="lm-search-clear" id="invClear"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lm-search-clear" id="invClear"><?= icon('close') ?></button>
     </div>
     <select class="lm-select" id="invSort" title="Sort">
         <option value="date-desc">Newest First</option>
@@ -73,7 +73,7 @@ ob_start();
 <!-- Month nav -->
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap">
     <a href="?month=<?= $prevMonth ?>&status=<?= $status ?>" class="btn btn-secondary btn-sm">
-        <i class="fa-solid fa-chevron-left"></i>
+        <?= icon('chevron-left') ?>
     </a>
     <div style="text-align:center;min-width:140px">
         <div style="font-weight:600;font-size:14px"><?= date('F Y', strtotime($month.'-01')) ?></div>
@@ -82,18 +82,18 @@ ob_start();
     <a href="?month=<?= $nextMonth ?>&status=<?= $status ?>"
        class="btn btn-secondary btn-sm <?= $isCurrent ? 'disabled' : '' ?>"
        style="<?= $isCurrent ? 'opacity:.35;pointer-events:none' : '' ?>">
-        <i class="fa-solid fa-chevron-right"></i>
+        <?= icon('chevron-right') ?>
     </a>
 </div>
 
 <?php if (empty($invoices)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+        <div class="empty-icon"><?= icon('shopping-cart') ?></div>
         <h3>No purchases yet</h3>
         <p>Record your first purchase bill to track stock and supplier payments.</p>
         <a href="/books/<?= $book['id'] ?>/invoices/create?type=purchase" class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i> New Purchase
+            <?= icon('plus') ?> New Purchase
         </a>
     </div>
 </div>
@@ -128,8 +128,8 @@ ob_start();
             <td style="text-align:right" class="td-amount in"><?= format_money($inv['paid'] ?? 0) ?></td>
             <td style="text-align:right" class="td-amount <?= $due>0?'out':'' ?>"><?= format_money($due) ?></td>
             <td style="white-space:nowrap">
-                <a href="/books/<?= $book['id'] ?>/invoices/<?= $inv['id'] ?>" class="btn btn-sm btn-secondary" title="View"><i class="fa-solid fa-eye"></i></a>
-                <a href="/books/<?= $book['id'] ?>/invoices/<?= $inv['id'] ?>/pdf" class="btn btn-sm btn-secondary" title="PDF" target="_blank"><i class="fa-solid fa-print"></i></a>
+                <a href="/books/<?= $book['id'] ?>/invoices/<?= $inv['id'] ?>" class="btn btn-sm btn-secondary" title="View"><?= icon('eye') ?></a>
+                <a href="/books/<?= $book['id'] ?>/invoices/<?= $inv['id'] ?>/pdf" class="btn btn-sm btn-secondary" title="PDF" target="_blank"><?= icon('printer') ?></a>
             </td>
         </tr>
         <?php endforeach; ?>

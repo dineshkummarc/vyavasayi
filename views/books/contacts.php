@@ -10,7 +10,7 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>"><?= e($book['name']) ?></a> <span>›</span>
             <span>Contacts</span>
         </div>
-        <h1><i class="fa-solid fa-address-book" style="color:var(--brand)"></i> Contacts</h1>
+        <h1><?= icon('address-book', '', 'color:var(--brand)') ?> Contacts</h1>
         <p><?= count($contacts) ?> contact<?= count($contacts) !== 1 ? 's' : '' ?> in this book</p>
     </div>
     <button class="btn btn-primary" data-modal="addContactModal">
@@ -22,7 +22,7 @@ ob_start();
 <?php if (empty($contacts)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon">👤</div>
+        <div class="empty-icon"><?= icon('user') ?></div>
         <h3>No contacts yet</h3>
         <p>Add contacts to link them to your entries.</p>
     </div>

@@ -227,8 +227,8 @@ body {
         <input type="number" id="copiesInput" class="ctrl-input" value="1" min="1" max="21">
     </label>
 
-    <button class="btn-print" onclick="doPrint()"><i class="fa-solid fa-print"></i> Print</button>
-    <a href="/books/<?= $book['id'] ?>/coupons" class="btn-back">← Back</a>
+    <button class="btn-print" onclick="doPrint()"><?= icon('printer') ?> Print</button>
+    <a href="/books/<?= $book['id'] ?>/coupons" class="btn-back"><?= icon('arrow-left') ?> Back</a>
 </div>
 
 <div class="a4-preview">

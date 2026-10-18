@@ -80,7 +80,7 @@ body {
 <body>
 
 <div class="controls">
-    <strong style="font-size:14px">🏷️ Barcode Labels</strong>
+    <strong style="font-size:14px"><?= icon('tag') ?> Barcode Labels</strong>
 
     <label style="font-size:13px">
         Copies per label:
@@ -109,11 +109,11 @@ body {
     </label>
 
     <button onclick="window.print()" style="padding:7px 16px;background:#1a6b4a;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px">
-        🖨️ Print
+        <?= icon('printer') ?> Print
     </button>
 
     <a href="/books/<?= $book['id'] ?>/products" style="padding:7px 16px;background:#f0f0f0;color:#333;border-radius:6px;font-size:13px;text-decoration:none">
-        ← Products
+        <?= icon('arrow-left') ?> Products
     </a>
 </div>
 

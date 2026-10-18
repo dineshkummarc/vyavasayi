@@ -9,36 +9,36 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>">Books</a> <span>›</span>
             <span>Debts</span>
         </div>
-        <h1><i class="fa-solid fa-file-circle-minus" style="color:var(--red)"></i> Debts</h1>
+        <h1><?= icon('file-minus', '', 'color:var(--red)') ?> Debts</h1>
         <p>Money your business owes — loans, supplier credit, payables</p>
     </div>
     <button class="btn btn-secondary btn-sm" data-modal="printModal" title="Print PDF">
-            <i class="fa-solid fa-print"></i> Print
+            <?= icon('printer') ?> Print
         </button>
     <button class="btn btn-primary" data-modal="addDebtModal">
-        <i class="fa-solid fa-plus"></i> Add Debt
+        <?= icon('plus') ?> Add Debt
     </button>
 </div>
 
 <!-- Summary cards -->
 <div class="stat-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));max-width:760px;margin-bottom:22px">
     <div class="stat-card" style="border-left:4px solid var(--red)">
-        <div class="stat-label"><i class="fa-solid fa-circle-exclamation" style="color:var(--red)"></i> Outstanding</div>
+        <div class="stat-label"><?= icon('alert-circle', '', 'color:var(--red)') ?> Outstanding</div>
         <div class="stat-value red"><?= format_money((float)($summary['outstanding'] ?? 0), $symbol) ?></div>
         <div class="stat-sub"><?= (int)($summary['unpaid_count']??0) + (int)($summary['partial_count']??0) ?> active</div>
     </div>
     <div class="stat-card" style="border-left:4px solid var(--green)">
-        <div class="stat-label"><i class="fa-solid fa-check-circle" style="color:var(--green)"></i> Repaid</div>
+        <div class="stat-label"><?= icon('check-circle', '', 'color:var(--green)') ?> Repaid</div>
         <div class="stat-value green"><?= format_money((float)($summary['total_paid'] ?? 0), $symbol) ?></div>
         <div class="stat-sub"><?= (int)($summary['paid_count']??0) ?> fully settled</div>
     </div>
     <div class="stat-card" style="border-left:4px solid var(--amber)">
-        <div class="stat-label"><i class="fa-solid fa-hourglass-half" style="color:var(--amber)"></i> Partial</div>
+        <div class="stat-label"><?= icon('hourglass', '', 'color:var(--amber)') ?> Partial</div>
         <div class="stat-value" style="color:var(--amber)"><?= (int)($summary['partial_count']??0) ?></div>
         <div class="stat-sub">partially repaid</div>
     </div>
     <div class="stat-card">
-        <div class="stat-label"><i class="fa-solid fa-list"></i> Total</div>
+        <div class="stat-label"><?= icon('list') ?> Total</div>
         <div class="stat-value brand"><?= (int)($summary['total_count']??0) ?></div>
         <div class="stat-sub">all debt records</div>
     </div>
@@ -48,9 +48,9 @@ ob_start();
 <!-- LM Controls -->
 <div class="lm-controls">
     <div class="lm-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <?= icon('search') ?>
         <input type="text" class="lm-search" id="debtsTableSearch" placeholder="Search creditor, invoice, note…">
-        <button class="lm-search-clear" id="debtsTableClear"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lm-search-clear" id="debtsTableClear"><?= icon('close') ?></button>
     </div>
     <select class="lm-select" id="debtsTableSort">
         <option value="date-desc">Newest First</option>
@@ -61,7 +61,7 @@ ob_start();
 </div>
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap">
     <a href="?month=<?= $prevMonth ?>&filter=<?= $filter ?><?= $search ? '&q='.urlencode($search) : '' ?>" class="btn btn-secondary btn-sm">
-        <i class="fa-solid fa-chevron-left"></i>
+        <?= icon('chevron-left') ?>
     </a>
     <div style="text-align:center;min-width:140px">
         <div style="font-weight:600;font-size:14px"><?= date('F Y', strtotime($month.'-01')) ?></div>
@@ -70,7 +70,7 @@ ob_start();
     <a href="?month=<?= $nextMonth ?>&filter=<?= $filter ?><?= $search ? '&q='.urlencode($search) : '' ?>"
        class="btn btn-secondary btn-sm <?= $isCurrent ? 'disabled' : '' ?>"
        style="<?= $isCurrent ? 'opacity:.35;pointer-events:none' : '' ?>">
-        <i class="fa-solid fa-chevron-right"></i>
+        <?= icon('chevron-right') ?>
     </a>
 </div>
 <div class="lm-filter-pills">
@@ -83,7 +83,7 @@ ob_start();
 <?php if (empty($debts)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon"><i class="fa-solid fa-file-circle-minus"></i></div>
+        <div class="empty-icon"><?= icon('file-minus') ?></div>
         <h3>No debts recorded</h3>
         <p>Track loans, supplier credit lines, or any money your business owes.</p>
     </div>
@@ -123,7 +123,7 @@ ob_start();
                     <a href="/books/<?= $book['id'] ?>/invoices/<?= (int)$debt['invoice_id'] ?>"
                        style="color:var(--brand);text-decoration:none;font-size:12px"
                        title="View Purchase Invoice">
-                        <i class="fa-solid fa-file-invoice fa-xs"></i> View Invoice
+                        <?= icon('invoice', 'ic-xs') ?> View Invoice
                     </a>
                 </div>
                 <?php endif; ?>
@@ -134,7 +134,7 @@ ob_start();
                 <div style="margin-top:4px">
                     <?php foreach (array_slice($paymentsByDebt[$debt['id']], 0, 2) as $p): ?>
                     <span style="font-size:10px;background:var(--green-bg,#f0fdf4);color:var(--green);padding:1px 6px;border-radius:99px;margin-right:3px;display:inline-block;margin-top:2px">
-                        <i class="fa-solid fa-check"></i> <?= format_money((float)$p['amount']) ?> · <?= date('d M', strtotime($p['paid_at'])) ?>
+                        <?= icon('check') ?> <?= format_money((float)$p['amount']) ?> · <?= date('d M', strtotime($p['paid_at'])) ?>
                     </span>
                     <?php endforeach; ?>
                 </div>
@@ -164,7 +164,7 @@ ob_start();
                 <?php if ($remaining > 0.001): ?>
                 <span style="color:var(--red);font-weight:700"><?= format_money($remaining, $symbol) ?></span>
                 <?php else: ?>
-                <span style="color:var(--green)"><i class="fa-solid fa-check"></i> Cleared</span>
+                <span style="color:var(--green)"><?= icon('check') ?> Cleared</span>
                 <?php endif; ?>
             </td>
             <td class="td-muted">
@@ -186,7 +186,7 @@ ob_start();
                 <?php if (!in_array($debt['status'], ['paid','cancelled'])): ?>
                 <button class="btn btn-sm btn-secondary" title="Record repayment"
                         onclick="openDebtPay(<?= $debt['id'] ?>,'<?= e(addslashes($debt['title'])) ?>',<?= $remaining ?>,'<?= $symbol ?>')">
-                    <i class="fa-solid fa-money-bill-wave" style="color:var(--green)"></i>
+                    <?= icon('banknote', '', 'color:var(--green)') ?>
                 </button>
                 <button class="btn btn-sm btn-secondary" title="Edit"
                         onclick="openDebtEdit(
@@ -197,13 +197,13 @@ ob_start();
                             '<?= $debt['due_date'] ?? '' ?>',
                             '<?= e(addslashes($debt['note'] ?? '')) ?>'
                         )">
-                    <i class="fa-solid fa-pen"></i>
+                    <?= icon('square-pen') ?>
                 </button>
                 <form method="POST" action="/books/<?= $book['id'] ?>/debts/<?= $debt['id'] ?>/cancel"
                       style="display:inline" onsubmit="return confirm('Mark this debt as cancelled?')">
                     <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
                     <button class="btn btn-sm btn-secondary" title="Cancel debt">
-                        <i class="fa-solid fa-ban" style="color:var(--amber)"></i>
+                        <?= icon('ban', '', 'color:var(--amber)') ?>
                     </button>
                 </form>
                 <?php endif; ?>
@@ -211,7 +211,7 @@ ob_start();
                       style="display:inline" onsubmit="return confirm('Delete this debt record permanently?')">
                     <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
                     <button class="btn btn-sm btn-secondary" title="Delete">
-                        <i class="fa-solid fa-trash" style="color:var(--red)"></i>
+                        <?= icon('trash', '', 'color:var(--red)') ?>
                     </button>
                 </form>
             </td>
@@ -228,7 +228,7 @@ ob_start();
 <div class="modal-backdrop" id="addDebtModal">
     <div class="modal">
         <div class="modal-title">
-            <i class="fa-solid fa-file-circle-minus" style="color:var(--red)"></i> Add Debt
+            <?= icon('file-minus', '', 'color:var(--red)') ?> Add Debt
         </div>
         <form method="POST" action="/books/<?= $book['id'] ?>/debts/add">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
@@ -257,7 +257,7 @@ ob_start();
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa-solid fa-plus"></i> Add Debt
+                    <?= icon('plus') ?> Add Debt
                 </button>
             </div>
         </form>
@@ -269,7 +269,7 @@ ob_start();
 <div class="modal-backdrop" id="editDebtModal">
     <div class="modal">
         <div class="modal-title">
-            <i class="fa-solid fa-pen" style="color:var(--brand)"></i> Edit Debt
+            <?= icon('square-pen', '', 'color:var(--brand)') ?> Edit Debt
         </div>
         <form method="POST" id="editDebtForm">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
@@ -298,7 +298,7 @@ ob_start();
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa-solid fa-check"></i> Save Changes
+                    <?= icon('check') ?> Save Changes
                 </button>
             </div>
         </form>
@@ -310,7 +310,7 @@ ob_start();
 <div class="modal-backdrop" id="debtPayModal">
     <div class="modal">
         <div class="modal-title">
-            <i class="fa-solid fa-money-bill-wave" style="color:var(--green)"></i> Record Repayment
+            <?= icon('banknote', '', 'color:var(--green)') ?> Record Repayment
         </div>
         <form method="POST" id="debtPayForm">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
@@ -344,7 +344,7 @@ ob_start();
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa-solid fa-check"></i> Save Repayment
+                    <?= icon('check') ?> Save Repayment
                 </button>
             </div>
         </form>

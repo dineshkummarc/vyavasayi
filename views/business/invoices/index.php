@@ -28,21 +28,21 @@ usort($mergedRows, function($a, $b) {
             <a href="/books/<?= $book['id'] ?>">Books</a> <span>›</span>
             <span>Invoices</span>
         </div>
-        <h1><i class="fa-solid fa-file-invoice" style="color:var(--brand)"></i> Invoices</h1>
+        <h1><?= icon('invoice', '', 'color:var(--brand)') ?> Invoices</h1>
         <p>Sales, purchases and returns — all in one place</p>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button class="btn btn-secondary btn-sm" data-modal="printModal" title="Print PDF">
-            <i class="fa-solid fa-print"></i> Print
+            <?= icon('printer') ?> Print
         </button>
         <a href="/books/<?= $book['id'] ?>/returns/create" class="btn btn-secondary btn-sm">
-            <i class="fa-solid fa-rotate-left"></i> Return
+            <?= icon('rotate-ccw') ?> Return
         </a>
         <a href="/books/<?= $book['id'] ?>/invoices/create?type=sale" class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i> Sale Invoice
+            <?= icon('plus') ?> Sale Invoice
         </a>
         <a href="/books/<?= $book['id'] ?>/invoices/create?type=purchase" class="btn btn-secondary">
-            <i class="fa-solid fa-cart-shopping"></i> Purchase
+            <?= icon('shopping-cart') ?> Purchase
         </a>
     </div>
 </div>
@@ -50,27 +50,27 @@ usort($mergedRows, function($a, $b) {
 <!-- Summary -->
 <div class="stat-grid" style="grid-template-columns:repeat(auto-fit,minmax(148px,1fr));max-width:1020px;margin-bottom:20px">
     <div class="stat-card">
-        <div class="stat-label"><i class="fa-solid fa-arrow-up-right-dots"></i> Total Sales</div>
+        <div class="stat-label"><?= icon('trending-up') ?> Total Sales</div>
         <div class="stat-value green"><?= format_money($summary['total_sales'] ?? 0) ?></div>
     </div>
     <div class="stat-card">
-        <div class="stat-label"><i class="fa-solid fa-check-double"></i> Collected</div>
+        <div class="stat-label"><?= icon('check-double') ?> Collected</div>
         <div class="stat-value brand"><?= format_money($summary['collected'] ?? 0) ?></div>
     </div>
     <div class="stat-card">
-        <div class="stat-label"><i class="fa-solid fa-clock"></i> Due</div>
+        <div class="stat-label"><?= icon('clock') ?> Due</div>
         <div class="stat-value red"><?= format_money($summary['due'] ?? 0) ?></div>
     </div>
     <div class="stat-card">
-        <div class="stat-label"><i class="fa-solid fa-cart-flatbed"></i> Total Purchases</div>
+        <div class="stat-label"><?= icon('trolley') ?> Total Purchases</div>
         <div class="stat-value red"><?= format_money($summary['total_purchases'] ?? 0) ?></div>
     </div>
     <div class="stat-card">
-        <div class="stat-label"><i class="fa-solid fa-rotate-left" style="color:var(--amber)"></i> Sales Refunds</div>
+        <div class="stat-label"><?= icon('rotate-ccw', '', 'color:var(--amber)') ?> Sales Refunds</div>
         <div class="stat-value amber"><?= format_money($returnsSummary['sales_refunds'] ?? 0) ?></div>
     </div>
     <div class="stat-card">
-        <div class="stat-label"><i class="fa-solid fa-rotate-right" style="color:var(--blue)"></i> Purchase Refunds</div>
+        <div class="stat-label"><?= icon('rotate-cw', '', 'color:var(--blue)') ?> Purchase Refunds</div>
         <div class="stat-value" style="color:var(--blue)"><?= format_money($returnsSummary['purchase_refunds'] ?? 0) ?></div>
     </div>
 </div>
@@ -78,9 +78,9 @@ usort($mergedRows, function($a, $b) {
 <!-- Controls -->
 <div class="lm-controls">
     <div class="lm-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <?= icon('search') ?>
         <input type="text" class="lm-search" id="invSearch" placeholder="Search invoice no., party name, return no.…">
-        <button class="lm-search-clear" id="invClear"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lm-search-clear" id="invClear"><?= icon('close') ?></button>
     </div>
     <select class="lm-select" id="invSort" title="Sort">
         <option value="date-desc">Newest First</option>
@@ -112,7 +112,7 @@ usort($mergedRows, function($a, $b) {
 <!-- Month navigation -->
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;margin-top:8px">
     <a href="?month=<?= $prevMonth ?>&type=<?= $type ?>&status=<?= $status ?>" class="btn btn-secondary btn-sm">
-        <i class="fa-solid fa-chevron-left"></i>
+        <?= icon('chevron-left') ?>
     </a>
     <div style="text-align:center;min-width:160px">
         <div style="font-weight:600;font-size:14px"><?= date('F Y', strtotime($month.'-01')) ?></div>
@@ -121,14 +121,14 @@ usort($mergedRows, function($a, $b) {
     <a href="?month=<?= $nextMonth ?>&type=<?= $type ?>&status=<?= $status ?>"
        class="btn btn-secondary btn-sm <?= $isCurrent ? 'disabled' : '' ?>"
        style="<?= $isCurrent ? 'opacity:.35;pointer-events:none' : '' ?>">
-        <i class="fa-solid fa-chevron-right"></i>
+        <?= icon('chevron-right') ?>
     </a>
 </div>
 
 <?php if (empty($mergedRows)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon"><i class="fa-solid fa-file-invoice"></i></div>
+        <div class="empty-icon"><?= icon('invoice') ?></div>
         <h3>No records this month</h3>
         <p>Create your first sale or purchase invoice to get started.</p>
     </div>
@@ -157,7 +157,7 @@ usort($mergedRows, function($a, $b) {
                 $party      = $row['customer_name'] ?? $row['supplier_name'] ?? '—';
                 $typeKey    = $row['type'] ?? '';
                 $typeBadge  = $typeKey === 'sales_return' ? 'badge-amber' : 'badge-indigo';
-                $typeLabel  = $typeKey === 'sales_return' ? '↩ Sales Ret.' : '↩ Pur. Ret.';
+                $typeLabel  = $typeKey === 'sales_return' ? icon('undo') . ' Sales Ret.' : icon('redo') . ' Pur. Ret.';
                 $refund     = (float)($row['total_refund'] ?? 0);
                 $origInvNo  = $row['orig_invoice_no'] ?? '—';
                 $rowDate    = $row['date'] ?? '';
@@ -178,7 +178,7 @@ usort($mergedRows, function($a, $b) {
             <td style="text-align:right;font-weight:600;color:var(--red)"><?= format_money($refund) ?></td>
             <td style="text-align:right" class="td-muted">—</td>
             <td style="white-space:nowrap">
-                <a href="/books/<?= $book['id'] ?>/returns/<?= $row['id'] ?>" class="btn btn-sm btn-secondary" title="View"><i class="fa-solid fa-eye"></i></a>
+                <a href="/books/<?= $book['id'] ?>/returns/<?= $row['id'] ?>" class="btn btn-sm btn-secondary" title="View"><?= icon('eye') ?></a>
             </td>
         </tr>
         <?php else:
@@ -197,8 +197,8 @@ usort($mergedRows, function($a, $b) {
             <td style="text-align:right" class="td-amount in"><?= format_money($row['paid'] ?? 0) ?></td>
             <td style="text-align:right" class="td-amount <?= $due>0?'out':'' ?>"><?= format_money($due) ?></td>
             <td style="white-space:nowrap">
-                <a href="/books/<?= $book['id'] ?>/invoices/<?= $row['id'] ?>" class="btn btn-sm btn-secondary" title="View"><i class="fa-solid fa-eye"></i></a>
-                <a href="/books/<?= $book['id'] ?>/invoices/<?= $row['id'] ?>/pdf" class="btn btn-sm btn-secondary" title="PDF" target="_blank"><i class="fa-solid fa-print"></i></a>
+                <a href="/books/<?= $book['id'] ?>/invoices/<?= $row['id'] ?>" class="btn btn-sm btn-secondary" title="View"><?= icon('eye') ?></a>
+                <a href="/books/<?= $book['id'] ?>/invoices/<?= $row['id'] ?>/pdf" class="btn btn-sm btn-secondary" title="PDF" target="_blank"><?= icon('printer') ?></a>
             </td>
         </tr>
         <?php endif; endforeach; ?>

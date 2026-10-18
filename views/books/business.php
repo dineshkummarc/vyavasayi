@@ -79,28 +79,28 @@ unset($act);
     <div class="biz-header-actions">
         <?php if ($vCan('invoices','create')): ?>
         <a href="/books/<?= $bookId ?>/invoices/create?type=sale" class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i> Sell
+            <?= icon('plus') ?> Sell
         </a>
         <a href="/books/<?= $bookId ?>/invoices/create?type=purchase" class="btn btn-secondary">
-            <i class="fa-solid fa-cart-shopping"></i> Purchase
+            <?= icon('shopping-cart') ?> Purchase
         </a>
         <?php endif; ?>
         <button class="biz-notif-btn" onclick="openNotifPanel(event)" title="Notifications">
-            <i class="fa-solid fa-bell"></i>
+            <?= icon('bell') ?>
         </button>
     </div>
 </div>
 
 <!-- ── Financial stat row (current month) ─────────────────────────────── -->
 <?php if ($vCan('funds','view') || $vCan('dues','view') || $vCan('debts','view') || $vCan('expenses','view')): ?>
-<p class="section-label"><i class="fa-solid fa-rectangle-list"></i> Summary — <?= date('F Y') ?></p>
+<p class="section-label"><?= icon('list') ?> Summary — <?= date('F Y') ?></p>
 <div class="dash-stat-grid" style="margin-bottom:12px">
 <?php if ($vCan('funds','view') || $vCan('expenses','view')): ?>
     <div class="stat-card" style="border-top:3px solid <?= $availableFunds >= 0 ? 'var(--brand)' : 'var(--red)' ?>">
         <div class="stat-card-icon"
              style="background:<?= $availableFunds >= 0 ? 'var(--brand-light)' : 'var(--red-bg)' ?>;
                     color:<?= $availableFunds >= 0 ? 'var(--brand)' : 'var(--red)' ?>">
-            <i class="fa-solid fa-wallet"></i>
+            <?= icon('wallet') ?>
         </div>
         <div style="min-width:0;flex:1">
             <div class="stat-label">Available Funds</div>
@@ -116,7 +116,7 @@ unset($act);
     <a href="/books/<?= $bookId ?>/funds" class="stat-card stat-card-link"
        style="border-top:3px solid var(--green)">
         <div class="stat-card-icon" style="background:var(--green-bg);color:var(--green)">
-            <i class="fa-solid fa-arrow-trend-up"></i>
+            <?= icon('trending-up') ?>
         </div>
         <div style="min-width:0;flex:1">
             <div class="stat-label">Total In</div>
@@ -130,7 +130,7 @@ unset($act);
     <a href="/books/<?= $bookId ?>/expenses" class="stat-card stat-card-link"
        style="border-top:3px solid var(--red)">
         <div class="stat-card-icon" style="background:var(--red-bg);color:var(--red)">
-            <i class="fa-solid fa-arrow-trend-down"></i>
+            <?= icon('trending-down') ?>
         </div>
         <div style="min-width:0;flex:1">
             <div class="stat-label">Total Out</div>
@@ -144,7 +144,7 @@ unset($act);
     <a href="/books/<?= $bookId ?>/dues" class="stat-card stat-card-link"
        style="border-top:3px solid var(--amber)">
         <div class="stat-card-icon" style="background:var(--amber-bg);color:var(--amber)">
-            <i class="fa-solid fa-hand-holding-dollar"></i>
+            <?= icon('hand-coins') ?>
         </div>
         <div style="min-width:0;flex:1">
             <div class="stat-label">Total Dues</div>
@@ -158,7 +158,7 @@ unset($act);
     <a href="/books/<?= $bookId ?>/debts" class="stat-card stat-card-link"
        style="border-top:3px solid var(--red)">
         <div class="stat-card-icon" style="background:var(--red-bg);color:var(--red)">
-            <i class="fa-solid fa-file-circle-minus"></i>
+            <?= icon('file-minus') ?>
         </div>
         <div style="min-width:0;flex:1">
             <div class="stat-label">Total Debts</div>
@@ -174,15 +174,15 @@ unset($act);
 <!-- ── Count cards ────────────────────────────────────────────────────── -->
 <?php
 $countCards = [
-    ['perm'=>['invoices','view'],   'href'=>'/sales',      'icon'=>'fa-arrow-trend-up',    'color'=>'#10b981', 'val'=>$stats['sales']??0,     'label'=>'Sales'],
-    ['perm'=>['invoices','view'],   'href'=>'/purchases',  'icon'=>'fa-cart-shopping',      'color'=>'#3b82f6', 'val'=>$stats['purchases']??0,  'label'=>'Purchases'],
-    ['perm'=>['returns','view'],    'href'=>'/returns',    'icon'=>'fa-rotate-left',         'color'=>'#ff0080', 'val'=>$stats['returns']??0,    'label'=>'Returns'],
-    ['perm'=>['products','view'],   'href'=>'/products',   'icon'=>'fa-box',                 'color'=>'#15ff00', 'val'=>$stats['products']??0,   'label'=>'Products'],
-    ['perm'=>['customers','view'],  'href'=>'/customers',  'icon'=>'fa-users',               'color'=>'#3b82f6', 'val'=>$stats['customers']??0,  'label'=>'Customers'],
-    ['perm'=>['suppliers','view'],  'href'=>'/suppliers',  'icon'=>'fa-user-tie',            'color'=>'#8b5cf6', 'val'=>$stats['suppliers']??0,  'label'=>'Suppliers'],
-    ['perm'=>['employees','view'],  'href'=>'/employees',  'icon'=>'fa-id-badge',            'color'=>'#6366f1', 'val'=>$stats['employees']??0,  'label'=>'Employees'],
-    ['perm'=>['coupons','view'],    'href'=>'/coupons',    'icon'=>'fa-ticket',              'color'=>'#d4ec69', 'val'=>$stats['coupons']??0,    'label'=>'Coupons'],
-    ['perm'=>['deliveries','view'], 'href'=>'/deliveries', 'icon'=>'fa-truck-fast',          'color'=>'#5409aa', 'val'=>0,                       'label'=>'Deliveries', 'soon'=>true],
+    ['perm'=>['invoices','view'],   'href'=>'/sales',      'icon'=>'trending-up',    'color'=>'#10b981', 'val'=>$stats['sales']??0,     'label'=>'Sales'],
+    ['perm'=>['invoices','view'],   'href'=>'/purchases',  'icon'=>'shopping-cart',      'color'=>'#3b82f6', 'val'=>$stats['purchases']??0,  'label'=>'Purchases'],
+    ['perm'=>['returns','view'],    'href'=>'/returns',    'icon'=>'rotate-ccw',         'color'=>'#ff0080', 'val'=>$stats['returns']??0,    'label'=>'Returns'],
+    ['perm'=>['products','view'],   'href'=>'/products',   'icon'=>'package',                 'color'=>'#15ff00', 'val'=>$stats['products']??0,   'label'=>'Products'],
+    ['perm'=>['customers','view'],  'href'=>'/customers',  'icon'=>'users',               'color'=>'#3b82f6', 'val'=>$stats['customers']??0,  'label'=>'Customers'],
+    ['perm'=>['suppliers','view'],  'href'=>'/suppliers',  'icon'=>'user-tie',            'color'=>'#8b5cf6', 'val'=>$stats['suppliers']??0,  'label'=>'Suppliers'],
+    ['perm'=>['employees','view'],  'href'=>'/employees',  'icon'=>'id-card',            'color'=>'#6366f1', 'val'=>$stats['employees']??0,  'label'=>'Employees'],
+    ['perm'=>['coupons','view'],    'href'=>'/coupons',    'icon'=>'ticket',              'color'=>'#d4ec69', 'val'=>$stats['coupons']??0,    'label'=>'Coupons'],
+    ['perm'=>['deliveries','view'], 'href'=>'/deliveries', 'icon'=>'truck-fast',          'color'=>'#5409aa', 'val'=>0,                       'label'=>'Deliveries', 'soon'=>true],
 ];
 $visibleCountCards = array_filter($countCards, fn($cc) => $vCan($cc['perm'][0], $cc['perm'][1]));
 ?>
@@ -190,7 +190,7 @@ $visibleCountCards = array_filter($countCards, fn($cc) => $vCan($cc['perm'][0], 
 <div class="dash-count-grid" style="margin-bottom:22px">
 <?php foreach ($visibleCountCards as $cc): ?>
     <a href="/books/<?= $bookId ?><?= $cc['href'] ?>" class="count-card<?= !empty($cc['soon']) ? ' nav-item-soon' : '' ?>">
-        <i class="fa-solid <?= $cc['icon'] ?>" style="color:<?= $cc['color'] ?>"></i>
+        <?= icon($cc['icon'], '', 'color:' . ($cc['color'])) ?>
         <span class="count-val"><?= number_format((int)$cc['val']) ?></span>
         <span class="count-label"><?= $cc['label'] ?></span>
     </a>
@@ -201,32 +201,32 @@ $visibleCountCards = array_filter($countCards, fn($cc) => $vCan($cc['perm'][0], 
 <!-- ── Modules ──────────────────────────────────────────────────────────── -->
 <?php
 $allModules = [
-    ['perm'=>['invoices','view'],   'icon'=>'fa-file-invoice',       'color'=>'#10b981','label'=>'Invoices',  'sub'=>'Sales & Purchases'],
-    ['perm'=>['products','view'],   'icon'=>'fa-box',                'color'=>'#15ff00','label'=>'Products',  'sub'=>'Inventory'],
-    ['perm'=>['funds','view'],      'icon'=>'fa-piggy-bank',         'color'=>'#0ea5e9','label'=>'Funds',     'sub'=>'Cash Flow'],
-    ['perm'=>['expenses','view'],   'icon'=>'fa-receipt',            'color'=>'#ef4444','label'=>'Expenses',  'sub'=>'Costs & Spending'],
-    ['perm'=>['dues','view'],       'icon'=>'fa-hand-holding-dollar','color'=>'#d97706','label'=>'Dues',      'sub'=>'Owed by Others'],
-    ['perm'=>['debts','view'],      'icon'=>'fa-file-circle-minus',  'color'=>'#dc2626','label'=>'Debts',     'sub'=>'Owed to Others'],
-    ['perm'=>['customers','view'],  'icon'=>'fa-users',              'color'=>'#3b82f6','label'=>'Customers', 'sub'=>'Client Directory'],
-    ['perm'=>['suppliers','view'],  'icon'=>'fa-user-tie',           'color'=>'#8b5cf6','label'=>'Suppliers', 'sub'=>'Vendor Directory'],
-    ['perm'=>['employees','view'],  'icon'=>'fa-id-badge',           'color'=>'#6366f1','label'=>'Employees', 'sub'=>'HR & Payroll'],
-    ['perm'=>['contacts','view'],   'icon'=>'fa-address-book',       'color'=>'#f97316','label'=>'Contacts',  'sub'=>'Everyone Known'],
-    ['perm'=>['returns','view'],    'icon'=>'fa-rotate-left',        'color'=>'#ff0080','label'=>'Returns',   'sub'=>'Returned Goods'],
-    ['perm'=>['coupons','view'],    'icon'=>'fa-ticket',             'color'=>'#d4ec69','label'=>'Coupons',   'sub'=>'Discount Codes'],
-    ['perm'=>['deliveries','view'], 'icon'=>'fa-truck-fast',         'color'=>'#5409aa','label'=>'Deliveries','sub'=>'Shipment Tracking'],
-    ['perm'=>['reports','view'],    'icon'=>'fa-chart-line',         'color'=>'#14b8a6','label'=>'Reports',   'sub'=>'Profit & Loss'],
-    ['perm'=>['logs','view'],       'icon'=>'fa-clock-rotate-left',  'color'=>'#64748b','label'=>'Activity Log','sub'=>'Audit Trail'],
+    ['perm'=>['invoices','view'],   'icon'=>'invoice',       'color'=>'#10b981','label'=>'Invoices',  'sub'=>'Sales & Purchases'],
+    ['perm'=>['products','view'],   'icon'=>'package',                'color'=>'#15ff00','label'=>'Products',  'sub'=>'Inventory'],
+    ['perm'=>['funds','view'],      'icon'=>'piggy-bank',         'color'=>'#0ea5e9','label'=>'Funds',     'sub'=>'Cash Flow'],
+    ['perm'=>['expenses','view'],   'icon'=>'receipt',            'color'=>'#ef4444','label'=>'Expenses',  'sub'=>'Costs & Spending'],
+    ['perm'=>['dues','view'],       'icon'=>'hand-coins','color'=>'#d97706','label'=>'Dues',      'sub'=>'Owed by Others'],
+    ['perm'=>['debts','view'],      'icon'=>'file-minus',  'color'=>'#dc2626','label'=>'Debts',     'sub'=>'Owed to Others'],
+    ['perm'=>['customers','view'],  'icon'=>'users',              'color'=>'#3b82f6','label'=>'Customers', 'sub'=>'Client Directory'],
+    ['perm'=>['suppliers','view'],  'icon'=>'user-tie',           'color'=>'#8b5cf6','label'=>'Suppliers', 'sub'=>'Vendor Directory'],
+    ['perm'=>['employees','view'],  'icon'=>'id-card',           'color'=>'#6366f1','label'=>'Employees', 'sub'=>'HR & Payroll'],
+    ['perm'=>['contacts','view'],   'icon'=>'address-book',       'color'=>'#f97316','label'=>'Contacts',  'sub'=>'Everyone Known'],
+    ['perm'=>['returns','view'],    'icon'=>'rotate-ccw',        'color'=>'#ff0080','label'=>'Returns',   'sub'=>'Returned Goods'],
+    ['perm'=>['coupons','view'],    'icon'=>'ticket',             'color'=>'#d4ec69','label'=>'Coupons',   'sub'=>'Discount Codes'],
+    ['perm'=>['deliveries','view'], 'icon'=>'truck-fast',         'color'=>'#5409aa','label'=>'Deliveries','sub'=>'Shipment Tracking'],
+    ['perm'=>['reports','view'],    'icon'=>'chart-line',         'color'=>'#14b8a6','label'=>'Reports',   'sub'=>'Profit & Loss'],
+    ['perm'=>['logs','view'],       'icon'=>'history',  'color'=>'#64748b','label'=>'Activity Log','sub'=>'Audit Trail'],
 ];
 $visibleModules = array_filter($allModules, fn($m) => $vCan($m['perm'][0], $m['perm'][1]));
 ?>
 <?php if (!empty($visibleModules)): ?>
-<p class="section-label"><i class="fa-solid fa-grip"></i> Modules</p>
+<p class="section-label"><?= icon('grid') ?> Modules</p>
 <div class="modules-grid" style="margin-bottom:22px">
 <?php foreach ($visibleModules as $m): ?>
 <?php $mUrl = '/books/'.$bookId.'/'.strtolower(str_replace(' ','-',$m['perm'][0])); ?>
 <a href="<?= $mUrl ?>" class="module-card">
     <div class="module-icon" style="background:<?= $m['color'] ?>22;color:<?= $m['color'] ?>">
-        <i class="fa-solid <?= $m['icon'] ?>"></i>
+        <?= icon($m['icon']) ?>
     </div>
     <div class="module-body">
         <div class="module-label"><?= $m['label'] ?></div>
@@ -238,11 +238,10 @@ $visibleModules = array_filter($allModules, fn($m) => $vCan($m['perm'][0], $m['p
 <?php endif; ?>
 
 <!-- ── Search ──────────────────────────────────────────────────────────── -->
-<p class="section-label"><i class="fa-solid fa-magnifying-glass"></i> Discover</p>
+<p class="section-label"><?= icon('search') ?> Discover</p>
 <div style="margin-bottom:22px;position:relative;max-width:560px">
     <div style="position:relative">
-        <i class="fa-solid fa-magnifying-glass"
-           style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;pointer-events:none"></i>
+        <?= icon('search', '', 'position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px;pointer-events:none') ?>
         <input type="text" id="bookSearch"
                placeholder="Search invoices, customers, products, expenses, coupons…"
                oninput="doBookSearch(this.value)" autocomplete="off"
@@ -267,17 +266,17 @@ $visibleModules = array_filter($allModules, fn($m) => $vCan($m['perm'][0], $m['p
               transition:background .12s"
        onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background=''">
         <h3 style="font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;margin:0">
-            <i class="fa-solid fa-clock-rotate-left" style="color:var(--brand)"></i>
+            <?= icon('history', '', 'color:var(--brand)') ?>
             Recent Activity
         </h3>
         <span style="font-size:12px;color:var(--brand);display:flex;align-items:center;gap:4px">
-            View All Logs <i class="fa-solid fa-arrow-right" style="font-size:10px"></i>
+            View All Logs <?= icon('arrow-right', '', 'font-size:10px') ?>
         </span>
     </a>
     <div style="padding:4px 18px 12px">
         <?php if (empty($recentActivity)): ?>
         <div class="empty-state" style="padding:28px 0">
-            <div class="empty-icon"><i class="fa-solid fa-clock"></i></div>
+            <div class="empty-icon"><?= icon('clock') ?></div>
             <p>No activities yet. Actions will appear here as they happen.</p>
         </div>
         <?php else: ?>
@@ -286,7 +285,7 @@ $visibleModules = array_filter($allModules, fn($m) => $vCan($m['perm'][0], $m['p
             <a href="<?= $act['href'] ?? '#' ?>" class="activity-link" style="text-decoration:none">
             <div class="activity-item">
                 <div class="activity-icon" style="color:<?= $act['icon_color'] ?? 'var(--text-muted)' ?>">
-                    <i class="fa-solid <?= $act['icon'] ?? 'fa-circle-dot' ?>"></i>
+                    <?= icon($act['icon'] ?? 'circle-dot') ?>
                 </div>
                 <div class="activity-body">
                     <div class="activity-desc"><?= e($act['description'] ?? $act['action'] ?? 'Activity') ?></div>
@@ -326,7 +325,7 @@ $visibleModules = array_filter($allModules, fn($m) => $vCan($m['perm'][0], $m['p
 .dash-count-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:10px}
 .count-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;color:inherit;transition:box-shadow .15s,transform .1s;text-align:center}
 .count-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
-.count-card i{font-size:18px;margin-bottom:2px}
+.count-card .ic{font-size:18px;margin-bottom:2px}
 .count-val{font-size:18px;font-weight:700;color:var(--text)}
 .count-label{font-size:11px;color:var(--text-muted);font-weight:500}
 .modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}

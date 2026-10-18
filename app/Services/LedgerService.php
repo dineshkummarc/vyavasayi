@@ -6,7 +6,7 @@ use App\Helpers\Database;
 /**
  * One place that keeps related records in step.
  *
- *   invoice  ⇄  payments  ⇄  due (customer owes) / debt (we owe supplier)  ⇄  loyalty points
+ *   invoice  ->  payments  ->  due (customer owes) / debt (we owe supplier)  ->  loyalty points
  *   invoice  →  delivery expense, report entry
  *   return   →  stock, due/debt reduction, refund expense
  *

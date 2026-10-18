@@ -55,7 +55,7 @@ ob_start();
 <?php if (empty($entries)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon">📝</div>
+        <div class="empty-icon"><?= icon('file-text') ?></div>
         <h3>No entries yet</h3>
         <p>Click "Add Entry" to record your first income or expense.</p>
     </div>
@@ -112,7 +112,7 @@ ob_start();
                 <?php endif; ?>
                 <?php if (!empty($entryAttachments)): ?>
                     <div style="margin-top:3px">
-                        <span style="font-size:11px;color:var(--muted)">📎 <?= count($entryAttachments) ?> attachment<?= count($entryAttachments) > 1 ? 's' : '' ?></span>
+                        <span style="font-size:11px;color:var(--muted)"><?= icon('paperclip') ?> <?= count($entryAttachments) ?> attachment<?= count($entryAttachments) > 1 ? 's' : '' ?></span>
                     </div>
                 <?php endif; ?>
             </td>
@@ -336,7 +336,7 @@ ob_start();
              + 'color:var(--brand);text-decoration:none;padding:4px 8px;'
              + 'background:var(--surface);border:1px solid var(--border);'
              + 'border-radius:6px;margin:2px 4px 2px 0">'
-             + (isPdf ? '📄' : '🖼️') + ' ' + name + '</a>';
+             + Icons.svg(isPdf ? 'file-text' : 'image') + ' ' + name.replace(/[&<>"']/g, function (c) { return '&#' + c.charCodeAt(0) + ';'; }) + '</a>';
     }
 
     // ── VIEW modal ───────────────────────────────────────────────────────────

@@ -476,7 +476,7 @@ CREATE TABLE IF NOT EXISTS `expense_categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `book_id` int(10) unsigned NOT NULL,
   `name` varchar(120) NOT NULL,
-  `icon` varchar(60) NOT NULL DEFAULT 'fa-tag',
+  `icon` varchar(60) NOT NULL DEFAULT 'tag',
   `is_active` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `book_id` (`book_id`),

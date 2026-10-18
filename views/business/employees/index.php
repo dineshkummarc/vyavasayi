@@ -5,27 +5,27 @@ $isOwner   = (int)$book['user_id'] === (int)auth()['id'];
 // Friendly module labels
 $moduleLabels = [
     // Financial
-    'invoices'            => '🧾 Invoices',
-    'funds'               => '🏦 Funds',
-    'expenses'            => '🧾 Expenses',
-    'dues'                => '📥 Dues',
-    'debts'               => '📤 Debts',
+    'invoices'            => icon('invoice') . ' Invoices',
+    'funds'               => icon('piggy-bank') . ' Funds',
+    'expenses'            => icon('receipt') . ' Expenses',
+    'dues'                => icon('hand-coins') . ' Dues',
+    'debts'               => icon('file-minus') . ' Debts',
     // Inventory & Sales
-    'products'            => '📦 Products',
-    'returns'             => '↩ Returns',
-    'coupons'             => '🎟 Coupons',
-    'integrations'        => '🔗 Online store',
-    'deliveries'          => '🚚 Deliveries',
+    'products'            => icon('package') . ' Products',
+    'returns'             => icon('rotate-ccw') . ' Returns',
+    'coupons'             => icon('ticket') . ' Coupons',
+    'integrations'        => icon('link') . ' Online store',
+    'deliveries'          => icon('truck-fast') . ' Deliveries',
     // Contacts
-    'customers'           => '👥 Customers',
-    'suppliers'           => '🤝 Suppliers',
-    'contacts'            => '📋 Contacts',
+    'customers'           => icon('users') . ' Customers',
+    'suppliers'           => icon('user-tie') . ' Suppliers',
+    'contacts'            => icon('address-book') . ' Contacts',
     // People
-    'employees'           => '🪪 Employees',
+    'employees'           => icon('id-card') . ' Employees',
     // Admin
-    'reports'             => '📊 Reports',
-    'logs'                => '🕐 Activity Log',
-    'book_settings'       => '⚙ Book Settings',
+    'reports'             => icon('chart-line') . ' Reports',
+    'logs'                => icon('history') . ' Activity Log',
+    'book_settings'       => icon('settings') . ' Book Settings',
 ];
 $actionLabels = [
     'view'               => 'View',
@@ -52,22 +52,22 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>">Books</a> <span>›</span>
             <span>Employees</span>
         </div>
-        <h1><i class="fa-solid fa-id-badge" style="color:var(--brand)"></i> Employees</h1>
+        <h1><?= icon('id-card', '', 'color:var(--brand)') ?> Employees</h1>
         <p><?= count($employees) ?> employee<?= count($employees) !== 1 ? 's' : '' ?></p>
     </div>
     <?php if ($isOwner): ?>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button class="btn btn-secondary" data-modal="manageDesignationsModal">
-            <i class="fa-solid fa-sitemap"></i> Designations
+            <?= icon('sitemap') ?> Designations
         </button>
         <button class="btn btn-primary" data-modal="inviteModal">
-            <i class="fa-solid fa-envelope"></i> Invite User
+            <?= icon('mail') ?> Invite User
         </button>
         <button class="btn btn-secondary btn-sm" data-modal="printModal" title="Print PDF">
-            <i class="fa-solid fa-print"></i> Print
+            <?= icon('printer') ?> Print
         </button>
         <button class="btn btn-secondary" data-modal="addEmployeeModal">
-            <i class="fa-solid fa-plus"></i> Add Employee
+            <?= icon('plus') ?> Add Employee
         </button>
     </div>
     <?php endif; ?>
@@ -77,7 +77,7 @@ ob_start();
 <?php if ($isOwner && !empty($pending_invitations)): ?>
 <div class="card" style="border-left:4px solid var(--brand);margin-bottom:16px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <p class="card-title" style="margin:0"><i class="fa-solid fa-clock" style="color:var(--accent)"></i> Pending Invitations (<?= count($pending_invitations) ?>)</p>
+        <p class="card-title" style="margin:0"><?= icon('clock', '', 'color:var(--accent)') ?> Pending Invitations (<?= count($pending_invitations) ?>)</p>
     </div>
     <div class="table-wrap" style="margin:0">
         <table>
@@ -107,9 +107,9 @@ ob_start();
 <!-- LM Controls -->
 <div class="lm-controls">
     <div class="lm-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <?= icon('search') ?>
         <input type="text" class="lm-search" id="empTableSearch" placeholder="Search name, designation, email…">
-        <button class="lm-search-clear" id="empTableClear"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lm-search-clear" id="empTableClear"><?= icon('close') ?></button>
     </div>
     <select class="lm-select" id="empTableSort">
         <option value="az">Name A–Z</option>
@@ -152,16 +152,16 @@ sort($_empDesigs); sort($_empDepts);
 <?php if (empty($employees)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon">👥</div>
+        <div class="empty-icon"><?= icon('users') ?></div>
         <h3>No employees yet</h3>
         <p>Add employees or invite Byabsayee users to collaborate on this book.</p>
         <?php if ($isOwner): ?>
         <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
             <button class="btn btn-primary" data-modal="inviteModal">
-                <i class="fa-solid fa-envelope"></i> Invite User
+                <?= icon('mail') ?> Invite User
             </button>
             <button class="btn btn-secondary" data-modal="addEmployeeModal">
-                <i class="fa-solid fa-plus"></i> Add Employee
+                <?= icon('plus') ?> Add Employee
             </button>
         </div>
         <?php endif; ?>
@@ -202,7 +202,7 @@ sort($_empDesigs); sort($_empDepts);
             </td>
             <td>
                 <?php if ($emp['user_id'] == $book['user_id']): ?>
-                    <span class="badge badge-owner"><i class="fa-solid fa-crown"></i> Owner</span>
+                    <span class="badge badge-owner"><?= icon('crown') ?> Owner</span>
                     <?php if ($emp['designation_name'] && strtolower($emp['designation_name']) !== 'owner'): ?>
                     <span class="badge badge-blue" style="margin-left:4px"><?= e($emp['designation_name']) ?></span>
                     <?php endif; ?>
@@ -220,7 +220,7 @@ sort($_empDesigs); sort($_empDepts);
             <td><span class="badge badge-<?= $sc ?>"><?= ucfirst($emp['status']) ?></span></td>
             <td>
                 <?php if ($hasLogin): ?>
-                    <span class="badge badge-green"><i class="fa-solid fa-check"></i> Active</span>
+                    <span class="badge badge-green"><?= icon('check') ?> Active</span>
                 <?php else: ?>
                     <span class="badge badge-gray">No account</span>
                 <?php endif; ?>
@@ -242,7 +242,7 @@ sort($_empDesigs); sort($_empDepts);
 <?php if ($isOwner): ?>
 <div class="modal-backdrop" id="inviteModal">
     <div class="modal" style="max-width:640px">
-        <div class="modal-title"><i class="fa-solid fa-envelope" style="color:var(--brand)"></i> Invite User to Book</div>
+        <div class="modal-title"><?= icon('mail', '', 'color:var(--brand)') ?> Invite User to Book</div>
         <form method="POST" action="/books/<?= $book['id'] ?>/employees/invite">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
             <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">
@@ -297,7 +297,7 @@ sort($_empDesigs); sort($_empDepts);
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Send Invitation</button>
+                <button type="submit" class="btn btn-primary"><?= icon('send') ?> Send Invitation</button>
             </div>
         </form>
     </div>
@@ -366,7 +366,7 @@ sort($_empDesigs); sort($_empDepts);
 <!-- MANAGE DESIGNATIONS MODAL -->
 <div class="modal-backdrop" id="manageDesignationsModal">
     <div class="modal" style="max-width:700px">
-        <div class="modal-title"><i class="fa-solid fa-sitemap" style="color:var(--brand)"></i> Designations</div>
+        <div class="modal-title"><?= icon('sitemap', '', 'color:var(--brand)') ?> Designations</div>
         <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">
             Designations are saved permission templates. Assign them to employees for quick setup.
         </p>
@@ -612,7 +612,7 @@ function wireDeletePermWarning(formEl) {
     var warn = document.createElement('div');
     warn.className = 'delete-perm-warning';
     warn.style.display = 'none';
-    warn.innerHTML = '<i class=\'fa-solid fa-triangle-exclamation\'></i>'
+    warn.innerHTML = Icons.svg("alert-triangle")
         + ' <strong>Warning:</strong> This allows the employee to permanently delete the entire book and all its data. Only grant this to highly trusted people.';
     cb.closest('.perm-check') ? cb.closest('.perm-check').parentNode.appendChild(warn) : cb.parentNode.appendChild(warn);
     cb.addEventListener('change', function(){
@@ -689,7 +689,7 @@ document.addEventListener('DOMContentLoaded', function(){
         var el = document.createElement('div');
         el.className = 'delete-perm-warning';
         el.style.cssText = 'display:none;align-items:center;gap:6px;margin-top:6px';
-        el.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>'
+        el.innerHTML = Icons.svg("alert-triangle")
             + '<span><strong>Danger:</strong> This lets the employee permanently delete this entire book and all its data.</span>';
         warn.parentNode.insertBefore(el, warn.nextSibling);
         cb.addEventListener('change', function() { el.style.display = this.checked ? 'flex' : 'none'; });

@@ -4,7 +4,7 @@ $methods = $_SESSION['2fa_methods'] ?? [$user['two_fa_method'] ?? 'email'];
 
 $methodLabels = ['email'=>'Email OTP','whatsapp'=>'WhatsApp OTP','app'=>'Authenticator App'];
 $methodDescs  = ['email'=>'Enter the 6-digit code sent to your email','whatsapp'=>'Enter the 6-digit code sent to your WhatsApp','app'=>'Enter the 6-digit code from your authenticator app'];
-$methodIcons  = ['email'=>'fa-envelope','whatsapp'=>'fa-brands fa-whatsapp','app'=>'fa-mobile-screen-button'];
+$methodIcons  = ['email'=>'mail','whatsapp'=>'whatsapp','app'=>'smartphone'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +13,7 @@ $methodIcons  = ['email'=>'fa-envelope','whatsapp'=>'fa-brands fa-whatsapp','app
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Two-Factor Authentication — Byabsayee</title>
     <link rel="icon" href="/favicon.ico">
-    <script src="https://kit.fontawesome.com/86c0c1c09a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="<?= asset('css/icons.css') ?>">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
     *{box-sizing:border-box;margin:0;padding:0}
@@ -50,18 +50,18 @@ $methodIcons  = ['email'=>'fa-envelope','whatsapp'=>'fa-brands fa-whatsapp','app
 </head>
 <body>
 <div class="card">
-    <div class="logo"><i class="fa-solid fa-lock"></i> Byabsayee</div>
+    <div class="logo"><?= icon('lock') ?> Byabsayee</div>
 
     <?php if (!empty($_SESSION['2fa_error'])): ?>
-    <div class="err"><i class="fa-solid fa-triangle-exclamation"></i> <?= e($_SESSION['2fa_error']) ?><?php unset($_SESSION['2fa_error']); ?></div>
+    <div class="err"><?= icon('alert-triangle') ?> <?= e($_SESSION['2fa_error']) ?><?php unset($_SESSION['2fa_error']); ?></div>
     <?php endif; ?>
     <?php if (!empty($_SESSION['flash_success'])): ?>
-    <div class="ok"><i class="fa-solid fa-check-circle"></i> <?= e($_SESSION['flash_success']) ?><?php unset($_SESSION['flash_success']); ?></div>
+    <div class="ok"><?= icon('check-circle') ?> <?= e($_SESSION['flash_success']) ?><?php unset($_SESSION['flash_success']); ?></div>
     <?php endif; ?>
 
     <?php if (!$chosen && count($methods) > 1): ?>
     <!-- ── Step 1: Choose a method ──────────────────────────────────────── -->
-    <div class="icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
+    <div class="icon-wrap"><?= icon('shield') ?></div>
     <h1>Two-Factor Authentication</h1>
     <p class="sub">Choose how you'd like to verify your identity.</p>
 
@@ -71,12 +71,12 @@ $methodIcons  = ['email'=>'fa-envelope','whatsapp'=>'fa-brands fa-whatsapp','app
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
             <input type="hidden" name="choose_method" value="<?= e($m) ?>">
             <button type="submit" class="method-btn">
-                <div class="method-icon"><i class="fa-solid <?= e($methodIcons[$m] ?? 'fa-lock') ?>"></i></div>
+                <div class="method-icon"><?= icon($methodIcons[$m] ?? 'lock') ?></div>
                 <div>
                     <div class="method-label"><?= e($methodLabels[$m] ?? ucfirst($m)) ?></div>
                     <div class="method-desc"><?= e($methodDescs[$m] ?? '') ?></div>
                 </div>
-                <i class="fa-solid fa-chevron-right" style="margin-left:auto;color:#ccc;font-size:12px"></i>
+                <?= icon('chevron-right', '', 'margin-left:auto;color:#ccc;font-size:12px') ?>
             </button>
         </form>
         <?php endforeach; ?>
@@ -84,7 +84,7 @@ $methodIcons  = ['email'=>'fa-envelope','whatsapp'=>'fa-brands fa-whatsapp','app
 
     <?php else: ?>
     <!-- ── Step 2: Enter code ───────────────────────────────────────────── -->
-    <div class="icon-wrap"><i class="fa-solid <?= e($methodIcons[$chosen] ?? 'fa-lock') ?>"></i></div>
+    <div class="icon-wrap"><?= icon($methodIcons[$chosen] ?? 'lock') ?></div>
     <h1><?= e($methodLabels[$chosen] ?? 'Verify') ?></h1>
     <p class="sub"><?= e($methodDescs[$chosen] ?? 'Enter the 6-digit code.') ?></p>
 
@@ -117,7 +117,7 @@ $methodIcons  = ['email'=>'fa-envelope','whatsapp'=>'fa-brands fa-whatsapp','app
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
             <input type="hidden" name="choose_method" value="">
             <button type="submit" onclick="this.form.elements['choose_method'].value='__reset__';return true;">
-                ← Use a different method
+                <?= icon('arrow-left') ?> Use a different method
             </button>
         </form>
     </div>
@@ -125,7 +125,7 @@ $methodIcons  = ['email'=>'fa-envelope','whatsapp'=>'fa-brands fa-whatsapp','app
 
     <?php endif; ?>
 
-    <a href="/logout" class="back-link"><i class="fa-solid fa-arrow-left" style="margin-right:4px"></i>Back to login</a>
+    <a href="/logout" class="back-link"><?= icon('arrow-left', '', 'margin-right:4px') ?>Back to login</a>
 </div>
 
 <script>

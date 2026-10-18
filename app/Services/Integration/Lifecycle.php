@@ -4,7 +4,7 @@ namespace App\Services\Integration;
 use App\Helpers\Database;
 
 /**
- * Connection lifecycle: pending → verifying → active ⇄ paused → revoked (D2/D12).
+ * Connection lifecycle: pending → verifying → active -> paused → revoked (D2/D12).
  *   1. the owner creates the link in the book (domain + authority + scopes) and gets a pairing code;
  *   2. the store calls connect/handshake (pairing code, or signed with manual credentials);
  *   3. the book proves the store controls its domain (GET /.well-known/erp-verify) and completes the link.

@@ -30,7 +30,7 @@ $pdo = new PDO(
     [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
 );
 $log = [];
-function run($pdo, $sql, $d) { global $log; try { $pdo->exec($sql); $log[] = "✅ $d"; } catch (Exception $e) { $log[] = "⚠️ $d — " . $e->getMessage(); } }
+function run($pdo, $sql, $d) { global $log; try { $pdo->exec($sql); $log[] = "OK: $d"; } catch (Exception $e) { $log[] = "WARN: $d — " . $e->getMessage(); } }
 function has($pdo, $t) { $s = $pdo->prepare("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE() AND table_name=?"); $s->execute([$t]); return (bool)$s->fetchColumn(); }
 function hasCol($pdo, $t, $c) { $s = $pdo->prepare("SELECT COUNT(*) FROM information_schema.columns WHERE table_schema=DATABASE() AND table_name=? AND column_name=?"); $s->execute([$t, $c]); return (bool)$s->fetchColumn(); }
 
@@ -60,7 +60,7 @@ $userCols = [
 ];
 foreach ($userCols as [$col, $sql]) {
     if (!hasCol($pdo, 'users', $col)) run($pdo, $sql, "Add users.$col");
-    else $log[] = "ℹ️ users.$col already exists";
+    else $log[] = "INFO: users.$col already exists";
 }
 
 // ── user_handles ──────────────────────────────────────────────────────────────
@@ -273,7 +273,7 @@ try {
         run($pdo, "ALTER TABLE `user_profiles` ADD COLUMN `hobbies` VARCHAR(500) NULL AFTER `languages`", 'Add hobbies to user_profiles');
     }
 } catch (\Throwable $e) {
-    $log[] = '⚠️ Could not add languages/hobbies to user_profiles: ' . $e->getMessage();
+    $log[] = 'WARN: Could not add languages/hobbies to user_profiles: ' . $e->getMessage();
 }
 
 // ── user_2fa_methods ──────────────────────────────────────────────────────────
@@ -335,7 +335,7 @@ try {
         run($pdo, "ALTER TABLE `users` ADD COLUMN `two_fa_method` VARCHAR(20) NULL AFTER `two_fa_enabled`", 'Add two_fa_method to users');
     }
 } catch (\Throwable $e) {
-    $log[] = '⚠️ Could not alter users table: ' . $e->getMessage();
+    $log[] = 'WARN: Could not alter users table: ' . $e->getMessage();
 }
 
 ?><!DOCTYPE html><html><head><meta charset="utf-8">
@@ -345,9 +345,9 @@ h1{color:#1a6b4a}ul{list-style:none;padding:0}li{padding:8px 12px;border-bottom:
 .done{margin-top:24px;padding:18px;background:#f0fdf4;border-radius:10px;color:#166534;font-weight:600;font-size:16px}
 .warn{color:#b45309;}.ok{color:#166534;}.info{color:#1e40af;}</style></head>
 <body>
-<h1>📦 Migration: Profiles, Handles & 2FA</h1>
+<h1>Migration: Profiles, Handles & 2FA</h1>
 <ul><?php foreach ($log as $l):
-    $cls = str_starts_with($l,'✅') ? 'ok' : (str_starts_with($l,'⚠️') ? 'warn' : 'info');
+    $cls = str_starts_with($l,'OK:') ? 'ok' : (str_starts_with($l,'WARN:') ? 'warn' : 'info');
 ?><li class="<?=$cls?>"><?= htmlspecialchars($l) ?></li><?php endforeach; ?></ul>
-<div class="done">✅ Migration complete — <strong>Delete this file from your server immediately!</strong></div>
+<div class="done">Migration complete — <strong>Delete this file from your server immediately!</strong></div>
 </body></html>

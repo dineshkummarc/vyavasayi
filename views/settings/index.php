@@ -38,7 +38,7 @@ ob_start();
 <div class="page-header">
     <div class="page-header-left">
         <div class="breadcrumb"><span>Settings</span></div>
-        <h1><i class="fa-solid fa-sliders" style="color:var(--brand)"></i> App Settings</h1>
+        <h1><?= icon('sliders', '', 'color:var(--brand)') ?> App Settings</h1>
         <p>Manage your account, preferences, and app settings</p>
     </div>
 </div>
@@ -48,13 +48,13 @@ ob_start();
     <!-- Sidebar Nav -->
     <nav class="st-nav">        
         <div class="st-nav-group">App</div>
-        <a href="/settings?tab=preferences"  class="<?= $tab==='preferences'?'active':'' ?>"><i class="fa-solid fa-sliders"></i> Preferences</a>
-        <a href="/settings?tab=notifications" class="<?= $tab==='notifications'?'active':'' ?>"><i class="fa-solid fa-bell"></i> Notifications</a>
+        <a href="/settings?tab=preferences"  class="<?= $tab==='preferences'?'active':'' ?>"><?= icon('sliders') ?> Preferences</a>
+        <a href="/settings?tab=notifications" class="<?= $tab==='notifications'?'active':'' ?>"><?= icon('bell') ?> Notifications</a>
         <div class="st-nav-group">Support</div>
-        <a href="/settings?tab=about"        class="<?= $tab==='about'?'active':'' ?>"><i class="fa-solid fa-circle-info"></i> About</a>
-        <a href="/settings?tab=faq"          class="<?= $tab==='faq'?'active':'' ?>"><i class="fa-solid fa-circle-question"></i> FAQ</a>
-        <a href="/settings?tab=help"         class="<?= $tab==='help'?'active':'' ?>"><i class="fa-solid fa-life-ring"></i> Help</a>
-        <a href="/settings?tab=contact"      class="<?= $tab==='contact'?'active':'' ?>"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+        <a href="/settings?tab=about"        class="<?= $tab==='about'?'active':'' ?>"><?= icon('info') ?> About</a>
+        <a href="/settings?tab=faq"          class="<?= $tab==='faq'?'active':'' ?>"><?= icon('help-circle') ?> FAQ</a>
+        <a href="/settings?tab=help"         class="<?= $tab==='help'?'active':'' ?>"><?= icon('life-buoy') ?> Help</a>
+        <a href="/settings?tab=contact"      class="<?= $tab==='contact'?'active':'' ?>"><?= icon('mail') ?> Contact Us</a>
     </nav>
 
     <!-- Content Panels -->
@@ -71,13 +71,13 @@ ob_start();
                 <label>Appearance Mode</label>
                 <div class="theme-swatches">
                     <div class="theme-swatch" style="background:#f8f9fa;border:1px solid #dee2e6" onclick="setTheme('light')" id="sw-light" title="Light">
-                        <div class="swatch-check"><i class="fa-solid fa-check" style="color:#333"></i></div>
+                        <div class="swatch-check"><?= icon('check', '', 'color:#333') ?></div>
                     </div>
                     <div class="theme-swatch" style="background:#1a1a2e" onclick="setTheme('dark')" id="sw-dark" title="Dark">
-                        <div class="swatch-check"><i class="fa-solid fa-check"></i></div>
+                        <div class="swatch-check"><?= icon('check') ?></div>
                     </div>
                     <div class="theme-swatch" style="background:linear-gradient(135deg,#f8f9fa 50%,#1a1a2e 50%)" onclick="setTheme('system')" id="sw-system" title="System">
-                        <div class="swatch-check"><i class="fa-solid fa-check"></i></div>
+                        <div class="swatch-check"><?= icon('check') ?></div>
                     </div>
                 </div>
                 <div style="display:flex;gap:40px;margin-top:8px;font-size:12px;color:var(--text-muted)">
@@ -89,11 +89,11 @@ ob_start();
                 <div class="fg">
                     <label>Interface Language</label>
                     <select name="language">
-                        <option value="en" <?= $userLang==='en'?'selected':'' ?>>🇬🇧 English</option>
-                        <option value="bn" <?= $userLang==='bn'?'selected':'' ?>>🇧🇩 বাংলা (Bengali)</option>
-                        <option value="ar" <?= $userLang==='ar'?'selected':'' ?>>🇸🇦 عربى (Arabic)</option>
-                        <option value="ur" <?= $userLang==='ur'?'selected':'' ?>>🇵🇰 اردو (Urdu)</option>
-                        <option value="hi" <?= $userLang==='hi'?'selected':'' ?>>🇮🇳 हिन्दी (Hindi)</option>
+                        <option value="en" <?= $userLang==='en'?'selected':'' ?>>English</option>
+                        <option value="bn" <?= $userLang==='bn'?'selected':'' ?>>বাংলা (Bengali)</option>
+                        <option value="ar" <?= $userLang==='ar'?'selected':'' ?>>عربى (Arabic)</option>
+                        <option value="ur" <?= $userLang==='ur'?'selected':'' ?>>اردو (Urdu)</option>
+                        <option value="hi" <?= $userLang==='hi'?'selected':'' ?>>हिन्दी (Hindi)</option>
                     </select>
                     <p style="font-size:12px;color:var(--text-muted);margin:6px 0 0">Full localization of the interface is still in progress — this saves your preference for when it ships.</p>
                 </div>
@@ -136,7 +136,7 @@ ob_start();
                 </div>
             </div>
             <div style="margin-top:18px">
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Preferences</button>
+                <button type="submit" class="btn btn-primary"><?= icon('save') ?> Save Preferences</button>
             </div>
         </form>
     </div>
@@ -224,7 +224,7 @@ ob_start();
                 </label>
             </div>
             <div style="margin-top:18px">
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Preferences</button>
+                <button type="submit" class="btn btn-primary"><?= icon('save') ?> Save Preferences</button>
             </div>
         </form>
     </div>
@@ -278,10 +278,10 @@ ob_start();
             </div>
             <?php endif; ?>
             <div>
-                <div style="font-size:14px;font-weight:600;color:var(--text)"><a href="https://byabsayee.com/privacypolicy">Privacy Policy <i class="fa-solid fa-arrow-up-right-from-square" style="color: var(--text);"></i></a></div>
+                <div style="font-size:14px;font-weight:600;color:var(--text)"><a href="https://byabsayee.com/privacypolicy">Privacy Policy <?= icon('external-link', '', 'color: var(--text);') ?></a></div>
             </div>
             <div>
-                <div style="font-size:14px;font-weight:600;color:var(--text)"><a href="https://byabsayee.com/termsofservice">Terms of Service <i class="fa-solid fa-arrow-up-right-from-square" style="color: var(--text);"></i></a></div>
+                <div style="font-size:14px;font-weight:600;color:var(--text)"><a href="https://byabsayee.com/termsofservice">Terms of Service <?= icon('external-link', '', 'color: var(--text);') ?></a></div>
             </div>
         </div>
         <hr>
@@ -313,7 +313,7 @@ ob_start();
         <div class="faq-item">
             <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
                 <?= e($f['q']) ?>
-                <i class="fa-solid fa-chevron-down"></i>
+                <?= icon('chevron-down') ?>
             </div>
             <div class="faq-a"><?= e($f['a']) ?></div>
         </div>
@@ -324,15 +324,15 @@ ob_start();
     <div class="st-panel">
         <div class="st-head"><div><h2>Help &amp; Documentation</h2><p class="panel-desc">Get started quickly with guides and resources.</p></div></div>
         <?php $guides = [
-            ['icon'=>'fa-rocket','title'=>'Getting Started','desc'=>'Learn the basics of setting up your first business book, adding products, and creating your first invoice.'],
-            ['icon'=>'fa-file-invoice-dollar','title'=>'Invoicing Guide','desc'=>'Understand sales invoices, purchase bills, payment recording, and the invoice lifecycle from draft to paid.'],
-            ['icon'=>'fa-boxes-stacked','title'=>'Inventory Management','desc'=>'Track stock levels, set low-stock alerts, manage product batches (FIFO/LIFO), and run stock adjustments.'],
-            ['icon'=>'fa-users','title'=>'Managing Employees','desc'=>'Invite employees, assign designations, set permissions, and manage salary payments.'],
-            ['icon'=>'fa-chart-line','title'=>'Reports &amp; Analytics','desc'=>'Understand your business with profit/loss summaries, category-wise expense breakdowns, and fund tracking.'],
-            ['icon'=>'fa-tags','title'=>'Coupons &amp; Discounts','desc'=>'Create promotional coupons, apply customer privilege discounts, and use loyalty points at checkout.'],
+            ['icon'=>'rocket','title'=>'Getting Started','desc'=>'Learn the basics of setting up your first business book, adding products, and creating your first invoice.'],
+            ['icon'=>'invoice-dollar','title'=>'Invoicing Guide','desc'=>'Understand sales invoices, purchase bills, payment recording, and the invoice lifecycle from draft to paid.'],
+            ['icon'=>'boxes','title'=>'Inventory Management','desc'=>'Track stock levels, set low-stock alerts, manage product batches (FIFO/LIFO), and run stock adjustments.'],
+            ['icon'=>'users','title'=>'Managing Employees','desc'=>'Invite employees, assign designations, set permissions, and manage salary payments.'],
+            ['icon'=>'chart-line','title'=>'Reports &amp; Analytics','desc'=>'Understand your business with profit/loss summaries, category-wise expense breakdowns, and fund tracking.'],
+            ['icon'=>'tags','title'=>'Coupons &amp; Discounts','desc'=>'Create promotional coupons, apply customer privilege discounts, and use loyalty points at checkout.'],
         ]; foreach ($guides as $g): ?>
         <div class="info-card">
-            <i class="fa-solid <?= $g['icon'] ?>"></i>
+            <?= icon($g['icon']) ?>
             <div>
                 <strong><?= $g['title'] ?></strong>
                 <span><?= $g['desc'] ?></span>
@@ -351,28 +351,28 @@ ob_start();
         <div class="st-head"><div><h2>Contact Us</h2><p class="panel-desc">Have a question or issue? Reach out to us and we'll get back to you.</p></div></div>
         <div class="fg-row" style="margin-bottom:20px">
             <div class="info-card">
-                <i class="fa-solid fa-envelope"></i>
+                <?= icon('mail') ?>
                 <div>
                     <strong>Email Support</strong>
                     <span>support@byabsayee.com</span>
                 </div>
             </div>
             <div class="info-card">
-                <i class="fa-brands fa-whatsapp" style="color:#25d366"></i>
+                <?= icon('whatsapp', '', 'color:#25d366') ?>
                 <div>
                     <strong>WhatsApp</strong>
                     <span>+880 1XXX-XXXXXX</span>
                 </div>
             </div>
             <div class="info-card">
-                <i class="fa-solid fa-clock"></i>
+                <?= icon('clock') ?>
                 <div>
                     <strong>Support Hours</strong>
                     <span>Sun–Thu, 9 AM – 6 PM (BST)</span>
                 </div>
             </div>
             <div class="info-card">
-                <i class="fa-solid fa-globe"></i>
+                <?= icon('globe') ?>
                 <div>
                     <strong>Website</strong>
                     <span><a href="https://byabsayee.com" target="_blank" style="color:var(--brand)">byabsayee.com</a></span>
@@ -409,7 +409,7 @@ ob_start();
                 <textarea name="message" placeholder="Describe your question or issue in detail…" style="min-height:120px" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">
-                <i class="fa-solid fa-paper-plane"></i> Send Message
+                <?= icon('send') ?> Send Message
             </button>
         </form>
     </div>
@@ -452,7 +452,7 @@ ob_start();
 
     <div id="deleteModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center">
         <div style="background:var(--card-bg);border-radius:12px;padding:28px;max-width:420px;width:90%;border:2px solid #e53e3e">
-            <h3 style="margin:0 0 8px;color:#e53e3e"><i class="fa-solid fa-triangle-exclamation"></i> Confirm Account Deletion</h3>
+            <h3 style="margin:0 0 8px;color:#e53e3e"><?= icon('alert-triangle') ?> Confirm Account Deletion</h3>
             <p style="font-size:14px;color:var(--text-muted);margin:0 0 16px;line-height:1.6">
                 This action <strong>cannot be undone</strong>. Your account, all books, invoices, products, customers, and all other data will be permanently deleted.
             </p>
@@ -463,7 +463,7 @@ ob_start();
                 <div style="display:flex;gap:10px">
                     <button type="button" class="btn btn-secondary" onclick="document.getElementById('deleteModal').style.display='none'">Cancel</button>
                     <button type="submit" class="btn" style="background:#e53e3e;color:#fff;border:none;flex:1">
-                        <i class="fa-solid fa-trash"></i> Permanently Delete
+                        <?= icon('trash') ?> Permanently Delete
                     </button>
                 </div>
             </form>

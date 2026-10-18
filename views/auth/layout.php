@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= asset('css/auth.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/icons.css') ?>">
 </head>
 <body>
 
@@ -25,10 +26,10 @@
             </div>
             <p class="brand-tagline">ব্যবসার হিসাব, একটি জায়গায়।<br><small>Track every taka. Know your business.</small></p>
             <div class="brand-features">
-                <div class="feat"><span>✓</span> Personal &amp; business books</div>
-                <div class="feat"><span>✓</span> Invoices with PDF &amp; POS</div>
-                <div class="feat"><span>✓</span> Inventory &amp; stock tracking</div>
-                <div class="feat"><span>✓</span> Employee &amp; payroll management</div>
+                <div class="feat"><span><?= icon('check') ?></span> Personal &amp; business books</div>
+                <div class="feat"><span><?= icon('check') ?></span> Invoices with PDF &amp; POS</div>
+                <div class="feat"><span><?= icon('check') ?></span> Inventory &amp; stock tracking</div>
+                <div class="feat"><span><?= icon('check') ?></span> Employee &amp; payroll management</div>
             </div>
         </div>
     </div>

@@ -7,25 +7,25 @@ $nextMonth = date('Y-m', strtotime($month . '-01 +1 month'));
 $isCurrent = $month === date('Y-m');
 
 $catMeta = [
-    'Sale Payment'               => ['var(--green)',  'fa-file-invoice-dollar'],
-    'POS Sale'                   => ['var(--green)',  'fa-cash-register'],
-    'Purchase Payment'           => ['var(--blue)',   'fa-cart-shopping'],
-    'Sales Return (Refund)'      => ['var(--red)',    'fa-rotate-left'],
-    'Purchase Return (Recovery)' => ['var(--green)',  'fa-truck-ramp-box'],
-    'Expense:'                   => ['var(--red)',    'fa-receipt'],
-    'Expenses'                   => ['var(--red)',    'fa-receipt'],
-    'Fund Received'              => ['var(--green)',  'fa-piggy-bank'],
-    'Fund Withdrawn'             => ['var(--red)',    'fa-circle-arrow-up'],
-    'Due Payment'                => ['var(--green)',  'fa-hand-holding-dollar'],
-    'Debt Repayment'             => ['var(--red)',    'fa-hand-holding-dollar'],
-    'Salary Payment'             => ['var(--amber)',  'fa-user-tie'],
+    'Sale Payment'               => ['var(--green)',  'invoice-dollar'],
+    'POS Sale'                   => ['var(--green)',  'cash-register'],
+    'Purchase Payment'           => ['var(--blue)',   'shopping-cart'],
+    'Sales Return (Refund)'      => ['var(--red)',    'rotate-ccw'],
+    'Purchase Return (Recovery)' => ['var(--green)',  'package-return'],
+    'Expense:'                   => ['var(--red)',    'receipt'],
+    'Expenses'                   => ['var(--red)',    'receipt'],
+    'Fund Received'              => ['var(--green)',  'piggy-bank'],
+    'Fund Withdrawn'             => ['var(--red)',    'circle-arrow-up'],
+    'Due Payment'                => ['var(--green)',  'hand-coins'],
+    'Debt Repayment'             => ['var(--red)',    'hand-coins'],
+    'Salary Payment'             => ['var(--amber)',  'user-tie'],
 ];
 $GLOBALS['catMeta'] = $catMeta;   // the view is included inside a controller method, so a bare `global` saw null (no icons/colours)
 function catMeta(string $cat): array {
     foreach ($GLOBALS['catMeta'] as $k => $v) {
         if (str_starts_with($cat, $k)) return $v;
     }
-    return ['var(--text-muted)', 'fa-circle'];
+    return ['var(--text-muted)', 'circle'];
 }
 ?>
 
@@ -35,12 +35,12 @@ function catMeta(string $cat): array {
             <a href="/books/<?= $book['id'] ?>">Books</a> <span>›</span>
             <span>Reports</span>
         </div>
-        <h1><i class="fa-solid fa-chart-line" style="color:var(--brand)"></i> Reports & Ledger</h1>
+        <h1><?= icon('chart-line', '', 'color:var(--brand)') ?> Reports & Ledger</h1>
         <p>Cash that actually moved in and out of this business, plus what was booked and what is still owed.</p>
     </div>
     <div style="display:flex;gap:8px">
         <button class="btn btn-secondary btn-sm" data-modal="printModal">
-            <i class="fa-solid fa-print"></i> Print PDF
+            <?= icon('printer') ?> Print PDF
         </button>
     </div>
 </div>
@@ -49,19 +49,19 @@ function catMeta(string $cat): array {
 <?php $net = $totalIn - $totalOut; $closing = $openingBalance + $net; ?>
 <div class="stat-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));max-width:900px;margin-bottom:12px">
     <div class="stat-card" style="border-top:3px solid var(--green)">
-        <div class="stat-label"><i class="fa-solid fa-arrow-down" style="color:var(--green)"></i> Cash In</div>
+        <div class="stat-label"><?= icon('arrow-down', '', 'color:var(--green)') ?> Cash In</div>
         <div class="stat-value green"><?= $sym . number_format($totalIn, 0) ?></div>
     </div>
     <div class="stat-card" style="border-top:3px solid var(--red)">
-        <div class="stat-label"><i class="fa-solid fa-arrow-up" style="color:var(--red)"></i> Cash Out</div>
+        <div class="stat-label"><?= icon('arrow-up', '', 'color:var(--red)') ?> Cash Out</div>
         <div class="stat-value red"><?= $sym . number_format($totalOut, 0) ?></div>
     </div>
     <div class="stat-card" style="border-top:3px solid var(--brand)">
-        <div class="stat-label"><i class="fa-solid fa-scale-balanced" style="color:var(--brand)"></i> Net Cash</div>
+        <div class="stat-label"><?= icon('scale', '', 'color:var(--brand)') ?> Net Cash</div>
         <div class="stat-value <?= $net >= 0 ? 'green' : 'red' ?>"><?= ($net >= 0 ? '+' : '-') . $sym . number_format(abs($net), 0) ?></div>
     </div>
     <div class="stat-card" style="border-top:3px solid var(--blue)">
-        <div class="stat-label"><i class="fa-solid fa-wallet" style="color:var(--blue)"></i> Cash Balance</div>
+        <div class="stat-label"><?= icon('wallet', '', 'color:var(--blue)') ?> Cash Balance</div>
         <div class="stat-value <?= $closing >= 0 ? '' : 'red' ?>"><?= ($closing < 0 ? '-' : '') . $sym . number_format(abs($closing), 0) ?></div>
         <div style="font-size:11px;color:var(--text-muted)">from <?= $sym . number_format($openingBalance, 0) ?> at start of month</div>
     </div>
@@ -105,7 +105,7 @@ function catMeta(string $cat): array {
     <?php $maxCat = 0; foreach ($categories as $c) $maxCat = max($maxCat, $c['in'] + $c['out']); ?>
     <?php foreach ($categories as $name => $c): [$clr, $icon] = catMeta($name); $v = $c['in'] + $c['out']; $isInCat = $c['in'] >= $c['out']; ?>
     <div style="display:flex;align-items:center;gap:10px;padding:5px 0;font-size:13px">
-        <span style="width:190px;flex-shrink:0;color:<?= $clr ?>;font-weight:600"><i class="fa-solid <?= $icon ?>"></i> <?= e($name) ?> <span style="color:var(--text-muted);font-weight:400">(<?= (int)$c['count'] ?>)</span></span>
+        <span style="width:190px;flex-shrink:0;color:<?= $clr ?>;font-weight:600"><?= icon($icon) ?> <?= e($name) ?> <span style="color:var(--text-muted);font-weight:400">(<?= (int)$c['count'] ?>)</span></span>
         <span style="flex:1;background:var(--bg);border-radius:4px;height:8px;overflow:hidden"><span style="display:block;height:100%;width:<?= $maxCat > 0 ? max(2, round($v / $maxCat * 100)) : 0 ?>%;background:<?= $isInCat ? 'var(--green)' : 'var(--red)' ?>"></span></span>
         <span style="width:110px;text-align:right;font-weight:700"><?= $sym . number_format($v, 2) ?></span>
     </div>
@@ -116,7 +116,7 @@ function catMeta(string $cat): array {
 <!-- Month navigator -->
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap">
     <a href="?month=<?= $prevMonth ?>&type=<?= $typeFilter ?>" class="btn btn-secondary btn-sm">
-        <i class="fa-solid fa-chevron-left"></i>
+        <?= icon('chevron-left') ?>
     </a>
     <div style="text-align:center;min-width:140px">
         <div style="font-weight:600;font-size:14px"><?= date('F Y', strtotime($month.'-01')) ?></div>
@@ -125,7 +125,7 @@ function catMeta(string $cat): array {
     <a href="?month=<?= $nextMonth ?>&type=<?= $typeFilter ?>"
        class="btn btn-secondary btn-sm <?= $isCurrent ? 'disabled' : '' ?>"
        style="<?= $isCurrent ? 'opacity:.35;pointer-events:none' : '' ?>">
-        <i class="fa-solid fa-chevron-right"></i>
+        <?= icon('chevron-right') ?>
     </a>
     <div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap">
         <?php foreach (['all'=>'All','in'=>'Cash In','out'=>'Cash Out'] as $k=>$lbl): ?>
@@ -138,9 +138,9 @@ function catMeta(string $cat): array {
 <!-- Search + sort controls (client-side within the month) -->
 <div class="lm-controls">
     <div class="lm-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <?= icon('search') ?>
         <input type="text" class="lm-search" id="repSearch" placeholder="Search ref, party, category…">
-        <button class="lm-search-clear" id="repClear"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lm-search-clear" id="repClear"><?= icon('close') ?></button>
     </div>
     <select class="lm-select" id="repSort">
         <option value="date-desc">Newest First</option>
@@ -153,7 +153,7 @@ function catMeta(string $cat): array {
 <?php if (empty($entries)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon">📊</div>
+        <div class="empty-icon"><?= icon('chart-line') ?></div>
         <h3>No cash movement this month</h3>
         <p>Nothing recorded for <?= date('F Y', strtotime($month.'-01')) ?>.</p>
     </div>
@@ -186,7 +186,7 @@ function catMeta(string $cat): array {
             </td>
             <td>
                 <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:<?= $clr ?>">
-                    <i class="fa-solid <?= $icon ?>"></i>
+                    <?= icon($icon) ?>
                     <?= e($e['category']) ?>
                 </span>
             </td>

@@ -53,7 +53,7 @@ $brand   = '#1a6b4a';
         </table>
 
         <p style="margin:24px 0 0;font-size:13px;color:#64748b;line-height:1.6">
-          ⏱ This link <strong>expires in 1 hour</strong>. If you didn't request a password reset, you can safely ignore this email — your password won't change.
+          This link <strong>expires in 1 hour</strong>. If you didn't request a password reset, you can safely ignore this email — your password won't change.
         </p>
 
         <p style="margin:20px 0 0;font-size:12px;color:#94a3b8;line-height:1.6">

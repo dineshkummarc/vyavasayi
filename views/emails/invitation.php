@@ -48,7 +48,7 @@ $bg       = '#f4f6fb';
         <tr>
             <td style="padding:36px 36px 28px">
                 <p style="margin:0 0 20px;font-size:18px;font-weight:600;color:#1e293b">
-                    You've been invited! 🎉
+                    You've been invited!
                 </p>
 
                 <p style="margin:0 0 16px;font-size:15px;color:#475569;line-height:1.6">

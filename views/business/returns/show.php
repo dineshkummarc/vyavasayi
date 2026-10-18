@@ -14,13 +14,13 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>/returns">Returns</a> <span>›</span>
             <span><?= e($return['return_no']) ?></span>
         </div>
-        <h1><?= $isSale ? '↩ Sales Return' : '↪ Purchase Return' ?> — <?= e($return['return_no']) ?></h1>
+        <h1><?= $isSale ? icon('undo') . ' Sales Return' : icon('redo') . ' Purchase Return' ?> — <?= e($return['return_no']) ?></h1>
     </div>
     <div style="display:flex;gap:8px">
         <form method="POST" action="/books/<?= $book['id'] ?>/returns/<?= $return['id'] ?>/delete"
               onsubmit="return confirm('Delete this return? Stock changes will NOT be reversed.')">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
-            <button class="btn btn-secondary" style="color:var(--red)"><i class="fa-solid fa-trash"></i> Delete</button>
+            <button class="btn btn-secondary" style="color:var(--red)"><?= icon('trash') ?> Delete</button>
         </form>
     </div>
 </div>
@@ -120,19 +120,19 @@ ob_start();
     <div class="card" style="font-size:12px;color:var(--text-muted)">
         <p class="card-title">Stock Impact</p>
         <?php if ($isSale): ?>
-        <p><i class="fa-solid fa-arrow-up" style="color:var(--green)"></i> Items added back to stock</p>
+        <p><?= icon('arrow-up', '', 'color:var(--green)') ?> Items added back to stock</p>
         <?php else: ?>
-        <p><i class="fa-solid fa-arrow-down" style="color:var(--red)"></i> Items removed from stock</p>
+        <p><?= icon('arrow-down', '', 'color:var(--red)') ?> Items removed from stock</p>
         <?php endif; ?>
         <?php if ($return['discount'] > 0): ?>
         <p style="margin-top:6px">
-            <i class="fa-solid fa-chart-line" style="color:var(--brand)"></i>
+            <?= icon('chart-line', '', 'color:var(--brand)') ?>
             <?= $isSale ? 'Non-refunded amount recorded as income in Reports' : 'Non-recovered amount recorded as loss in Reports' ?>
         </p>
         <?php endif; ?>
         <?php if ($return['delivery_charge'] > 0): ?>
         <p style="margin-top:6px">
-            <i class="fa-solid fa-receipt" style="color:var(--amber)"></i>
+            <?= icon('receipt', '', 'color:var(--amber)') ?>
             Delivery charge added to Expenses
         </p>
         <?php endif; ?>

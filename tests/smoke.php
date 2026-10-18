@@ -4,7 +4,7 @@
 // page points at a route that exists for that HTTP method.
 //   Run after tests/e2e.php (needs its seed):  php tests/smoke.php
 $ok = 0; $bad = 0;
-function check(string $n, $c, $d = '') { global $ok, $bad; if ($c) { $ok++; echo "  ✓ $n\n"; } else { $bad++; echo "  ✗ $n  $d\n"; } }
+function check(string $n, $c, $d = '') { global $ok, $bad; if ($c) { $ok++; echo "  PASS $n\n"; } else { $bad++; echo "  FAIL $n  $d\n"; } }
 $pdo = new PDO('mysql:host=127.0.0.1;dbname=byab;charset=utf8mb4', 'b', 'b', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
 $one = fn($sql, $p = []) => (($s = $pdo->prepare($sql)) && $s->execute($p)) ? ($s->fetchAll()[0] ?? null) : null;
 $val = fn($sql, $p = []) => ($r = $one($sql, $p)) ? array_values($r)[0] : null;

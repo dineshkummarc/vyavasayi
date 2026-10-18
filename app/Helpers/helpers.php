@@ -355,3 +355,12 @@ function abort_403(): never
     require BASE_PATH . '/views/errors/403.php';
     exit;
 }
+
+/**
+ * Inline SVG icon from the icon collection (public/icons). See App\Helpers\Icon.
+ * Escapes its own output; $class/$style are attribute values (escape any user data with e() first).
+ */
+function icon(string $name, string $class = '', string $style = '', array $attrs = []): string
+{
+    return \App\Helpers\Icon::svg($name, $class, $style, $attrs);
+}

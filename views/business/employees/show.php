@@ -3,24 +3,24 @@ $pageTitle = e($employee['name']) . ' — Employees — ' . e($book['name']);
 $isOwner   = (int)$book['user_id'] === (int)auth()['id'];
 
 $moduleLabels = [
-    'invoices'      => ['label'=>'Invoices',      'icon'=>'fa-file-invoice'],
-    'pos'           => ['label'=>'POS',            'icon'=>'fa-cash-register'],
-    'products'      => ['label'=>'Products',       'icon'=>'fa-box'],
-    'funds'         => ['label'=>'Funds',          'icon'=>'fa-piggy-bank'],
-    'expenses'      => ['label'=>'Expenses',       'icon'=>'fa-receipt'],
-    'dues'          => ['label'=>'Dues',           'icon'=>'fa-hand-holding-dollar'],
-    'debts'         => ['label'=>'Debts',          'icon'=>'fa-file-circle-minus'],
-    'customers'     => ['label'=>'Customers',      'icon'=>'fa-users'],
-    'suppliers'     => ['label'=>'Suppliers',      'icon'=>'fa-user-tie'],
-    'employees'     => ['label'=>'Employees',      'icon'=>'fa-id-badge'],
-    'contacts'      => ['label'=>'Contacts',       'icon'=>'fa-address-book'],
-    'coupons'       => ['label'=>'Coupons',        'icon'=>'fa-ticket'],
-    'integrations'  => ['label'=>'Online store',   'icon'=>'fa-link'],
-    'returns'       => ['label'=>'Returns',        'icon'=>'fa-rotate-left'],
-    'deliveries'    => ['label'=>'Deliveries',     'icon'=>'fa-truck-fast'],
-    'reports'       => ['label'=>'Reports',        'icon'=>'fa-chart-line'],
-    'privileges'    => ['label'=>'Privileges',     'icon'=>'fa-star'],
-    'book_settings' => ['label'=>'Book Settings',  'icon'=>'fa-gear'],
+    'invoices'      => ['label'=>'Invoices',      'icon'=>'invoice'],
+    'pos'           => ['label'=>'POS',            'icon'=>'cash-register'],
+    'products'      => ['label'=>'Products',       'icon'=>'package'],
+    'funds'         => ['label'=>'Funds',          'icon'=>'piggy-bank'],
+    'expenses'      => ['label'=>'Expenses',       'icon'=>'receipt'],
+    'dues'          => ['label'=>'Dues',           'icon'=>'hand-coins'],
+    'debts'         => ['label'=>'Debts',          'icon'=>'file-minus'],
+    'customers'     => ['label'=>'Customers',      'icon'=>'users'],
+    'suppliers'     => ['label'=>'Suppliers',      'icon'=>'user-tie'],
+    'employees'     => ['label'=>'Employees',      'icon'=>'id-card'],
+    'contacts'      => ['label'=>'Contacts',       'icon'=>'address-book'],
+    'coupons'       => ['label'=>'Coupons',        'icon'=>'ticket'],
+    'integrations'  => ['label'=>'Online store',   'icon'=>'link'],
+    'returns'       => ['label'=>'Returns',        'icon'=>'rotate-ccw'],
+    'deliveries'    => ['label'=>'Deliveries',     'icon'=>'truck-fast'],
+    'reports'       => ['label'=>'Reports',        'icon'=>'chart-line'],
+    'privileges'    => ['label'=>'Privileges',     'icon'=>'star-filled'],
+    'book_settings' => ['label'=>'Book Settings',  'icon'=>'settings'],
 ];
 $actionLabels = ['view'=>'View','create'=>'Create','edit'=>'Edit','delete'=>'Delete',
                  'adjust_stock'=>'Adjust Stock','pay'=>'Pay','invite'=>'Invite','record_payment'=>'Record Payment','manage_designations'=>'Manage Designations','pay_salary'=>'Pay Salary'];
@@ -66,7 +66,7 @@ ob_start();
             <?php $sc = ['active'=>'green','inactive'=>'gray','terminated'=>'red'][$employee['status']] ?? 'gray'; ?>
             <span class="badge badge-<?= $sc ?>"><?= ucfirst($employee['status']) ?></span>
             <?php if ($employee['user_id']): ?>
-                <span class="badge badge-green"><i class="fa-solid fa-link"></i> Has Account</span>
+                <span class="badge badge-green"><?= icon('link') ?> Has Account</span>
             <?php else: ?>
                 <span class="badge badge-gray">No account</span>
             <?php endif; ?>
@@ -79,14 +79,14 @@ ob_start();
             <?php if ($employee['status'] !== 'terminated'): ?>
             <button class="btn btn-danger" data-modal="terminateModal"
                     style="background:var(--red-bg);color:var(--red);border-color:var(--red)">
-                <i class="fa-solid fa-user-slash"></i> Terminate
+                <?= icon('user-off') ?> Terminate
             </button>
             <?php else: ?>
             <form method="POST" action="/books/<?= $book['id'] ?>/employees/<?= $employee['id'] ?>/reinstate"
                   data-confirm="Reinstate <?= e($employee['name']) ?>? This will restore their book access.">
                 <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
                 <button class="btn btn-secondary" style="color:var(--green)">
-                    <i class="fa-solid fa-user-check"></i> Reinstate
+                    <?= icon('user-check') ?> Reinstate
                 </button>
             </form>
             <?php endif; ?>
@@ -98,7 +98,7 @@ ob_start();
 <div class="modal-backdrop" id="terminateModal">
     <div class="modal" style="max-width:420px">
         <div class="modal-title" style="color:var(--red)">
-            <i class="fa-solid fa-user-slash"></i> Terminate <?= e($employee['name']) ?>
+            <?= icon('user-off') ?> Terminate <?= e($employee['name']) ?>
         </div>
         <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">
             This will permanently revoke their access to this book. The employee record will remain in your list.
@@ -114,7 +114,7 @@ ob_start();
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
                 <button type="submit" class="btn btn-danger">
-                    <i class="fa-solid fa-user-slash"></i> Confirm Termination
+                    <?= icon('user-off') ?> Confirm Termination
                 </button>
             </div>
         </form>
@@ -173,7 +173,7 @@ ob_start();
                     <form method="POST" action="/books/<?= $book['id'] ?>/employees/<?= $employee['id'] ?>/salary/<?= $sp['id'] ?>/delete" style="display:inline"
                           onsubmit="return confirm('Remove this salary payment and its expense?')">
                         <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
-                        <button class="btn btn-sm btn-secondary" title="Remove payment"><i class="fa-solid fa-trash" style="color:var(--red)"></i></button>
+                        <button class="btn btn-sm btn-secondary" title="Remove payment"><?= icon('trash', '', 'color:var(--red)') ?></button>
                     </form>
                     <?php endif; ?>
                 </div>
@@ -211,7 +211,7 @@ ob_start();
                 <p style="font-size:13px;color:var(--text-muted);margin-bottom:10px">This employee does not have a Byabsayee account linked.</p>
                 <?php if ($isOwner): ?>
                 <button class="btn btn-sm btn-secondary" data-modal="sendInviteModal">
-                    <i class="fa-solid fa-envelope"></i> Send Invitation
+                    <?= icon('mail') ?> Send Invitation
                 </button>
                 <?php endif; ?>
             <?php endif; ?>
@@ -241,9 +241,9 @@ ob_start();
             </div>
             <div class="perm-grid">
             <?php foreach ($modules as $mod => $actions): ?>
-            <?php $ml = $moduleLabels[$mod] ?? ['label'=>$mod,'icon'=>'fa-circle']; ?>
+            <?php $ml = $moduleLabels[$mod] ?? ['label'=>$mod,'icon'=>'circle']; ?>
             <div class="perm-row">
-                <div class="perm-module"><i class="fa-solid <?= $ml['icon'] ?>"></i> <?= $ml['label'] ?></div>
+                <div class="perm-module"><?= icon($ml['icon']) ?> <?= $ml['label'] ?></div>
                 <div class="perm-actions">
                 <?php foreach ($actions as $action): ?>
                 <?php $checked = !empty($currentPerms[$mod][$action]); ?>
@@ -262,19 +262,19 @@ ob_start();
         </form>
         <?php elseif (!$employee['user_id']): ?>
         <div class="card"><div class="empty-state" style="padding:40px">
-            <div class="empty-icon"><i class="fa-solid fa-lock" style="font-size:32px;color:var(--text-muted)"></i></div>
+            <div class="empty-icon"><?= icon('lock', '', 'font-size:32px;color:var(--text-muted)') ?></div>
             <h3>No App Permissions</h3>
             <p>Send an invitation to set up permissions once they join.</p>
         </div></div>
         <?php elseif ($member && $member['status'] !== 'active'): ?>
         <div class="card"><div class="empty-state" style="padding:40px">
-            <div class="empty-icon"><i class="fa-solid fa-ban" style="font-size:32px;color:var(--red)"></i></div>
+            <div class="empty-icon"><?= icon('ban', '', 'font-size:32px;color:var(--red)') ?></div>
             <h3>Access Revoked</h3>
             <p>Restore access to re-enable permissions.</p>
         </div></div>
         <?php else: ?>
         <div class="card"><div class="empty-state" style="padding:40px">
-            <div class="empty-icon"><i class="fa-solid fa-clock" style="font-size:32px;color:var(--accent)"></i></div>
+            <div class="empty-icon"><?= icon('clock', '', 'font-size:32px;color:var(--accent)') ?></div>
             <h3>Invitation Pending</h3>
             <p>Waiting for the user to accept the invitation.</p>
         </div></div>
@@ -340,7 +340,7 @@ ob_start();
 <?php if ($employee['salary']): ?>
 <div class="modal-backdrop" id="paySalaryModal">
     <div class="modal" style="max-width:460px">
-        <div class="modal-title"><i class="fa-solid fa-money-bill-wave" style="color:var(--green)"></i> Pay Salary</div>
+        <div class="modal-title"><?= icon('banknote', '', 'color:var(--green)') ?> Pay Salary</div>
         <form method="POST" action="/books/<?= $book['id'] ?>/employees/<?= $employee['id'] ?>/salary/pay">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
             <div class="form-grid" style="gap:12px">
@@ -376,11 +376,11 @@ ob_start();
                 </div>
             </div>
             <p style="font-size:12px;color:var(--text-muted);margin-top:8px;margin-bottom:0">
-                <i class="fa-solid fa-info-circle"></i> This will also create an entry in Expenses.
+                <?= icon('info') ?> This will also create an entry in Expenses.
             </p>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Confirm Payment</button>
+                <button type="submit" class="btn btn-primary"><?= icon('check') ?> Confirm Payment</button>
             </div>
         </form>
     </div>
@@ -391,7 +391,7 @@ ob_start();
 <?php if (!$employee['user_id']): ?>
 <div class="modal-backdrop" id="sendInviteModal">
     <div class="modal" style="max-width:460px">
-        <div class="modal-title"><i class="fa-solid fa-envelope" style="color:var(--brand)"></i> Send Invitation</div>
+        <div class="modal-title"><?= icon('mail', '', 'color:var(--brand)') ?> Send Invitation</div>
         <form method="POST" action="/books/<?= $book['id'] ?>/employees/<?= $employee['id'] ?>/send-invite">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
             <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">
@@ -404,7 +404,7 @@ ob_start();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Send Invitation</button>
+                <button type="submit" class="btn btn-primary"><?= icon('send') ?> Send Invitation</button>
             </div>
         </form>
     </div>

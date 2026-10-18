@@ -9,36 +9,36 @@ ob_start();
             <a href="/books/<?= $book['id'] ?>">Books</a> <span>›</span>
             <span>Dues</span>
         </div>
-        <h1><i class="fa-solid fa-hand-holding-dollar" style="color:var(--brand)"></i> Dues</h1>
+        <h1><?= icon('hand-coins', '', 'color:var(--brand)') ?> Dues</h1>
         <p>Money customers owe your business</p>
     </div>
     <button class="btn btn-secondary btn-sm" data-modal="printModal" title="Print PDF">
-            <i class="fa-solid fa-print"></i> Print
+            <?= icon('printer') ?> Print
         </button>
     <button class="btn btn-primary" data-modal="addDueModal">
-        <i class="fa-solid fa-plus"></i> Add Due
+        <?= icon('plus') ?> Add Due
     </button>
 </div>
 
 <!-- Summary -->
 <div class="stat-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));max-width:720px;margin-bottom:22px">
     <div class="stat-card" style="border-left:4px solid var(--red)">
-        <div class="stat-label"><i class="fa-solid fa-circle-exclamation" style="color:var(--red)"></i> Outstanding</div>
+        <div class="stat-label"><?= icon('alert-circle', '', 'color:var(--red)') ?> Outstanding</div>
         <div class="stat-value red"><?= format_money((float)($summary['outstanding'] ?? 0), $symbol) ?></div>
         <div class="stat-sub"><?= (int)($summary['unpaid_count'] ?? 0) + (int)($summary['partial_count'] ?? 0) ?> unpaid</div>
     </div>
     <div class="stat-card" style="border-left:4px solid var(--green)">
-        <div class="stat-label"><i class="fa-solid fa-money-bill-wave" style="color:var(--green)"></i> Collected</div>
+        <div class="stat-label"><?= icon('banknote', '', 'color:var(--green)') ?> Collected</div>
         <div class="stat-value green"><?= format_money((float)($summary['total_collected'] ?? 0), $symbol) ?></div>
         <div class="stat-sub"><?= (int)($summary['paid_count'] ?? 0) ?> fully paid</div>
     </div>
     <div class="stat-card" style="border-left:4px solid var(--amber)">
-        <div class="stat-label"><i class="fa-solid fa-hourglass-half" style="color:var(--amber)"></i> Partial</div>
+        <div class="stat-label"><?= icon('hourglass', '', 'color:var(--amber)') ?> Partial</div>
         <div class="stat-value amber"><?= (int)($summary['partial_count'] ?? 0) ?></div>
         <div class="stat-sub">partially paid</div>
     </div>
     <div class="stat-card">
-        <div class="stat-label"><i class="fa-solid fa-list"></i> Total Dues</div>
+        <div class="stat-label"><?= icon('list') ?> Total Dues</div>
         <div class="stat-value brand"><?= (int)($summary['total_count'] ?? 0) ?></div>
         <div class="stat-sub">all records</div>
     </div>
@@ -48,9 +48,9 @@ ob_start();
 <!-- LM Controls -->
 <div class="lm-controls">
     <div class="lm-search-wrap">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <?= icon('search') ?>
         <input type="text" class="lm-search" id="duesTableSearch" placeholder="Search party, invoice, note…">
-        <button class="lm-search-clear" id="duesTableClear"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lm-search-clear" id="duesTableClear"><?= icon('close') ?></button>
     </div>
     <select class="lm-select" id="duesTableSort">
         <option value="date-desc">Newest First</option>
@@ -61,7 +61,7 @@ ob_start();
 </div>
 <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap">
     <a href="?month=<?= $prevMonth ?>&filter=<?= $filter ?><?= $search ? '&q='.urlencode($search) : '' ?>" class="btn btn-secondary btn-sm">
-        <i class="fa-solid fa-chevron-left"></i>
+        <?= icon('chevron-left') ?>
     </a>
     <div style="text-align:center;min-width:140px">
         <div style="font-weight:600;font-size:14px"><?= date('F Y', strtotime($month.'-01')) ?></div>
@@ -70,7 +70,7 @@ ob_start();
     <a href="?month=<?= $nextMonth ?>&filter=<?= $filter ?><?= $search ? '&q='.urlencode($search) : '' ?>"
        class="btn btn-secondary btn-sm <?= $isCurrent ? 'disabled' : '' ?>"
        style="<?= $isCurrent ? 'opacity:.35;pointer-events:none' : '' ?>">
-        <i class="fa-solid fa-chevron-right"></i>
+        <?= icon('chevron-right') ?>
     </a>
 </div>
 <div class="lm-filter-pills">
@@ -83,7 +83,7 @@ ob_start();
 <?php if (empty($dues)): ?>
 <div class="table-wrap">
     <div class="empty-state">
-        <div class="empty-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+        <div class="empty-icon"><?= icon('hand-coins') ?></div>
         <h3>No dues found</h3>
         <p><?= $search ? 'Try a different search.' : 'Dues are created automatically when a sale invoice is marked unpaid, or add one manually.' ?></p>
     </div>
@@ -142,11 +142,11 @@ ob_start();
                     <a href="/books/<?= $book['id'] ?>/invoices/<?= (int)$due['invoice_id'] ?>"
                        style="color:var(--brand);text-decoration:none;font-size:12px"
                        title="View Invoice">
-                        <i class="fa-solid fa-file-invoice fa-xs"></i> <?= e($due['invoice_no']) ?>
+                        <?= icon('invoice', 'ic-xs') ?> <?= e($due['invoice_no']) ?>
                     </a>
                 </div>
                 <?php elseif (!empty($due['invoice_no'])): ?>
-                <div class="td-muted"><i class="fa-solid fa-file-invoice fa-xs"></i> <?= e($due['invoice_no']) ?></div>
+                <div class="td-muted"><?= icon('invoice', 'ic-xs') ?> <?= e($due['invoice_no']) ?></div>
                 <?php endif; ?>
                 <?php if (!empty($due['note'])): ?>
                 <div class="td-muted" style="font-size:11px;font-style:italic"><?= e($due['note']) ?></div>
@@ -163,7 +163,7 @@ ob_start();
                 <?php if ($remaining > 0.001): ?>
                 <span style="color:var(--red);font-weight:700"><?= format_money($remaining, $sym) ?></span>
                 <?php else: ?>
-                <span style="color:var(--green)"><i class="fa-solid fa-check"></i> Settled</span>
+                <span style="color:var(--green)"><?= icon('check') ?> Settled</span>
                 <?php endif; ?>
             </td>
             <td class="td-muted">
@@ -186,17 +186,17 @@ ob_start();
                 <button class="btn btn-sm btn-secondary"
                         onclick="openPayModal(<?= $due['id'] ?>,'<?= e(addslashes($due['title'])) ?>',<?= $remaining ?>,'<?= e($sym) ?>')"
                         title="Record payment">
-                    <i class="fa-solid fa-money-bill-wave" style="color:var(--green)"></i>
+                    <?= icon('banknote', '', 'color:var(--green)') ?>
                 </button>
                 <button class="btn btn-sm btn-secondary" title="Edit"
                         onclick="openDueEdit(<?= $due['id'] ?>,'<?= e(addslashes($due['title'])) ?>',<?= (float)$due['amount'] ?>,'<?= $due['due_date'] ?? '' ?>','<?= e(addslashes($due['note'] ?? '')) ?>')">
-                    <i class="fa-solid fa-pen"></i>
+                    <?= icon('square-pen') ?>
                 </button>
                 <form method="POST" action="/books/<?= $book['id'] ?>/dues/<?= $due['id'] ?>/cancel"
                       style="display:inline" onsubmit="return confirm('Cancel this due?')">
                     <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
                     <button class="btn btn-sm btn-secondary" title="Cancel due">
-                        <i class="fa-solid fa-ban" style="color:var(--amber)"></i>
+                        <?= icon('ban', '', 'color:var(--amber)') ?>
                     </button>
                 </form>
                 <?php endif; ?>
@@ -204,7 +204,7 @@ ob_start();
                       style="display:inline" onsubmit="return confirm('Permanently delete this due record?')">
                     <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
                     <button class="btn btn-sm btn-secondary" title="Delete">
-                        <i class="fa-solid fa-trash" style="color:var(--red)"></i>
+                        <?= icon('trash', '', 'color:var(--red)') ?>
                     </button>
                 </form>
             </td>
@@ -220,7 +220,7 @@ ob_start();
 <!-- ══ RECORD PAYMENT MODAL ══ -->
 <div class="modal-backdrop" id="payModal">
     <div class="modal">
-        <div class="modal-title"><i class="fa-solid fa-money-bill-wave" style="color:var(--green)"></i> Record Payment</div>
+        <div class="modal-title"><?= icon('banknote', '', 'color:var(--green)') ?> Record Payment</div>
         <form id="payModalForm" method="POST">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
             <div class="form-grid" style="gap:12px">
@@ -253,7 +253,7 @@ ob_start();
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
                 <button type="submit" class="btn btn-primary">
-                    <i class="fa-solid fa-check"></i> Save Payment
+                    <?= icon('check') ?> Save Payment
                 </button>
             </div>
         </form>
@@ -264,7 +264,7 @@ ob_start();
 <!-- ══ EDIT DUE MODAL ══ -->
 <div class="modal-backdrop" id="editDueModal">
     <div class="modal">
-        <div class="modal-title"><i class="fa-solid fa-pen" style="color:var(--brand)"></i> Edit Due</div>
+        <div class="modal-title"><?= icon('square-pen', '', 'color:var(--brand)') ?> Edit Due</div>
         <form id="editDueForm" method="POST">
             <input type="hidden" name="_csrf" value="<?= csrf_token() ?>">
             <div class="form-grid" style="gap:12px">
@@ -287,7 +287,7 @@ ob_start();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Save Changes</button>
+                <button type="submit" class="btn btn-primary"><?= icon('check') ?> Save Changes</button>
             </div>
         </form>
     </div>
@@ -297,7 +297,7 @@ ob_start();
 <!-- ══ ADD DUE MODAL ══ -->
 <div class="modal-backdrop" id="addDueModal">
     <div class="modal">
-        <div class="modal-title"><i class="fa-solid fa-hand-holding-dollar" style="color:var(--amber)"></i> Add Manual Due</div>
+        <div class="modal-title"><?= icon('hand-coins', '', 'color:var(--amber)') ?> Add Manual Due</div>
         <form method="POST" action="/books/<?= $book['id'] ?>/dues/add"
               onsubmit="
                 if (!document.getElementById('dueCustomerId').value) {
@@ -316,7 +316,7 @@ ob_start();
                            oninput="searchDueCustomer(this.value); this.style.border=''; document.getElementById('dueCustomerHint').style.display='none';">
                     <input type="hidden" name="customer_id" id="dueCustomerId">
                     <div id="dueCustomerDropdown" class="autocomplete-dropdown" style="display:none"></div>
-                    <div id="dueCustomerHint" style="display:none;color:var(--red);font-size:12px;margin-top:4px">⚠ Please search and <strong>click</strong> a customer from the list.</div>
+                    <div id="dueCustomerHint" style="display:none;color:var(--red);font-size:12px;margin-top:4px"><?= icon('alert-triangle') ?> Please search and <strong>click</strong> a customer from the list.</div>
                 </div>
                 <div class="form-group full">
                     <label>Title *</label>
@@ -337,7 +337,7 @@ ob_start();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-close-modal>Cancel</button>
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Due</button>
+                <button type="submit" class="btn btn-primary"><?= icon('plus') ?> Add Due</button>
             </div>
         </form>
     </div>

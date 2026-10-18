@@ -53,12 +53,12 @@ td, th   { padding:1px 2px; }
 
 <!-- Print controls (hidden on print) -->
 <div class="print-controls" style="margin-bottom:8px;display:flex;gap:6px;flex-wrap:wrap">
-    <button class="print-btn" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
+    <button class="print-btn" onclick="window.print()"><?= icon('printer') ?> Print</button>
     <a href="?w=<?= $paperWidth===58?80:58 ?>" style="display:inline-block;padding:6px 14px;background:#f0f0f0;border-radius:6px;font-size:12px;text-decoration:none;color:#333">
         Switch to <?= $paperWidth===58?'80':'58' ?>mm
     </a>
     <a href="/books/<?= $book['id'] ?>/invoices/<?= $invoice['id'] ?>" style="display:inline-block;padding:6px 14px;background:#f0f0f0;border-radius:6px;font-size:12px;text-decoration:none;color:#333">
-        <i class="fa-solid fa-arrow-left-long"></i> Back
+        <?= icon('arrow-left') ?> Back
     </a>
 </div>
 

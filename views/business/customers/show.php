@@ -151,13 +151,13 @@ ob_start();
                     All <span class="badge badge-gray" style="margin-left:4px"><?= count($activity) ?></span>
                 </button>
                 <button class="filter-btn" onclick="filterActivity('invoice',this)">
-                    <i class="fa-solid fa-file-invoice"></i> Invoices <span class="badge badge-gray" style="margin-left:4px"><?= count($invoices) ?></span>
+                    <?= icon('invoice') ?> Invoices <span class="badge badge-gray" style="margin-left:4px"><?= count($invoices) ?></span>
                 </button>
                 <button class="filter-btn" onclick="filterActivity('due',this)">
-                    <i class="fa-solid fa-hand-holding-dollar"></i> Dues <span class="badge badge-gray" style="margin-left:4px"><?= count($dues) ?></span>
+                    <?= icon('hand-coins') ?> Dues <span class="badge badge-gray" style="margin-left:4px"><?= count($dues) ?></span>
                 </button>
                 <button class="filter-btn" onclick="filterActivity('return',this)">
-                    <i class="fa-solid fa-rotate-left"></i> Returns <span class="badge badge-gray" style="margin-left:4px"><?= count($returns) ?></span>
+                    <?= icon('rotate-ccw') ?> Returns <span class="badge badge-gray" style="margin-left:4px"><?= count($returns) ?></span>
                 </button>
             </div>
             <a href="/books/<?= $book['id'] ?>/returns/create?type=sales_return&customer_id=<?= $customer['id'] ?>" class="btn btn-sm btn-secondary">+ Return</a>
@@ -178,7 +178,7 @@ ob_start();
                 <tbody>
                 <?php foreach ($activity as $row):
                     $typeColor = ['invoice'=>'blue','due'=>'amber','return'=>'red'][$row['type']] ?? 'gray';
-                    $typeIcon  = ['invoice'=>'fa-file-invoice','due'=>'fa-hand-holding-dollar','return'=>'fa-rotate-left'][$row['type']] ?? 'fa-circle';
+                    $typeIcon  = ['invoice'=>'invoice','due'=>'hand-coins','return'=>'rotate-ccw'][$row['type']] ?? 'circle';
 
                     $statusColors = [
                         'draft'=>'gray','sent'=>'blue','partial'=>'amber','paid'=>'green',
@@ -190,7 +190,7 @@ ob_start();
                 <tr data-type="<?= $row['type'] ?>">
                     <td>
                         <span class="badge badge-<?= $typeColor ?>" style="font-size:10px">
-                            <i class="fa-solid <?= $typeIcon ?>"></i> <?= ucfirst($row['type']) ?>
+                            <?= icon($typeIcon) ?> <?= ucfirst($row['type']) ?>
                         </span>
                     </td>
                     <td style="font-weight:500"><?= e($row['ref']) ?></td>
