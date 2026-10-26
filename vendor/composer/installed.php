@@ -3,7 +3,7 @@
         'name' => 'byabsayee/app',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '0758aba99d8277063d378c67ffc2843a8c1cf9b6',
+        'reference' => 'c2f73ff099baf1c7aaaadaa6211176e112226d7e',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'byabsayee/app' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '0758aba99d8277063d378c67ffc2843a8c1cf9b6',
+            'reference' => 'c2f73ff099baf1c7aaaadaa6211176e112226d7e',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
